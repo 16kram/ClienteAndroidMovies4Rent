@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         contrasena = (EditText) findViewById(R.id.editTextTextContrasena);
         buttonEntrar = (Button) findViewById(R.id.buttonEntrar);
 
+        //Acción del botón
         buttonEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
