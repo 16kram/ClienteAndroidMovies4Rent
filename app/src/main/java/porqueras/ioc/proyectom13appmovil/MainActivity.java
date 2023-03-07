@@ -3,6 +3,7 @@ package porqueras.ioc.proyectom13appmovil;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -23,6 +24,13 @@ public class MainActivity extends AppCompatActivity {
         usuario = (EditText) findViewById(R.id.editTextTextUsuario);
         contrasena = (EditText) findViewById(R.id.editTextTextContrasena);
         buttonEntrar = (Button) findViewById(R.id.buttonEntrar);
+
+        buttonEntrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 }
