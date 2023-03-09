@@ -11,6 +11,8 @@ import android.widget.EditText;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,8 +45,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //String baseUrl = "http://localhost:8080/";
-        String baseUrl = "https://jsonplaceholder.typicode.com/";
+        String baseUrl = "http://10.0.2.2:8080";
 
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-ddd HH:mm:ss")
@@ -55,46 +56,48 @@ public class MainActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        //APIService service = retrofit.create(APIService.class);
-        MiAPIService service=retrofit.create(MiAPIService.class);
+        APIService service = retrofit.create(APIService.class);
 
-        Call<ArticuloResponse> call=service.getArticulo(28);
-
-        call.enqueue(new Callback<ArticuloResponse>() {
+        //Prueba USUARIOS
+        Call<List<UsuarioResponse>> call = service.getUsuario();
+        call.enqueue(new Callback<List<UsuarioResponse>>() {
             @Override
-            public void onResponse(Call<ArticuloResponse> call, Response<ArticuloResponse> response) {
-                    if(response.isSuccessful()){
-                        ArticuloResponse articulo=response.body();
-                        Log.d("response", "response=" + articulo);
-                    }else{
-                        Log.d("response", "error" + response.code());
-                    }
-            }
-
-            @Override
-            public void onFailure(Call<ArticuloResponse> call, Throwable t) {
-                Log.d("response", "error general-->" + t.getMessage());
-            }
-        });
-
-        /*Call<UsuarioResponse> call = service.getUsuario();
-
-        call.enqueue(new Callback<UsuarioResponse>() {
-            @Override
-            public void onResponse(Call<UsuarioResponse> call, Response<UsuarioResponse> response) {
+            public void onResponse(Call<List<UsuarioResponse>> call, Response<List<UsuarioResponse>> response) {
                 if (response.isSuccessful()) {
-                    UsuarioResponse usuario = response.body();
-                    Log.d("response", "response=" + usuario);
+                    UsuarioResponse usuario = response.body().get(0);
+                    Log.d("response", "Nombre=" + usuario.getNombre());
+                    Log.d("response", "Apellidos=" + usuario.getApellidos());
                 } else {
-                    Log.d("response", "error" + response.code());
+                    Log.d("response", "Ocurrió un error en la petición-->" + response.code());
                 }
             }
 
             @Override
-            public void onFailure(Call<UsuarioResponse> call, Throwable t) {
-                Log.d("response", "error general-->" + t.getMessage());
+            public void onFailure(Call<List<UsuarioResponse>> call, Throwable t) {
+                Log.d("response", "Error de red-->" + t.getMessage());
             }
-        });*/
+        });
+
+
+        //Prueba LOGIN
+        Call<LoginResponse> callLogin = service.getLogin("string", "string");
+
+        callLogin.enqueue((new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                if (response.isSuccessful()) {
+                    Log.d("response", "LoginCorrecto");
+                } else {
+                    Log.d("response", "Ocurrió un error en la petición LogIn-->" + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                Log.d("response", "Error de red-->" + t.getMessage());
+            }
+        }));
+
 
     }
 }
