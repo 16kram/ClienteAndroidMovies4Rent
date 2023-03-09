@@ -43,37 +43,58 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String baseUrl="http://localhost:8080/";
+        //String baseUrl = "http://localhost:8080/";
+        String baseUrl = "https://jsonplaceholder.typicode.com/";
 
-        Gson gson=new GsonBuilder()
+        Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-ddd HH:mm:ss")
                 .create();
 
-        Retrofit retrofit=new Retrofit.Builder()
+        Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        APIService service=retrofit.create(APIService.class);
+        //APIService service = retrofit.create(APIService.class);
+        MiAPIService service=retrofit.create(MiAPIService.class);
 
-        Call<UsuarioResponse> call=service.getUsuario();
+        Call<ArticuloResponse> call=service.getArticulo(28);
+
+        call.enqueue(new Callback<ArticuloResponse>() {
+            @Override
+            public void onResponse(Call<ArticuloResponse> call, Response<ArticuloResponse> response) {
+                    if(response.isSuccessful()){
+                        ArticuloResponse articulo=response.body();
+                        Log.d("response", "response=" + articulo);
+                    }else{
+                        Log.d("response", "error" + response.code());
+                    }
+            }
+
+            @Override
+            public void onFailure(Call<ArticuloResponse> call, Throwable t) {
+                Log.d("response", "error general-->" + t.getMessage());
+            }
+        });
+
+        /*Call<UsuarioResponse> call = service.getUsuario();
 
         call.enqueue(new Callback<UsuarioResponse>() {
             @Override
             public void onResponse(Call<UsuarioResponse> call, Response<UsuarioResponse> response) {
-                if(response.isSuccessful()){
-                    UsuarioResponse usuario=response.body();
-                    Log.d("response","response="+usuario);
-                }else{
-                    Log.d("response","error"+response.code());
+                if (response.isSuccessful()) {
+                    UsuarioResponse usuario = response.body();
+                    Log.d("response", "response=" + usuario);
+                } else {
+                    Log.d("response", "error" + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<UsuarioResponse> call, Throwable t) {
-                Log.d("response","error general-->"+t.getMessage());
+                Log.d("response", "error general-->" + t.getMessage());
             }
-        });
+        });*/
 
     }
 }

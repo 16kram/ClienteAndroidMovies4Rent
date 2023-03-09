@@ -91,4 +91,6 @@ public class UsuarioResponse {
     public void setId_rol(int id_rol) {
         this.id_rol = id_rol;
     }
+
+
 }
