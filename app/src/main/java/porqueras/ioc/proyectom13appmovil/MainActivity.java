@@ -3,9 +3,19 @@ package porqueras.ioc.proyectom13appmovil;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     EditText usuario;
@@ -30,6 +40,38 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+
+        String baseUrl="http://localhost:8080/";
+
+        Gson gson=new GsonBuilder()
+                .setDateFormat("yyyy-MM-ddd HH:mm:ss")
+                .create();
+
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        APIService service=retrofit.create(APIService.class);
+
+        Call<UsuarioResponse> call=service.getUsuario();
+
+        call.enqueue(new Callback<UsuarioResponse>() {
+            @Override
+            public void onResponse(Call<UsuarioResponse> call, Response<UsuarioResponse> response) {
+                if(response.isSuccessful()){
+                    UsuarioResponse usuario=response.body();
+                    Log.d("response","response="+usuario);
+                }else{
+                    Log.d("response","error"+response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UsuarioResponse> call, Throwable t) {
+                Log.d("response","error general-->"+t.getMessage());
             }
         });
 
