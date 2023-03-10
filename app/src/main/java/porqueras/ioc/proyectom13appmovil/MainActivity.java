@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             Log.d("response", "Login Correcto, código="+response.code());
                         } else {
-                            Log.d("response", "Ocurrió un error en la petición LogIn-->" + response.code());
+                            Log.d("response", "Ocurrió un error en la petición Login, código=" + response.code());
                         }
                     }
 
