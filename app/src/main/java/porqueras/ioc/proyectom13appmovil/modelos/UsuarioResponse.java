@@ -1,4 +1,4 @@
-package porqueras.ioc.proyectom13appmovil;
+package porqueras.ioc.proyectom13appmovil.modelos;
 
 public class UsuarioResponse {
     private int id;
@@ -11,6 +11,19 @@ public class UsuarioResponse {
     private String password;
     private String confirmpassword;
     private int id_rol;
+
+    public UsuarioResponse(int id, String nombre, String apellidos, String telefono, String email, String address, String username, String password, String confirmpassword, int id_rol) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.telefono = telefono;
+        this.email = email;
+        this.address = address;
+        this.username = username;
+        this.password = password;
+        this.confirmpassword = confirmpassword;
+        this.id_rol = id_rol;
+    }
 
     public int getId() {
         return id;
