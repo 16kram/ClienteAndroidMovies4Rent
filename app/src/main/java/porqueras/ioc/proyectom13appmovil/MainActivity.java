@@ -2,12 +2,14 @@ package porqueras.ioc.proyectom13appmovil;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         usuario = (EditText) findViewById(R.id.editTextTextUsuario);
         contrasena = (EditText) findViewById(R.id.editTextTextContrasena);
         buttonEntrar = (Button) findViewById(R.id.buttonEntrar);
-        buttonNuevoUsuario=(Button)findViewById(R.id.buttonNuevoUsuario);
+        buttonNuevoUsuario = (Button) findViewById(R.id.buttonNuevoUsuario);
 
 
         //Configuración de la conexión de red
@@ -73,12 +75,21 @@ public class MainActivity extends AppCompatActivity {
                 Call<LoginResponse> callLogin = apiService.getLogin(login);
 
                 callLogin.enqueue((new Callback<LoginResponse>() {
+
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         if (response.isSuccessful()) {
-                            Log.d("response", "Login Correcto, código="+response.code());
+                            Log.d("response", "Login Correcto, código=" + response.code());
+                            usuario.setText(""); //Borra los campos Usuario
+                            contrasena.setText("");// y Contraseña
+                            Intent i = new Intent(MainActivity.this, PantallaUsuario.class);
+                            startActivity(i);
                         } else {
                             Log.d("response", "Ocurrió un error en la petición Login, código=" + response.code());
+                            //Si la contraseña no coincide con la introducida en la base de datos del servidor muestra un Toast
+                            Context context = getApplicationContext();
+                            Toast toast = Toast.makeText(context, "La contraseña o el usuario no son válidos", Toast.LENGTH_SHORT);
+                            toast.show();
                         }
                     }
 
@@ -94,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         buttonNuevoUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(MainActivity.this,RegistroUsuario.class);
+                Intent i = new Intent(MainActivity.this, RegistroUsuario.class);
                 startActivity(i);
             }
         });
@@ -190,4 +201,5 @@ public class MainActivity extends AppCompatActivity {
 */
 
     }
+
 }
