@@ -2,6 +2,7 @@ package porqueras.ioc.proyectom13appmovil;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     EditText usuario;
     EditText contrasena;
     Button buttonEntrar;
+    Button buttonNuevoUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +38,12 @@ public class MainActivity extends AppCompatActivity {
         //Oculta la ActionBar
         getSupportActionBar().hide();
 
-        //Añadimos los campos de texto y el botón
+        //Añadimos los campos de texto y los botones
         usuario = (EditText) findViewById(R.id.editTextTextUsuario);
         contrasena = (EditText) findViewById(R.id.editTextTextContrasena);
         buttonEntrar = (Button) findViewById(R.id.buttonEntrar);
+        buttonNuevoUsuario=(Button)findViewById(R.id.buttonNuevoUsuario);
+
 
         //Configuración de la conexión de red
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
@@ -83,6 +87,15 @@ public class MainActivity extends AppCompatActivity {
                         Log.d("response", "Error de red-->" + t.getMessage());
                     }
                 }));
+            }
+        });
+
+        //Acción del botón Nuevo Usuario
+        buttonNuevoUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(MainActivity.this,RegistroUsuario.class);
+                startActivity(i);
             }
         });
 

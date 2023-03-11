@@ -30,5 +30,4 @@ public interface APIService {
     @POST("login")
     Call<LoginResponse> getLogin(@Body LoginResponse loginResponse);
 
-
 }
