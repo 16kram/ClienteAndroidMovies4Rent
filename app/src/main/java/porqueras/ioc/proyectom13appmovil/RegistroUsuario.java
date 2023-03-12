@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioResponse;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
+import porqueras.ioc.proyectom13appmovil.utilidades.InstanciaRetrofit;
 import porqueras.ioc.proyectom13appmovil.utilidades.NullConverterFactory;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,25 +47,7 @@ public class RegistroUsuario extends AppCompatActivity {
         confirmPassword = (EditText) findViewById(R.id.editTextConfirmPassword);
         botonRegistro = (Button) findViewById(R.id.buttonRegistro);
 
-        //Configuración de la conexión de red
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(5, TimeUnit.SECONDS)
-                .build();
-
-        //Creamos la instancia de Gson y Retrofit
-        Gson gson = new GsonBuilder()
-                .setLenient()//Opción para aceptar JSON malformados
-                .setDateFormat("yyyy-MM-ddd HH:mm:ss")
-                .create();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiUtils.BASE_URL)
-                .client(okHttpClient)
-                .addConverterFactory(new NullConverterFactory())//Si la cadena devuelta es nula o vacía evita el error-->End of input at line 1 column 1 path $
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-        APIService apiService = retrofit.create(APIService.class);
+        APIService apiService= InstanciaRetrofit.getApiService();
 
         //Acción del botón Añadir
         botonRegistro.setOnClickListener(new View.OnClickListener() {
