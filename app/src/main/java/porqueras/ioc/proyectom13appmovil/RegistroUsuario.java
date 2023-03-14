@@ -27,13 +27,15 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegistroUsuario extends AppCompatActivity {
-    EditText nombre, apellidos, telefono, email, address, username, password, confirmPassword;
+    EditText nombre, apellidos, telefono, email, direccion, username, password, confirmPassword;
     Button botonRegistro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_usuario);
+
+        //Añadimos el título de la Activity en la barra superior
         setTitle("Registro de usuarios");
 
         //Añadimos los campos de texto y los botones
@@ -41,12 +43,13 @@ public class RegistroUsuario extends AppCompatActivity {
         apellidos = (EditText) findViewById(R.id.editTextApellidos);
         telefono = (EditText) findViewById(R.id.editTextTelefono);
         email = (EditText) findViewById(R.id.editTextTelefono);
-        address = (EditText) findViewById(R.id.editTextDireccion);
+        direccion = (EditText) findViewById(R.id.editTextDireccion);
         username = (EditText) findViewById(R.id.editTextUserName);
         password = (EditText) findViewById(R.id.editTextPassword);
         confirmPassword = (EditText) findViewById(R.id.editTextConfirmPassword);
         botonRegistro = (Button) findViewById(R.id.buttonRegistro);
 
+        //Instanciomos la incerfaz de APIService mediante Retrofit
         APIService apiService= InstanciaRetrofit.getApiService();
 
         //Acción del botón Añadir
@@ -67,25 +70,26 @@ public class RegistroUsuario extends AppCompatActivity {
                     toast.show();
                 } else {
                     //Las contraseñas coinciden
-                    UsuarioResponse user = new UsuarioResponse(0,
+                    UsuarioResponse user = new UsuarioResponse(
+                            email.getText().toString(),
+                            username.getText().toString(),
+                            password.getText().toString(),
                             nombre.getText().toString(),
                             apellidos.getText().toString(),
                             telefono.getText().toString(),
-                            email.getText().toString(),
-                            address.getText().toString(),
-                            username.getText().toString(),
-                            password.getText().toString(),
-                            confirmPassword.getText().toString(),
-                            1);
+                            direccion.getText().toString()
+                            );
                     Call<UsuarioResponse> callUsuario = apiService.setUsuario(user);
 
                     callUsuario.enqueue(new Callback<UsuarioResponse>() {
                         @Override
                         public void onResponse(Call<UsuarioResponse> call, Response<UsuarioResponse> response) {
                             if (response.isSuccessful()) {
-                                Log.d("response", "response=" + response.body());
+                                Log.d("response", "Response nuevo usuario=" + response.code());
+                                //Salimos de la actividad
+                                finish();
                             } else {
-                                Log.d("response", "Ocurrió un error en la petición-->" + response.code());
+                                Log.d("response", "Ocurrió un error en la petición de usuario-->" + response.code());
                             }
 
                         }

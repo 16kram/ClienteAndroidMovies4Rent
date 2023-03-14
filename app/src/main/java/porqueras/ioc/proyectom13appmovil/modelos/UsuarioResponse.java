@@ -1,36 +1,22 @@
 package porqueras.ioc.proyectom13appmovil.modelos;
 
 public class UsuarioResponse {
-    private int id;
+    private String email;
+    private String username;
+    private String password;
     private String nombre;
     private String apellidos;
     private String telefono;
-    private String email;
-    private String address;
-    private String username;
-    private String password;
-    private String confirmpassword;
-    private int id_rol;
+    private String direccion;
 
-    public UsuarioResponse(int id, String nombre, String apellidos, String telefono, String email, String address, String username, String password, String confirmpassword, int id_rol) {
-        this.id = id;
+    public UsuarioResponse(String email, String username, String password, String nombre, String apellidos, String telefono, String direccion) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.telefono = telefono;
-        this.email = email;
-        this.address = address;
-        this.username = username;
-        this.password = password;
-        this.confirmpassword = confirmpassword;
-        this.id_rol = id_rol;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.direccion = direccion;
     }
 
     public String getNombre() {
@@ -65,12 +51,12 @@ public class UsuarioResponse {
         this.email = email;
     }
 
-    public String getAddress() {
-        return address;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getUsername() {
@@ -88,22 +74,5 @@ public class UsuarioResponse {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public String getConfirmpassword() {
-        return confirmpassword;
-    }
-
-    public void setConfirmpassword(String confirmpassword) {
-        this.confirmpassword = confirmpassword;
-    }
-
-    public int getId_rol() {
-        return id_rol;
-    }
-
-    public void setId_rol(int id_rol) {
-        this.id_rol = id_rol;
-    }
-
 
 }

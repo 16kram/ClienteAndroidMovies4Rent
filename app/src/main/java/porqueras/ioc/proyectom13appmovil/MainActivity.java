@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import porqueras.ioc.proyectom13appmovil.modelos.LoginResponse;
+import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
 import porqueras.ioc.proyectom13appmovil.utilidades.InstanciaRetrofit;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         buttonEntrar = (Button) findViewById(R.id.buttonEntrar);
         buttonNuevoUsuario = (Button) findViewById(R.id.buttonNuevoUsuario);
 
-        apiService= InstanciaRetrofit.getApiService();
+        //Instanciomos la incerfaz de APIService mediante Retrofit
+        apiService = InstanciaRetrofit.getApiService();
 
         //Acción del botón Entrar
         buttonEntrar.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +55,10 @@ public class MainActivity extends AppCompatActivity {
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         if (response.isSuccessful()) {
                             Log.d("response", "Login Correcto, código=" + response.code());
+                            Log.d("response", "mensaje=" + response.body().getMessage());
+                            Log.d("response", "token=" + response.body().getValue().getToken());
+                            Log.d("response", "admin=" + response.body().getValue().isAdmin());
+                            ApiUtils.TOKEN = response.body().getValue().getToken();
                             usuario.setText(""); //Borra los campos Usuario
                             contrasena.setText("");// y Contraseña
                             Intent i = new Intent(MainActivity.this, PantallaUsuario.class);
