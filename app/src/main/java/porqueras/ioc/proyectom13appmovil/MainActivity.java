@@ -61,8 +61,15 @@ public class MainActivity extends AppCompatActivity {
                             ApiUtils.TOKEN = response.body().getValue().getToken();
                             usuario.setText(""); //Borra los campos Usuario
                             contrasena.setText("");// y Contraseña
-                            Intent i = new Intent(MainActivity.this, PantallaUsuario.class);
-                            startActivity(i);
+                            if (response.body().getValue().isAdmin()) {
+                                //El usuario es administrador
+                                Intent i = new Intent(MainActivity.this, PantallaAdministrador.class);
+                                startActivity(i);
+                            } else {
+                                //El usuario no es administrador
+                                Intent i = new Intent(MainActivity.this, PantallaUsuario.class);
+                                startActivity(i);
+                            }
                         } else {
                             Log.d("response", "Ocurrió un error en la petición Login, código=" + response.code());
                             //Si la contraseña no coincide con la introducida en la base de datos del servidor muestra un Toast

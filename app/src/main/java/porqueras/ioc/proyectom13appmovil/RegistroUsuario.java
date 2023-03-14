@@ -86,6 +86,10 @@ public class RegistroUsuario extends AppCompatActivity {
                         public void onResponse(Call<UsuarioResponse> call, Response<UsuarioResponse> response) {
                             if (response.isSuccessful()) {
                                 Log.d("response", "Response nuevo usuario=" + response.code());
+                                //Se muestra un Toast conforme el usuario se ha añadido correctamente
+                                Context context = getApplicationContext();
+                                Toast toast = Toast.makeText(context, "El usuario "+username.getText()+" se ha añadido correctamente", Toast.LENGTH_SHORT);
+                                toast.show();
                                 //Salimos de la actividad
                                 finish();
                             } else {

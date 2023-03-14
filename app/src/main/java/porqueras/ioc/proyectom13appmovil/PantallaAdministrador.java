@@ -9,26 +9,22 @@ import android.widget.Button;
 import porqueras.ioc.proyectom13appmovil.utilidades.InstanciaRetrofit;
 import porqueras.ioc.proyectom13appmovil.utilidades.Logout;
 
-public class PantallaUsuario extends AppCompatActivity {
-    APIService apiService;
-    Button botonLogout;
+public class PantallaAdministrador extends AppCompatActivity {
+    Button botonLogoutAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pantalla_usuario);
-
-        //Añadimos el título de la Activity en la barra superior
-        setTitle("Pantalla del usuario");
+        setContentView(R.layout.activity_pantalla_administrador);
 
         //Añadimos los campos de texto y los botones
-        botonLogout = (Button) findViewById(R.id.buttonLogout);
+        botonLogoutAdmin = (Button) findViewById(R.id.buttonLogoutAdmin);
 
-        //Instanciomos la incerfaz de APIService mediante Retrofit
-        apiService = InstanciaRetrofit.getApiService();
+        //Añadimos el título de la Activity en la barra superior
+        setTitle("Pantalla del administrador");
 
         //Acción del botón Logout
-        botonLogout.setOnClickListener(new View.OnClickListener() {
+        botonLogoutAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Instanciomos la incerfaz de APIService mediante Retrofit
