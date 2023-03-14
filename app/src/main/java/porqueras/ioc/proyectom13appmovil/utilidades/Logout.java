@@ -12,7 +12,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Logout {
-    public static boolean sesion = true;
+    public static boolean sesion = true;//La sesión está iniciada
 
     //Hace un logout
     //Devuelve false si se ha cerrado la sesión
@@ -24,7 +24,6 @@ public class Logout {
                 if (response.isSuccessful()) {
                     Log.d("response", "Logout Correcto, código=" + response.code());
                     //Finaliza la sesión en el servidor y muestra un Toast
-                    //Context context = getApplicationContext();
                     Toast toast = Toast.makeText(context, "Fin de sesión", Toast.LENGTH_SHORT);
                     toast.show();
                     sesion = false;//Ha hecho un logout
