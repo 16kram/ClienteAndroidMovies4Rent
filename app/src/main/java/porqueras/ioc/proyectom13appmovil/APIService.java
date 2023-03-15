@@ -4,6 +4,7 @@ import java.util.List;
 
 import porqueras.ioc.proyectom13appmovil.modelos.LoginResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.LogoutResponse;
+import porqueras.ioc.proyectom13appmovil.modelos.UsuarioInfoResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioUpdate;
 import retrofit2.http.Body;
@@ -19,6 +20,9 @@ import retrofit2.http.Query;
 public interface APIService {
     @GET("usuaris")
     Call<List<UsuarioResponse>> getUsuario();
+
+    @GET("users/info")
+    Call<UsuarioInfoResponse> getValue(@Query("token") String token);
 
     @POST("register")
     Call<UsuarioResponse> setUsuario(@Body UsuarioResponse usuarioResponse);
