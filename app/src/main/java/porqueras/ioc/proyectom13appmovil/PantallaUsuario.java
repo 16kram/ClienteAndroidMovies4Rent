@@ -61,11 +61,11 @@ public class PantallaUsuario extends AppCompatActivity {
             public void onClick(View v) {
                 //Instanciomos la incerfaz de APIService mediante Retrofit
                 APIService apiService = InstanciaRetrofit.getApiService();
-                //Si el método Logout.sesion devuelve false es que se ha cerrado la sesión
-                if (!Logout.sesion(apiService, getApplicationContext())) {
-                    //Cerramos la actividad actual
-                    finish();
-                }
+                //Llamamos a Logout.sesion para cerrar la sesión
+                Logout.sesion(apiService, getApplicationContext());
+                //Cerramos la actividad actual
+                finish();
+
             }
         });
     }

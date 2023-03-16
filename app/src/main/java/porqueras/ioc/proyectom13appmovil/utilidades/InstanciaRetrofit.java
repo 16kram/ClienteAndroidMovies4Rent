@@ -15,6 +15,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class InstanciaRetrofit {
     private static Retrofit retrofit = null;
 
+    /**
+     * Se obtiene una instancia de APIService para interactuar con el servidor
+     *
+     * @return APIService instancia para interactuar con el servidor.
+     */
     public static APIService getApiService() {
         if (retrofit == null) {
             //Configuración de la conexión de red

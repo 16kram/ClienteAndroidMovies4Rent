@@ -12,11 +12,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Logout {
-    public static boolean sesion = true;//La sesión está iniciada
 
-    //Hace un logout
-    //Devuelve false si se ha cerrado la sesión
-    public static boolean sesion(APIService apiService, Context context) {
+    /**
+     * Cierra la sesión con el servidor
+     *
+     * @param apiService la interface de Retrofit.
+     * @param context    el contexto de la aplicación.
+     */
+    public static void sesion(APIService apiService, Context context) {
         Call<LogoutResponse> callLogoutResponse = apiService.getToken(ApiUtils.TOKEN);
         callLogoutResponse.enqueue(new Callback<LogoutResponse>() {
             @Override
@@ -24,9 +27,8 @@ public class Logout {
                 if (response.isSuccessful()) {
                     Log.d("response", "Logout Correcto, código=" + response.code());
                     //Finaliza la sesión en el servidor y muestra un Toast
-                    Toast toast = Toast.makeText(context, "Fin de sesión", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(context, "Fin de sesión", Toast.LENGTH_LONG);
                     toast.show();
-                    sesion = false;//Ha hecho un logout
                 } else {
                     Log.d("response", "Ocurrió un error en la petición Logout, código=" + response.code());
                 }
@@ -37,6 +39,5 @@ public class Logout {
                 Log.d("response", "Error de red-->" + t.getMessage());
             }
         });
-        return sesion;
     }
 }

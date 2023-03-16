@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,7 +44,7 @@ public class RegistroUsuario extends AppCompatActivity {
         nombre = (EditText) findViewById(R.id.editTextNombre);
         apellidos = (EditText) findViewById(R.id.editTextApellidos);
         telefono = (EditText) findViewById(R.id.editTextTelefono);
-        email = (EditText) findViewById(R.id.editTextTelefono);
+        email = (EditText) findViewById(R.id.editTextEmail);
         direccion = (EditText) findViewById(R.id.editTextDireccion);
         username = (EditText) findViewById(R.id.editTextUserName);
         password = (EditText) findViewById(R.id.editTextPassword);
@@ -50,12 +52,38 @@ public class RegistroUsuario extends AppCompatActivity {
         botonRegistro = (Button) findViewById(R.id.buttonRegistro);
 
         //Instanciomos la incerfaz de APIService mediante Retrofit
-        APIService apiService= InstanciaRetrofit.getApiService();
+        APIService apiService = InstanciaRetrofit.getApiService();
 
         //Acción del botón Añadir
         botonRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Comprueba que el campo del correo electrónico está bien formado
+                boolean isValidEmail = Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches();
+                if (isValidEmail) {
+                    // el correo electrónico es válido
+                    Log.d("response", "correo electrónico valido=" + email.getText().toString());
+                } else {
+                    // el correo electrónico es inválido
+                    Log.d("response", "correo electrónico no valido=" + email.getText().toString());
+                    Context context = getApplicationContext();
+                    Toast toast = Toast.makeText(context, "Correo electrónico no válido", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+                //Comprueba que el campo del número de teléfono está bien formado
+                boolean isValidPhoneNumber = Patterns.PHONE.matcher(telefono.getText().toString()).matches();
+                if (isValidPhoneNumber) {
+                    // el número es válido
+                    Log.d("response", "número de teléfono no valido=" + email.getText().toString());
+                } else {
+                    // el número es inválido
+                    Log.d("response", "número de teléfono no valido=" + email.getText().toString());
+                    Context context = getApplicationContext();
+                    Toast toast = Toast.makeText(context, "Número de teléfono no válido", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
                 //Si el campo del usuario o la contraseña está vacío muestra un Toast
                 if (username.getText().toString().equals("") || password.getText().toString().equals("")) {
                     Context context = getApplicationContext();
@@ -63,13 +91,14 @@ public class RegistroUsuario extends AppCompatActivity {
                     toast.show();
                     return;
                 }
+                //Revisa si las contraseñas coinciden en ambos campos
                 if (!password.getText().toString().equals(confirmPassword.getText().toString())) {
                     //Si las contraseñas no coinciden muestra un Toast
                     Context context = getApplicationContext();
                     Toast toast = Toast.makeText(context, "Las contraseñas no coinciden", Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
-                    //Las contraseñas coinciden
+                    //Si las contraseñas coinciden envía los datos de registro de usuario al servidor
                     UsuarioResponse user = new UsuarioResponse(
                             email.getText().toString(),
                             username.getText().toString(),
@@ -78,17 +107,17 @@ public class RegistroUsuario extends AppCompatActivity {
                             apellidos.getText().toString(),
                             telefono.getText().toString(),
                             direccion.getText().toString()
-                            );
+                    );
                     Call<UsuarioResponse> callUsuario = apiService.setUsuario(user);
 
                     callUsuario.enqueue(new Callback<UsuarioResponse>() {
                         @Override
                         public void onResponse(Call<UsuarioResponse> call, Response<UsuarioResponse> response) {
                             if (response.isSuccessful()) {
-                                Log.d("response", "Response nuevo usuario=" + response.code());
+                                Log.d("response", "Response nuevo usuario añadido=" + response.code());
                                 //Se muestra un Toast conforme el usuario se ha añadido correctamente
                                 Context context = getApplicationContext();
-                                Toast toast = Toast.makeText(context, "El usuario "+username.getText()+" se ha añadido correctamente", Toast.LENGTH_SHORT);
+                                Toast toast = Toast.makeText(context, "El usuario " + username.getText() + " se ha añadido correctamente", Toast.LENGTH_SHORT);
                                 toast.show();
                                 //Salimos de la actividad
                                 finish();
