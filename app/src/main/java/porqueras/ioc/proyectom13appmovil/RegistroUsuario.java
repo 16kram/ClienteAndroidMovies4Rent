@@ -75,7 +75,7 @@ public class RegistroUsuario extends AppCompatActivity {
                 boolean isValidPhoneNumber = Patterns.PHONE.matcher(telefono.getText().toString()).matches();
                 if (isValidPhoneNumber) {
                     // el número es válido
-                    Log.d("response", "número de teléfono no valido=" + email.getText().toString());
+                    Log.d("response", "número de teléfono valido=" + email.getText().toString());
                 } else {
                     // el número es inválido
                     Log.d("response", "número de teléfono no valido=" + email.getText().toString());

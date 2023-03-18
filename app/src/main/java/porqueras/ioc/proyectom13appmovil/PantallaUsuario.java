@@ -27,7 +27,7 @@ public class PantallaUsuario extends AppCompatActivity {
         setContentView(R.layout.activity_pantalla_usuario);
 
         //Añadimos el título de la Activity en la barra superior
-        setTitle("Pantalla del usuario");
+        setTitle("Menú del usuario");
 
         //Añadimos los campos de texto y los botones
         titulo = (TextView) findViewById(R.id.textViewTituloUsuario);

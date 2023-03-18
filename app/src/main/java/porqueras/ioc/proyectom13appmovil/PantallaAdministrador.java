@@ -2,6 +2,7 @@ package porqueras.ioc.proyectom13appmovil;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,7 @@ import retrofit2.Response;
 public class PantallaAdministrador extends AppCompatActivity {
     private APIService apiService;
     private Button botonLogoutAdmin;
+    private Button botonGestionUsuarios;
     private TextView titulo;
 
     @Override
@@ -29,9 +31,10 @@ public class PantallaAdministrador extends AppCompatActivity {
         //Añadimos los campos de texto y los botones
         titulo = (TextView) findViewById(R.id.textViewTituloAdministrador);
         botonLogoutAdmin = (Button) findViewById(R.id.buttonLogoutAdmin);
+        botonGestionUsuarios = (Button) findViewById(R.id.buttonGestionUsuarios);
 
         //Añadimos el título de la Activity en la barra superior
-        setTitle("Pantalla del administrador");
+        setTitle("Menú del administrador");
 
         //Instanciomos la incerfaz de APIService mediante Retrofit
         apiService = InstanciaRetrofit.getApiService();
@@ -66,6 +69,15 @@ public class PantallaAdministrador extends AppCompatActivity {
                 //Cerramos la actividad actual
                 finish();
 
+            }
+        });
+
+        //Acción del botón de gestión de usuarios
+        botonGestionUsuarios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PantallaAdministrador.this, GestionUsuarios.class);
+                startActivity(i);
             }
         });
     }
