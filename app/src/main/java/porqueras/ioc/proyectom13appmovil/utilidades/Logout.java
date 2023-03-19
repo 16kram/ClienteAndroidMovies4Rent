@@ -11,6 +11,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Clase para cerrar la sesión con el servidor
+ *
+ * @author Esteban Porqueras Araque
+ */
 public class Logout {
 
     /**

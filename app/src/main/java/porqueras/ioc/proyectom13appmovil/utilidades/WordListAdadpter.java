@@ -16,6 +16,8 @@ import porqueras.ioc.proyectom13appmovil.R;
 
 /**
  * Adaptador del RecyclerView
+ *
+ * @author Esteban Porqueras Araque
  */
 public class WordListAdadpter extends RecyclerView.Adapter<WordListAdadpter.WordViewHolder> {
     private final LinkedList<String> mWordList;

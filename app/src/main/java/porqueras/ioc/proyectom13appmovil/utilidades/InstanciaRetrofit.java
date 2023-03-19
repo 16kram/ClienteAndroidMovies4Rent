@@ -12,6 +12,11 @@ import porqueras.ioc.proyectom13appmovil.utilidades.NullConverterFactory;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Clase para obtener una instancia de APIService mediante retrofit
+ *
+ * @author Esteban Porqueras Araque
+ */
 public class InstanciaRetrofit {
     private static Retrofit retrofit = null;
 

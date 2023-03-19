@@ -17,6 +17,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Pantalla para dar de alta a los usuarios
+ *
+ * @author Esteban Porqueras Araque
+ */
 public class RegistroUsuario extends AppCompatActivity {
     EditText nombre, apellidos, telefono, email, direccion, username, password, confirmPassword;
     Button botonRegistro;
@@ -98,7 +103,7 @@ public class RegistroUsuario extends AppCompatActivity {
                             direccion.getText().toString()
                     );
                     Call<UsuarioResponse> callUsuario = apiService.setUsuario(user);
-
+                    //Se hace la petición al servidor para añadir al usuario
                     callUsuario.enqueue(new Callback<UsuarioResponse>() {
                         @Override
                         public void onResponse(Call<UsuarioResponse> call, Response<UsuarioResponse> response) {
@@ -113,7 +118,6 @@ public class RegistroUsuario extends AppCompatActivity {
                             } else {
                                 Log.d("response", "Ocurrió un error en la petición de usuario-->" + response.code());
                             }
-
                         }
 
                         @Override

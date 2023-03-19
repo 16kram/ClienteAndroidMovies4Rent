@@ -9,8 +9,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * Pantalla el administrador para gestionar usuarios
+ *
+ * @author Esteban Porqueras Araque
+ */
 public class GestionUsuarios extends AppCompatActivity {
-    private Button listarUsuarios,ponerUsuarios,modificarUsuarios,borrarUsuarios;
+    private Button listarUsuarios, ponerUsuarios, modificarUsuarios, borrarUsuarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,17 +26,17 @@ public class GestionUsuarios extends AppCompatActivity {
         setTitle("Gestión de usuarios");
 
         //Añadimos los campos de texto y los botones
-        listarUsuarios=(Button)findViewById(R.id.buttonListaUsuarios);
-        ponerUsuarios=(Button) findViewById(R.id.buttonPonerUsuarios);
-        modificarUsuarios=(Button)findViewById(R.id.buttonModidficarUsuario);
-        borrarUsuarios=(Button)findViewById(R.id.buttonBorrarUsuarios);
+        listarUsuarios = (Button) findViewById(R.id.buttonListaUsuarios);
+        ponerUsuarios = (Button) findViewById(R.id.buttonPonerUsuarios);
+        modificarUsuarios = (Button) findViewById(R.id.buttonModidficarUsuario);
+        borrarUsuarios = (Button) findViewById(R.id.buttonBorrarUsuarios);
 
         //Acción del botón Listar Usuarios
         listarUsuarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(GestionUsuarios.this,ListadoUsuarios.class);
-                i.putExtra("accion","listar");
+                Intent i = new Intent(GestionUsuarios.this, ListadoUsuarios.class);
+                i.putExtra("accion", "listar");
                 startActivity(i);
             }
         });
@@ -40,7 +45,7 @@ public class GestionUsuarios extends AppCompatActivity {
         ponerUsuarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(GestionUsuarios.this,RegistroUsuario.class);
+                Intent i = new Intent(GestionUsuarios.this, RegistroUsuario.class);
                 startActivity(i);
             }
         });
@@ -49,8 +54,8 @@ public class GestionUsuarios extends AppCompatActivity {
         modificarUsuarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(GestionUsuarios.this,ListadoUsuarios.class);
-                i.putExtra("accion","modificar");
+                Intent i = new Intent(GestionUsuarios.this, ListadoUsuarios.class);
+                i.putExtra("accion", "modificar");
                 startActivity(i);
             }
         });
@@ -59,8 +64,8 @@ public class GestionUsuarios extends AppCompatActivity {
         borrarUsuarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(GestionUsuarios.this,ListadoUsuarios.class);
-                i.putExtra("accion","borrar");
+                Intent i = new Intent(GestionUsuarios.this, ListadoUsuarios.class);
+                i.putExtra("accion", "borrar");
                 startActivity(i);
             }
         });

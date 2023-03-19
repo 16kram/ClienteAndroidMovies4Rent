@@ -18,6 +18,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Clase principal de la aplicación
+ *
+ * @author Esteban Porqueras Araque
+ * @since 1.0
+ */
 public class MainActivity extends AppCompatActivity {
     APIService apiService;
     EditText usuario;
@@ -48,9 +54,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 LoginResponse login = new LoginResponse(usuario.getText().toString(), contrasena.getText().toString());
                 Call<LoginResponse> callLogin = apiService.getLogin(login);
-
+                //Se comprueba si el usuario está registrado y puede logarse
                 callLogin.enqueue((new Callback<LoginResponse>() {
-
                     @Override
                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                         if (response.isSuccessful()) {
@@ -63,10 +68,12 @@ public class MainActivity extends AppCompatActivity {
                             contrasena.setText("");// y Contraseña
                             if (response.body().getValue().isAdmin()) {
                                 //El usuario es administrador
+                                ApiUtils.administrador = true;
                                 Intent i = new Intent(MainActivity.this, PantallaAdministrador.class);
                                 startActivity(i);
                             } else {
                                 //El usuario no es administrador
+                                ApiUtils.administrador = false;
                                 Intent i = new Intent(MainActivity.this, PantallaUsuario.class);
                                 startActivity(i);
                             }

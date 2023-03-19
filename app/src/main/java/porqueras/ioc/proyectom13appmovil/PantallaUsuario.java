@@ -17,6 +17,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Pantalla del menú del usuario
+ *
+ * @Author Esteban Porqueras Araque
+ */
 public class PantallaUsuario extends AppCompatActivity {
     private APIService apiService;
     private Button botonLogout, modificarDatos;
@@ -82,5 +87,16 @@ public class PantallaUsuario extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    /**
+     * Si se sale del menú de usuarios se cierra la sesión
+     */
+    protected void onDestroy() {
+        super.onDestroy();
+        //Instanciomos la incerfaz de APIService mediante Retrofit
+        APIService apiService = InstanciaRetrofit.getApiService();
+        //Llamamos a Logout.sesion para cerrar la sesión
+        Logout.sesion(apiService, getApplicationContext());
     }
 }

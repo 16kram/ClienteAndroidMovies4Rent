@@ -35,7 +35,9 @@ public interface APIService {
     Call<UsuarioUpdate> updateUsuario(@Query("token") String token,@Body UsuarioUpdate usuarioUpdate);
 
     @PUT("users/update/{id}/{admin}")
-    Call<Void> setAdmin(@Query("admin")boolean admin,@Query("token")String token,@Query("id")String id);
+    Call<Void> setAdmin(@Path("id") String userId, @Path("admin") String isAdmin, @Query("admin") boolean isAdminParam, @Query("token") String token);
+
+    //Call<Void> setAdmin(@Query("admin")boolean admin,@Query("token")String token,@Query("id")String id);
 
     @DELETE("users/delete/{id}")
     Call<Void> deleteUsuario(@Path("id") String userId,@Query("token")String token);

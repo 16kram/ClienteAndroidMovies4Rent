@@ -41,7 +41,7 @@ public class LoginResponse {
 
     public class LoginResponseValue {
         private String token;
-        private boolean admin;
+        private boolean isAdmin;
 
         public String getToken() {
             return token;
@@ -52,11 +52,11 @@ public class LoginResponse {
         }
 
         public boolean isAdmin() {
-            return admin;
+            return isAdmin;
         }
 
         public void setAdmin(boolean admin) {
-            this.admin = admin;
+            this.isAdmin = admin;
         }
     }
 

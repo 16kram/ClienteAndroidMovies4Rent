@@ -8,7 +8,9 @@ import okhttp3.ResponseBody;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 
-//Conversor para gestionar las respuestas del servidor con cuerpos nulos
+/**
+ * Conversor para gestionar las respuestas del servidor con cuerpos nulos
+ */
 public class NullConverterFactory extends Converter.Factory {
     /**
      * Crea una instancia de un convertidor para un tipo específico

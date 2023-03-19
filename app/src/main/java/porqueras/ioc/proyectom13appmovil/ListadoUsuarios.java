@@ -24,6 +24,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Pantalla para listar los usuarios
+ *
+ * @author Esteban Porqueras Araque
+ */
 public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpter.PasarIdListado {
     private final LinkedList<String> mWordList = new LinkedList<>();
     private RecyclerView mRecyclerView;
