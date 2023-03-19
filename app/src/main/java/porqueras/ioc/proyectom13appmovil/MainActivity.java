@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                             ApiUtils.TOKEN = response.body().getValue().getToken();
                             usuario.setText(""); //Borra los campos Usuario
                             contrasena.setText("");// y Contraseña
-                            if (!response.body().getValue().isAdmin()) {
+                            if (response.body().getValue().isAdmin()) {
                                 //El usuario es administrador
                                 Intent i = new Intent(MainActivity.this, PantallaAdministrador.class);
                                 startActivity(i);
