@@ -161,9 +161,14 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
         dialog.show();
     }
 
+    /**
+     * Modifica los datos del usuario
+     *
+     * @param id se le pasa el identificador del usuario el cual se va a actualizar
+     */
     private void modificarUsuario(String id) {
-        Intent i=new Intent(ListadoUsuarios.this,ModificarUsuario.class);
-        i.putExtra("id",id);
+        Intent i = new Intent(ListadoUsuarios.this, ModificarUsuario.class);
+        i.putExtra("id", id);
         startActivity(i);
     }
 }

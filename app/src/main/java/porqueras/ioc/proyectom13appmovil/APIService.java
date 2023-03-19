@@ -25,11 +25,14 @@ public interface APIService {
     @GET("users/info")
     Call<UsuarioInfoResponse> getValue(@Query("token") String token);
 
+    @GET("users/{id}")
+    Call<UsuarioInfoResponse> getUsuarioId(@Path("id") String id,@Query("token") String token);
+
     @POST("register")
     Call<UsuarioResponse> setUsuario(@Body UsuarioResponse usuarioResponse);
 
     @PUT("users/update")
-    Call<UsuarioUpdate> updateUsuario(@Query("token") String token);
+    Call<UsuarioUpdate> updateUsuario(@Query("token") String token,@Body UsuarioUpdate usuarioUpdate);
 
     @PUT("users/update/{id}/{admin}")
     Call<Void> setAdmin(@Query("admin")boolean admin,@Query("token")String token,@Query("id")String id);

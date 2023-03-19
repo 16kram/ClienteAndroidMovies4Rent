@@ -2,6 +2,7 @@ package porqueras.ioc.proyectom13appmovil;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,8 +19,9 @@ import retrofit2.Response;
 
 public class PantallaUsuario extends AppCompatActivity {
     private APIService apiService;
-    private Button botonLogout;
+    private Button botonLogout, modificarDatos;
     private TextView titulo;
+    private String id;//Identificador del usuario
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class PantallaUsuario extends AppCompatActivity {
         //Añadimos los campos de texto y los botones
         titulo = (TextView) findViewById(R.id.textViewTituloUsuario);
         botonLogout = (Button) findViewById(R.id.buttonLogout);
+        modificarDatos = (Button) findViewById(R.id.buttonModificarDatos);
 
         //Instanciomos la incerfaz de APIService mediante Retrofit
         apiService = InstanciaRetrofit.getApiService();
@@ -44,6 +47,7 @@ public class PantallaUsuario extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.d("response", "Nombre usuario=" + response.body().getValue().getNombre());
                     titulo.setText("Bienvenido a MOVIES4RENT \n" + response.body().getValue().getNombre() + " eres USUARIO");
+                    id = response.body().getValue().getId();
                 } else {
                     Log.d("response", "Ocurrió un error al buscar el nombre de usuario, código=" + response.code());
                 }
@@ -66,6 +70,16 @@ public class PantallaUsuario extends AppCompatActivity {
                 //Cerramos la actividad actual
                 finish();
 
+            }
+        });
+
+        //Acción del botón modificar datos
+        modificarDatos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PantallaUsuario.this, ModificarUsuario.class);
+                i.putExtra("id", id);
+                startActivity(i);
             }
         });
     }
