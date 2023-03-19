@@ -4,26 +4,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 
-import porqueras.ioc.proyectom13appmovil.modelos.UsuarioInfoResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioListaResponse;
-import porqueras.ioc.proyectom13appmovil.modelos.UsuarioResponse;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
 import porqueras.ioc.proyectom13appmovil.utilidades.InstanciaRetrofit;
+import porqueras.ioc.proyectom13appmovil.utilidades.WordListAdadpter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ListadoUsuarios extends AppCompatActivity {
+public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpter.PasarIdListado {
     private final LinkedList<String> mWordList = new LinkedList<>();
     private RecyclerView mRecyclerView;
     private WordListAdadpter mAdapter;
     APIService apiService;
+    HashMap hashMap = new HashMap();
+    private String accion;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,29 +40,45 @@ public class ListadoUsuarios extends AppCompatActivity {
         //Añadimos el título de la Activity en la barra superior
         setTitle("Listado de usuarios");
 
+        //Recuperamos la acción a ejecutar de la actividad anterior
+        Bundle extras = getIntent().getExtras();
+        accion = extras.getString("accion");
+        Log.d("response", "accion=" + accion);
+
         //Instanciomos la incerfaz de APIService mediante Retrofit
         apiService = InstanciaRetrofit.getApiService();
 
-        Call<UsuarioListaResponse> callUsuarioInfoResponse = apiService.getUsuario(ApiUtils.TOKEN);
-        callUsuarioInfoResponse.enqueue(new Callback<UsuarioListaResponse>() {
+        Call<UsuarioListaResponse> callUsuarioListaResponse = apiService.getUsuario(ApiUtils.TOKEN);
+        callUsuarioListaResponse.enqueue(new Callback<UsuarioListaResponse>() {
             @Override
             public void onResponse(Call<UsuarioListaResponse> call, Response<UsuarioListaResponse> response) {
                 if (response.isSuccessful()) {
-                    Log.d("response", "usuario=" + response.body().getValue().get(0).getNombre());
                     for (int n = 0; n < response.body().getValue().size(); n++) {
                         //Obtiene los usuarios y los añade a la lista
-                        mWordList.add("Usuario: " + response.body().getValue().get(n).getNombre() +
-                                " " + response.body().getValue().get(n).getApellidos());
-
-                        //Obtiene un identificador para la vista del RecyclerView
-                        mRecyclerView = findViewById(R.id.recyclerview);
-                        //Crea un adaptador para proporcionar los datos mostrados
-                        mAdapter = new WordListAdadpter(ListadoUsuarios.this, mWordList);
-                        //Conecta el adaptador con el RecyclerView
-                        mRecyclerView.setAdapter(mAdapter);
-                        //Da al RecyclerView un layout manager por defecto
-                        mRecyclerView.setLayoutManager(new LinearLayoutManager(ListadoUsuarios.this));
+                        mWordList.add(response.body().getValue().get(n).getNombre() +
+                                " " + response.body().getValue().get(n).getApellidos() +
+                                "\nTeléfono: " + response.body().getValue().get(n).getTelefono()
+                                + "\ne-mail: " + response.body().getValue().get(n).getEmail()
+                                + "\nDirección: " + response.body().getValue().get(n).getDireccion());
                     }
+
+                    //Ordena lo usuarios
+                    Collections.sort(mWordList);
+
+                    //Asociamos el id con el número de la posición de la lista
+                    for (int n = 0; n < mWordList.size(); n++) {
+                        hashMap.put(n, response.body().getValue().get(n).getId());
+                        Log.d("respose", "response hasMap n=" + n + " id=" + hashMap.get(n));
+                    }
+
+                    //Obtiene un identificador para la vista del RecyclerView
+                    mRecyclerView = findViewById(R.id.recyclerview);
+                    //Crea un adaptador para proporcionar los datos mostrados
+                    mAdapter = new WordListAdadpter(ListadoUsuarios.this, mWordList, ListadoUsuarios.this);
+                    //Conecta el adaptador con el RecyclerView
+                    mRecyclerView.setAdapter(mAdapter);
+                    //Da al RecyclerView un layout manager por defecto
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(ListadoUsuarios.this));
                 } else {
                     Log.d("response", "error usuario " + response.code());
                 }
@@ -67,14 +90,65 @@ public class ListadoUsuarios extends AppCompatActivity {
             }
         });
 
-        /*
-        //Obtiene un identificador para la vista del RecyclerView
-        mRecyclerView = findViewById(R.id.recyclerview);
-        //Crea un adaptador para proporcionar los datos mostrados
-        mAdapter = new WordListAdadpter(this, mWordList);
-        //Conecta el adaptador con el RecyclerView
-        mRecyclerView.setAdapter(mAdapter);
-        //Da al RecyclerView un layout manager por defecto
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));*/
+    }
+
+    /**
+     * Recibe el número de posición que se ha clicado
+     * en el listado de usuarios
+     *
+     * @param posicion
+     */
+    @Override
+    public void pasarPosicionListado(int posicion) {
+        Log.d("response", "response interface posición pulsada=" + posicion);
+        id = (String) hashMap.get(posicion);
+
+        switch (accion) {
+            case "borrar":
+                borrarUsuario(id);
+                break;
+        }
+
+    }
+
+    //Borra el usuario
+    private void borrarUsuario(String userId) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("¿Estás seguro de que deseas borrar este usuario?");
+        builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // Se ha elegido borrar el usuario
+                Call<Void> usuarioBorrar = apiService.deleteUsuario(userId, ApiUtils.TOKEN);
+                usuarioBorrar.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("response", "El usuario ha sido eliminado");
+                            //Actualiza los datos del RecyclerView
+                            mAdapter.notifyDataSetChanged();
+                            Context context = getApplicationContext();
+                            //Muestra un Toast conforme se ha eliminado el usuario
+                            Toast toast = Toast.makeText(context, "EL usuario ha sido eliminado", Toast.LENGTH_SHORT);
+                            toast.show();
+                        } else {
+                            Log.d("response", "Ha ocurrido un error, código=" + response.code());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Log.d("response", "Ha ocurrido un error");
+                    }
+                });
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // Se ha cancelado la operación
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

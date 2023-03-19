@@ -15,17 +15,18 @@ public class UsuarioListaResponse {
     }
 
     public List<UsuarioInfoResponse.Usuario> getValue() {
-        return  value;
+        return value;
     }
 
     public void setValue(List<UsuarioInfoResponse.Usuario> value) {
         this.value = value;
     }
 
-    public class Usuario{
+    public class Usuario {
         private String id;
         private String nombre;
         private String apellidos;
+        private String telefono;
         private String email;
         private String direccion;
 
@@ -67,6 +68,14 @@ public class UsuarioListaResponse {
 
         public void setDireccion(String direccion) {
             this.direccion = direccion;
+        }
+
+        public String getTelefono() {
+            return telefono;
+        }
+
+        public void setTelefono(String telefono) {
+            this.telefono = telefono;
         }
     }
 }

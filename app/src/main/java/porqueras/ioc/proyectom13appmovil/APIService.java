@@ -31,8 +31,8 @@ public interface APIService {
     @PUT("updateusuari/{id}")
     Call<UsuarioUpdate> updateUsuario(@Path("id") int id, @Body UsuarioUpdate usuarioUpdate);
 
-    @DELETE("deleteusuari/{id}")
-    Call<Void> deleteUsuario(@Path("id") int id);
+    @DELETE("users/delete/{id}")
+    Call<Void> deleteUsuario(@Path("id") String userId,@Query("token")String token);
 
     @POST("login")
     Call<LoginResponse> getLogin(@Body LoginResponse loginResponse);

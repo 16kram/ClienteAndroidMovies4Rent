@@ -75,10 +75,10 @@ public class RegistroUsuario extends AppCompatActivity {
                 boolean isValidPhoneNumber = Patterns.PHONE.matcher(telefono.getText().toString()).matches();
                 if (isValidPhoneNumber) {
                     // el número es válido
-                    Log.d("response", "número de teléfono valido=" + email.getText().toString());
+                    Log.d("response", "número de teléfono valido=" + telefono.getText().toString());
                 } else {
                     // el número es inválido
-                    Log.d("response", "número de teléfono no valido=" + email.getText().toString());
+                    Log.d("response", "número de teléfono no valido=" + telefono.getText().toString());
                     Context context = getApplicationContext();
                     Toast toast = Toast.makeText(context, "Número de teléfono no válido", Toast.LENGTH_SHORT);
                     toast.show();

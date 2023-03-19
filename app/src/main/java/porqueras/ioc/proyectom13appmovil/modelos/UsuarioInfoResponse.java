@@ -20,10 +20,11 @@ public class UsuarioInfoResponse {
         this.value = value;
     }
 
-    public class Usuario{
+    public class Usuario {
         private String id;
         private String nombre;
         private String apellidos;
+        private String telefono;
         private String email;
         private String direccion;
 
@@ -65,6 +66,14 @@ public class UsuarioInfoResponse {
 
         public void setDireccion(String direccion) {
             this.direccion = direccion;
+        }
+
+        public String getTelefono() {
+            return telefono;
+        }
+
+        public void setTelefono(String telefono) {
+            this.telefono = telefono;
         }
     }
 }
