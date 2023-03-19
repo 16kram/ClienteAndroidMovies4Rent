@@ -28,8 +28,11 @@ public interface APIService {
     @POST("register")
     Call<UsuarioResponse> setUsuario(@Body UsuarioResponse usuarioResponse);
 
-    @PUT("updateusuari/{id}")
-    Call<UsuarioUpdate> updateUsuario(@Path("id") int id, @Body UsuarioUpdate usuarioUpdate);
+    @PUT("users/update")
+    Call<UsuarioUpdate> updateUsuario(@Query("token") String token);
+
+    @PUT("users/update/{id}/{admin}")
+    Call<Void> setAdmin(@Query("admin")boolean admin,@Query("token")String token,@Query("id")String id);
 
     @DELETE("users/delete/{id}")
     Call<Void> deleteUsuario(@Path("id") String userId,@Query("token")String token);

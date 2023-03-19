@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -37,13 +38,13 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_usuarios);
 
-        //Añadimos el título de la Activity en la barra superior
-        setTitle("Listado de usuarios");
-
         //Recuperamos la acción a ejecutar de la actividad anterior
         Bundle extras = getIntent().getExtras();
         accion = extras.getString("accion");
         Log.d("response", "accion=" + accion);
+
+        //Añadimos el título de la accion a realizar en la barra superior de la activity
+        setTitle(accion.substring(0, 1).toUpperCase() + accion.substring(1) + " usuarios");
 
         //Instanciomos la incerfaz de APIService mediante Retrofit
         apiService = InstanciaRetrofit.getApiService();
@@ -107,11 +108,18 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
             case "borrar":
                 borrarUsuario(id);
                 break;
+            case "modificar":
+                modificarUsuario(id);
+                break;
         }
 
     }
 
-    //Borra el usuario
+    /**
+     * Borrar el usuario
+     *
+     * @param userId se le pasa el identificador del usuario el cual se va a borrar
+     */
     private void borrarUsuario(String userId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("¿Estás seguro de que deseas borrar este usuario?");
@@ -130,6 +138,7 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
                             //Muestra un Toast conforme se ha eliminado el usuario
                             Toast toast = Toast.makeText(context, "EL usuario ha sido eliminado", Toast.LENGTH_SHORT);
                             toast.show();
+                            finish();
                         } else {
                             Log.d("response", "Ha ocurrido un error, código=" + response.code());
                         }
@@ -150,5 +159,11 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    private void modificarUsuario(String id) {
+        Intent i=new Intent(ListadoUsuarios.this,ModificarUsuario.class);
+        i.putExtra("id",id);
+        startActivity(i);
     }
 }

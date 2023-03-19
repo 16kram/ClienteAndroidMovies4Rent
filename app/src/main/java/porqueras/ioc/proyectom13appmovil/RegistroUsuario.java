@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -12,21 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioResponse;
-import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
 import porqueras.ioc.proyectom13appmovil.utilidades.InstanciaRetrofit;
-import porqueras.ioc.proyectom13appmovil.utilidades.NullConverterFactory;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegistroUsuario extends AppCompatActivity {
     EditText nombre, apellidos, telefono, email, direccion, username, password, confirmPassword;
@@ -38,10 +27,10 @@ public class RegistroUsuario extends AppCompatActivity {
         setContentView(R.layout.activity_registro_usuario);
 
         //Añadimos el título de la Activity en la barra superior
-        setTitle("Registro de usuarios");
+        setTitle("Añadir usuario");
 
         //Añadimos los campos de texto y los botones
-        nombre = (EditText) findViewById(R.id.editTextNombre);
+        nombre = (EditText) findViewById(R.id.editTextNombrer);
         apellidos = (EditText) findViewById(R.id.editTextApellidos);
         telefono = (EditText) findViewById(R.id.editTextTelefono);
         email = (EditText) findViewById(R.id.editTextEmail);

@@ -3,18 +3,17 @@ package porqueras.ioc.proyectom13appmovil.modelos;
 public class UsuarioUpdate {
     private String nombre;
     private String apellidos;
+    private String telefono;
     private String email;
     private String direccion;
-    private String address;
-    private String telefono;
 
-    public UsuarioUpdate(String nombre, String apellidos, String email, String direccion, String address, String telefono) {
+
+    public UsuarioUpdate(String nombre, String apellidos, String telefono, String email, String direccion) {
         this.nombre = nombre;
         this.apellidos = apellidos;
+        this.telefono = telefono;
         this.email = email;
         this.direccion = direccion;
-        this.address = address;
-        this.telefono = telefono;
     }
 
     public String getNombre() {
@@ -47,14 +46,6 @@ public class UsuarioUpdate {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getTelefono() {

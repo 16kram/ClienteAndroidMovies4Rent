@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistroUsuario">
-
+    tools:context=".ModificarUsuario">
     <EditText
-        android:id="@+id/editTextNombrer"
+        android:id="@+id/editTextNombreModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -18,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextApellidos"
+        android:id="@+id/editTextApellidosModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -26,10 +25,10 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNombrer" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextNombreModificar" />
 
     <EditText
-        android:id="@+id/editTextTelefono"
+        android:id="@+id/editTextTelefonoModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -37,10 +36,10 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextApellidos" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextApellidosModificar" />
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/editTextEmailModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -48,10 +47,10 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTelefono" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTelefonoModificar" />
 
     <EditText
-        android:id="@+id/editTextDireccion"
+        android:id="@+id/editTextDireccionModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -59,10 +58,10 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailModificar" />
 
     <EditText
-        android:id="@+id/editTextUserName"
+        android:id="@+id/editTextUserNameModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -70,10 +69,10 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDireccion" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDireccionModificar" />
 
     <TextView
-        android:id="@+id/textViewNombre"
+        android:id="@+id/textViewNombreModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -84,7 +83,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewApellidos"
+        android:id="@+id/textViewApellidosModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -92,10 +91,10 @@
         android:text="Apellidos"
         android:textSize="19dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNombre" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNombreModificar" />
 
     <TextView
-        android:id="@+id/textViewTelefono"
+        android:id="@+id/textViewTelefonoModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -103,10 +102,10 @@
         android:text="Teléfono"
         android:textSize="19dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewApellidos" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewApellidosModificar" />
 
     <TextView
-        android:id="@+id/textViewEmail"
+        android:id="@+id/textViewEmailModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -114,10 +113,10 @@
         android:text="e-mail"
         android:textSize="19dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTelefono" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTelefonoModificar" />
 
     <TextView
-        android:id="@+id/textViewDireccion"
+        android:id="@+id/textViewDireccionModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -125,10 +124,10 @@
         android:text="Dirección"
         android:textSize="19dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmailModificar" />
 
     <TextView
-        android:id="@+id/textViewUserName"
+        android:id="@+id/textViewUserNameModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -136,10 +135,10 @@
         android:text="UserName"
         android:textSize="19dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDireccion" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDireccionModificar" />
 
     <TextView
-        android:id="@+id/textViewPassword"
+        android:id="@+id/textViewPasswordModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -147,10 +146,10 @@
         android:text="Password"
         android:textSize="19dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUserName" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewUserNameModificar" />
 
     <TextView
-        android:id="@+id/textViewConfirmPassword"
+        android:id="@+id/textViewConfirmPasswordModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -158,20 +157,20 @@
         android:text="Confirm pswrd"
         android:textSize="19dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewPasswordModificar" />
 
     <Button
-        android:id="@+id/buttonRegistro"
+        android:id="@+id/buttonRegistroModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Añadir"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextConfirmPasswordModificar" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/editTextPasswordModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -179,10 +178,10 @@
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextUserName" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextUserNameModificar" />
 
     <EditText
-        android:id="@+id/editTextConfirmPassword"
+        android:id="@+id/editTextConfirmPasswordModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -190,6 +189,5 @@
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
-
+        app:layout_constraintTop_toBottomOf="@+id/editTextPasswordModificar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
