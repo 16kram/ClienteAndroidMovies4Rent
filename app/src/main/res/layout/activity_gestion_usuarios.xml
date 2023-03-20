@@ -7,17 +7,6 @@
     tools:context=".GestionUsuarios">
 
     <Button
-        android:id="@+id/buttonBuscarUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Buscar usuario"
-        app:backgroundTint="#64B5F6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/buttonListaUsuarios"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,7 +15,7 @@
         app:backgroundTint="#64B5F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonBuscarUsuario" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonPonerUsuarios"
@@ -49,14 +38,14 @@
         app:backgroundTint="#64B5F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonModidficarUsuario" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonModificarRolUsuario" />
 
     <Button
-        android:id="@+id/buttonModidficarUsuario"
+        android:id="@+id/buttonModificarRolUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Modificar usuario"
+        android:text="Modificar rol usuario"
         app:backgroundTint="#64B5F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

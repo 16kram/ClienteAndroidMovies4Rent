@@ -2,8 +2,6 @@ package porqueras.ioc.proyectom13appmovil;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +13,7 @@ import android.widget.Button;
  * @author Esteban Porqueras Araque
  */
 public class GestionUsuarios extends AppCompatActivity {
-    private Button listarUsuarios, ponerUsuarios, modificarUsuarios, borrarUsuarios;
+    private Button listarUsuarios, ponerUsuarios, modificarRolUsuarios, borrarUsuarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +26,7 @@ public class GestionUsuarios extends AppCompatActivity {
         //Añadimos los campos de texto y los botones
         listarUsuarios = (Button) findViewById(R.id.buttonListaUsuarios);
         ponerUsuarios = (Button) findViewById(R.id.buttonPonerUsuarios);
-        modificarUsuarios = (Button) findViewById(R.id.buttonModidficarUsuario);
+        modificarRolUsuarios = (Button) findViewById(R.id.buttonModificarRolUsuario);
         borrarUsuarios = (Button) findViewById(R.id.buttonBorrarUsuarios);
 
         //Acción del botón Listar Usuarios
@@ -50,8 +48,8 @@ public class GestionUsuarios extends AppCompatActivity {
             }
         });
 
-        //Acción del botón modificar
-        modificarUsuarios.setOnClickListener(new View.OnClickListener() {
+        //Acción del botón modificar rol usuarios
+        modificarRolUsuarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(GestionUsuarios.this, ListadoUsuarios.class);

@@ -28,7 +28,6 @@ public class ModificarUsuario extends AppCompatActivity {
     String id;//Identificador del usuario
     EditText nombre, apellidos, telefono, email, direccion;
     Button botonActualizar;
-    Switch switchAdministrador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +48,6 @@ public class ModificarUsuario extends AppCompatActivity {
         email = (EditText) findViewById(R.id.editTextEmailModificar);
         direccion = (EditText) findViewById(R.id.editTextDireccionModificar);
         botonActualizar = (Button) findViewById(R.id.buttonActualizar);
-        switchAdministrador = (Switch) findViewById(R.id.switchAdministrador);
-
-        //Si el usuario es un administrador se habilita el switch de Administrador
-        if (ApiUtils.administrador) {
-            switchAdministrador.setVisibility(View.VISIBLE);
-        } else {
-            switchAdministrador.setVisibility(View.GONE);
-        }
 
         //Instanciomos la incerfaz de APIService mediante Retrofit
         apiService = InstanciaRetrofit.getApiService();
@@ -89,40 +80,12 @@ public class ModificarUsuario extends AppCompatActivity {
         botonActualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Se actualiza el dato de si el usuario es administrador o no
-                //Sólo si el usuario actual es administrador
-                boolean admin;
-                if (switchAdministrador.isChecked()) {
-                    admin = true;
-                } else {
-                    admin = false;
-                }
-                if (ApiUtils.administrador) {
-                    //Se hace la llamada al servidor para modificar el estado del usuario, si es administrador o no
-                    Call<Void> callSetAdmin = apiService.setAdmin(id,"admin",admin,ApiUtils.TOKEN);
-                    callSetAdmin.enqueue(new Callback<Void>() {
-                        @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
-                            if (response.isSuccessful()) {
-                                Log.d("response", "Rol de admin modificado a " + admin);
-                            } else {
-                                Log.d("response", "Ocurrió un error al modificar el rol de admin, código=" + response.code());
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
-                            Log.d("response", "Error de red-->" + t.getMessage());
-                        }
-                    });
-                }
-
                 //Se actualizan los datos del usuario
                 UsuarioUpdate user = new UsuarioUpdate(
-                        email.getText().toString(),
                         nombre.getText().toString(),
                         apellidos.getText().toString(),
                         telefono.getText().toString(),
+                        email.getText().toString(),
                         direccion.getText().toString()
                 );
                 Call<UsuarioUpdate> callUsuarioUpdate = apiService.updateUsuario(ApiUtils.TOKEN, user);
@@ -131,6 +94,7 @@ public class ModificarUsuario extends AppCompatActivity {
                     public void onResponse(Call<UsuarioUpdate> call, Response<UsuarioUpdate> response) {
                         if (response.isSuccessful()) {
                             Log.d("response", "Usuario actualizado");
+                            finish();
                         } else {
                             Log.d("response", "Ha ocurrido un error , código=" + response.code());
                         }

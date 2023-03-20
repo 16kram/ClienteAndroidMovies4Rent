@@ -68,13 +68,11 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
                                 + "\nDirección: " + response.body().getValue().get(n).getDireccion());
                     }
 
-                    //Ordena lo usuarios
-                    Collections.sort(mWordList);
-
                     //Asociamos el id con el número de la posición de la lista
                     for (int n = 0; n < mWordList.size(); n++) {
                         hashMap.put(n, response.body().getValue().get(n).getId());
-                        Log.d("respose", "response hasMap n=" + n + " id=" + hashMap.get(n));
+                        Log.d("respose", "response hasMap n=" + n + " id=" + hashMap.get(n) + " " +
+                                response.body().getValue().get(n).getNombre());
                     }
 
                     //Obtiene un identificador para la vista del RecyclerView
@@ -114,7 +112,7 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
                 borrarUsuario(id);
                 break;
             case "modificar":
-                modificarUsuario(id);
+                modificarRolUsuario(id);
                 break;
         }
 
@@ -171,8 +169,8 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
      *
      * @param id se le pasa el identificador del usuario el cual se va a actualizar
      */
-    private void modificarUsuario(String id) {
-        Intent i = new Intent(ListadoUsuarios.this, ModificarUsuario.class);
+    private void modificarRolUsuario(String id) {
+        Intent i = new Intent(ListadoUsuarios.this, ModificarRolUsuario.class);
         i.putExtra("id", id);
         startActivity(i);
     }
