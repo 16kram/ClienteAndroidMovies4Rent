@@ -89,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<LoginResponse> call, Throwable t) {
                         Log.d("response", "Error de red-->" + t.getMessage());
+                        //Si hay un error con la conexión hacia el servidor se muestra un Toast de error
+                        Context context = getApplicationContext();
+                        Toast toast = Toast.makeText(context, "Error de red", Toast.LENGTH_SHORT);
+                        toast.show();
                     }
                 }));
             }

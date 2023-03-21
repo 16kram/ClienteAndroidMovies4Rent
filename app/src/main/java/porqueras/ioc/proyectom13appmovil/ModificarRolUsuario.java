@@ -16,7 +16,7 @@ public class ModificarRolUsuario extends AppCompatActivity {
         setContentView(R.layout.activity_modificar_rol_usuario);
 
         //Añadimos el título de la Activity en la barra superior
-        setTitle("Modificar del usuario");
+        setTitle("Modificar el rol del usuario");
 
         //Recupera el id del usuario enviado desde la actividad anterior
         Bundle extras = getIntent().getExtras();
