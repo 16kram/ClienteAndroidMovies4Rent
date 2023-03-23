@@ -12,7 +12,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
-import  retrofit2.Call;
+import retrofit2.Call;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -26,21 +26,19 @@ public interface APIService {
     Call<UsuarioInfoResponse> getValue(@Query("token") String token);
 
     @GET("users/{id}")
-    Call<UsuarioInfoResponse> getUsuarioId(@Path("id") String id,@Query("token") String token);
+    Call<UsuarioInfoResponse> getUsuarioId(@Path("id") String id, @Query("token") String token);
 
     @POST("register")
     Call<UsuarioResponse> setUsuario(@Body UsuarioResponse usuarioResponse);
 
     @PUT("users/update")
-    Call<UsuarioUpdate> updateUsuario(@Query("token") String token,@Body UsuarioUpdate usuarioUpdate);
+    Call<UsuarioUpdate> updateUsuario(@Query("token") String token, @Body UsuarioUpdate usuarioUpdate);
 
     @PUT("users/update/{id}/{admin}")
     Call<Void> setAdmin(@Path("id") String userId, @Path("admin") String isAdmin, @Query("admin") boolean isAdminParam, @Query("token") String token);
 
-    //Call<Void> setAdmin(@Query("admin")boolean admin,@Query("token")String token,@Query("id")String id);
-
     @DELETE("users/delete/{id}")
-    Call<Void> deleteUsuario(@Path("id") String userId,@Query("token")String token);
+    Call<Void> deleteUsuario(@Path("id") String userId, @Query("token") String token);
 
     @POST("login")
     Call<LoginResponse> getLogin(@Body LoginResponse loginResponse);

@@ -20,6 +20,9 @@ import retrofit2.Response;
 
 /**
  * Clase principal de la aplicación
+ * <p>
+ * En está clase el usuario se logea y
+ * se pueden crear nuevo usuarios
  *
  * @author Esteban Porqueras Araque
  * @since 1.0
