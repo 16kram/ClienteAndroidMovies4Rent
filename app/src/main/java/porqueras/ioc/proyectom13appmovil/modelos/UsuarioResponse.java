@@ -1,5 +1,10 @@
 package porqueras.ioc.proyectom13appmovil.modelos;
 
+/**
+ * Clase DTO de Usuario
+ *
+ * @author Esteban Porqueras Araque
+ */
 public class UsuarioResponse {
     private String email;
     private String username;

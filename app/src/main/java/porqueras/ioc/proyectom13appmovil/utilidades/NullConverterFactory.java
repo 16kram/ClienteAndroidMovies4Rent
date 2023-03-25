@@ -10,6 +10,8 @@ import retrofit2.Retrofit;
 
 /**
  * Conversor para gestionar las respuestas del servidor con cuerpos nulos
+ *
+ * @author Esteban Porqueras Araque
  */
 public class NullConverterFactory extends Converter.Factory {
     /**

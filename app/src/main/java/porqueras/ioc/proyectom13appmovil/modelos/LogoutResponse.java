@@ -1,5 +1,10 @@
 package porqueras.ioc.proyectom13appmovil.modelos;
 
+/**
+ * Clase DTO de logout
+ *
+ * @author Esteban Porqueras Araque
+ */
 public class LogoutResponse {
     String token;
 

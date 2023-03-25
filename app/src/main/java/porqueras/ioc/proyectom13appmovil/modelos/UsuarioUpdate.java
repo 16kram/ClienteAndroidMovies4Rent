@@ -1,5 +1,10 @@
 package porqueras.ioc.proyectom13appmovil.modelos;
 
+/**
+ * Clase DTO de actualización de usuario
+ *
+ * @author Esteban Porqueras Araque
+ */
 public class UsuarioUpdate {
     private String nombre;
     private String apellidos;

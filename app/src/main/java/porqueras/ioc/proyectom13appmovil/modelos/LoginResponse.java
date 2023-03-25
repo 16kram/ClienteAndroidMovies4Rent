@@ -1,5 +1,10 @@
 package porqueras.ioc.proyectom13appmovil.modelos;
 
+/**
+ * Clase DTO de login
+ *
+ * @author Esteban Porqueras Araque
+ */
 public class LoginResponse {
     private String username;
     private String password;

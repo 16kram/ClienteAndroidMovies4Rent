@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -42,6 +43,9 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_usuarios);
+
+        //Mantiene la orientación de la pantalla en vertical
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //Recuperamos la acción a ejecutar de la actividad anterior
         Bundle extras = getIntent().getExtras();

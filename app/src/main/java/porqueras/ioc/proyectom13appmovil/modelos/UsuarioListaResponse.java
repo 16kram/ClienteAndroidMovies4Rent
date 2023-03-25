@@ -2,6 +2,11 @@ package porqueras.ioc.proyectom13appmovil.modelos;
 
 import java.util.List;
 
+/**
+ * Clase DTO de lista de usuarios
+ *
+ * @author Esteban Porqueras Araque
+ */
 public class UsuarioListaResponse {
     private String message;
     private List<UsuarioInfoResponse.Usuario> value;

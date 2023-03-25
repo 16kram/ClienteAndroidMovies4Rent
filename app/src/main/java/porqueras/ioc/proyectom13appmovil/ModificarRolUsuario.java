@@ -3,6 +3,7 @@ package porqueras.ioc.proyectom13appmovil;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.CompoundButton;
@@ -33,11 +34,14 @@ public class ModificarRolUsuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modificar_rol_usuario);
 
+        //Mantiene la orientación de la pantalla en vertical
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         //Añadimos el título de la Activity en la barra superior
         setTitle("Modificar el rol del usuario");
 
         //Añadimos el texto y el switch
-        nombreUsuario=(TextView)findViewById(R.id.textViewRolUsuario);
+        nombreUsuario = (TextView) findViewById(R.id.textViewRolUsuario);
         switchAdministrador = (Switch) findViewById(R.id.switchAdministrador);
 
         //Instanciomos la incerfaz de APIService mediante Retrofit
@@ -48,16 +52,16 @@ public class ModificarRolUsuario extends AppCompatActivity {
         id = extras.getString("id");
         Log.d("response", "id=" + id);
 
-        //Pone el nombre del usuario seleccionado en la pantalla
-        Call<UsuarioInfoResponse> callUsuarioInfoResponse=apiService.getUsuarioId(id,ApiUtils.TOKEN);
+        //Pone el nombre y el apellido del usuario seleccionado en la pantalla
+        Call<UsuarioInfoResponse> callUsuarioInfoResponse = apiService.getUsuarioId(id, ApiUtils.TOKEN);
         callUsuarioInfoResponse.enqueue(new Callback<UsuarioInfoResponse>() {
             @Override
             public void onResponse(Call<UsuarioInfoResponse> call, Response<UsuarioInfoResponse> response) {
-                if(response.isSuccessful()){
-                    nombreUsuario.setText(response.body().getValue().getNombre()+
-                            " "+response.body().getValue().getApellidos());
-                }else{
-                    Log.d("response","Ha ocurrido un error, código="+response.code());
+                if (response.isSuccessful()) {
+                    nombreUsuario.setText(response.body().getValue().getNombre() +
+                            " " + response.body().getValue().getApellidos());
+                } else {
+                    Log.d("response", "Ha ocurrido un error, código=" + response.code());
                 }
             }
 

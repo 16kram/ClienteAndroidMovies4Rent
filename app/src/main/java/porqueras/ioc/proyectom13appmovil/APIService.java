@@ -18,6 +18,11 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+/**
+ * Interface donde se definen los endpoints que utilizará Retrofit
+ *
+ * @author Esteban Porqueras Araque
+ */
 public interface APIService {
     @GET("users")
     Call<UsuarioListaResponse> getUsuario(@Query("token") String token);
