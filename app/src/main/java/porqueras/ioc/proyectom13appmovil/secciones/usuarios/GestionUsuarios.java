@@ -1,4 +1,4 @@
-package porqueras.ioc.proyectom13appmovil;
+package porqueras.ioc.proyectom13appmovil.secciones.usuarios;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,9 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import porqueras.ioc.proyectom13appmovil.R;
+import porqueras.ioc.proyectom13appmovil.RegistroUsuario;
 
 /**
  * Pantalla el administrador para gestionar usuarios

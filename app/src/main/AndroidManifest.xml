@@ -24,10 +24,10 @@
             android:name=".ModificarUsuario"
             android:exported="false" />
         <activity
-            android:name=".ListadoUsuarios"
+            android:name=".secciones.usuarios.ListadoUsuarios"
             android:exported="false" />
         <activity
-            android:name=".GestionUsuarios"
+            android:name=".secciones.usuarios.GestionUsuarios"
             android:exported="false" />
         <activity
             android:name=".PantallaAdministrador"
