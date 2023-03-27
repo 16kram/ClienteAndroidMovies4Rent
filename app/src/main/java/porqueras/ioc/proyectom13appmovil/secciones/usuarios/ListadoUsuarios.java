@@ -17,7 +17,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import porqueras.ioc.proyectom13appmovil.APIService;
-import porqueras.ioc.proyectom13appmovil.ModificarRolUsuario;
 import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioListaResponse;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;

@@ -1,4 +1,4 @@
-package porqueras.ioc.proyectom13appmovil;
+package porqueras.ioc.proyectom13appmovil.secciones.usuarios;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import porqueras.ioc.proyectom13appmovil.APIService;
+import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioInfoResponse;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
 import porqueras.ioc.proyectom13appmovil.utilidades.InstanciaRetrofit;

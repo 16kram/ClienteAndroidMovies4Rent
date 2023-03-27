@@ -1,4 +1,4 @@
-package porqueras.ioc.proyectom13appmovil;
+package porqueras.ioc.proyectom13appmovil.secciones.usuarios;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import porqueras.ioc.proyectom13appmovil.APIService;
+import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioInfoResponse;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
 import porqueras.ioc.proyectom13appmovil.utilidades.InstanciaRetrofit;
@@ -19,31 +21,31 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Pantalla del menú del usuario
+ * Pantalla del menú del administrador
  *
- * @Author Esteban Porqueras Araque
+ * @author Esteban Porqueras Araque
  */
-public class PantallaUsuario extends AppCompatActivity {
+public class PantallaAdministrador extends AppCompatActivity {
     private APIService apiService;
-    private Button botonLogout, modificarDatos;
+    private Button botonLogoutAdmin;
+    private Button botonGestionUsuarios;
     private TextView titulo;
-    private String id;//Identificador del usuario
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pantalla_usuario);
+        setContentView(R.layout.activity_pantalla_administrador);
 
         //Mantiene la orientación de la pantalla en vertical
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        //Añadimos el título de la Activity en la barra superior
-        setTitle("Menú del usuario");
-
         //Añadimos los campos de texto y los botones
-        titulo = (TextView) findViewById(R.id.textViewTituloUsuario);
-        botonLogout = (Button) findViewById(R.id.buttonLogout);
-        modificarDatos = (Button) findViewById(R.id.buttonModificarDatos);
+        titulo = (TextView) findViewById(R.id.textViewTituloAdministrador);
+        botonLogoutAdmin = (Button) findViewById(R.id.buttonLogoutAdmin);
+        botonGestionUsuarios = (Button) findViewById(R.id.buttonGestionUsuarios);
+
+        //Añadimos el título de la Activity en la barra superior
+        setTitle("Menú del administrador");
 
         //Instanciomos la incerfaz de APIService mediante Retrofit
         apiService = InstanciaRetrofit.getApiService();
@@ -55,8 +57,7 @@ public class PantallaUsuario extends AppCompatActivity {
             public void onResponse(Call<UsuarioInfoResponse> call, Response<UsuarioInfoResponse> response) {
                 if (response.isSuccessful()) {
                     Log.d("response", "Nombre usuario=" + response.body().getValue().getNombre());
-                    titulo.setText("Bienvenido a MOVIES4RENT \n" + response.body().getValue().getNombre() + " eres USUARIO");
-                    id = response.body().getValue().getId();
+                    titulo.setText("Bienvenido a MOVIES4RENT \n" + response.body().getValue().getNombre() + " eres ADMINISTRADOR");
                 } else {
                     Log.d("response", "Ocurrió un error al buscar el nombre de usuario, código=" + response.code());
                 }
@@ -69,7 +70,7 @@ public class PantallaUsuario extends AppCompatActivity {
         });
 
         //Acción del botón Logout
-        botonLogout.setOnClickListener(new View.OnClickListener() {
+        botonLogoutAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Instanciomos la incerfaz de APIService mediante Retrofit
@@ -82,19 +83,18 @@ public class PantallaUsuario extends AppCompatActivity {
             }
         });
 
-        //Acción del botón modificar datos
-        modificarDatos.setOnClickListener(new View.OnClickListener() {
+        //Acción del botón de gestión de usuarios
+        botonGestionUsuarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(PantallaUsuario.this, ModificarUsuario.class);
-                i.putExtra("id", id);
+                Intent i = new Intent(PantallaAdministrador.this, GestionUsuarios.class);
                 startActivity(i);
             }
         });
     }
 
     /**
-     * Si se sale del menú de usuarios se cierra la sesión
+     * Si se sale del menú de administrador se cierra la sesión
      */
     protected void onDestroy() {
         super.onDestroy();
