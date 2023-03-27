@@ -18,25 +18,25 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".secciones.usuarios.ModificarRolUsuario"
+            android:name=".ModificarRolUsuario"
             android:exported="false" />
         <activity
-            android:name=".secciones.usuarios.ModificarUsuario"
+            android:name=".ModificarUsuario"
             android:exported="false" />
         <activity
-            android:name=".secciones.usuarios.ListadoUsuarios"
+            android:name=".ListadoUsuarios"
             android:exported="false" />
         <activity
             android:name=".secciones.usuarios.GestionUsuarios"
             android:exported="false" />
         <activity
-            android:name=".secciones.usuarios.PantallaAdministrador"
+            android:name=".PantallaAdministrador"
             android:exported="false" />
         <activity
-            android:name=".secciones.usuarios.PantallaUsuario"
+            android:name=".PantallaUsuario"
             android:exported="false" />
         <activity
-            android:name=".secciones.usuarios.RegistroUsuario"
+            android:name=".RegistroUsuario"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

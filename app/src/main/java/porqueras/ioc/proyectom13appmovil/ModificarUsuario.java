@@ -1,4 +1,4 @@
-package porqueras.ioc.proyectom13appmovil.secciones.usuarios;
+package porqueras.ioc.proyectom13appmovil;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,8 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 
-import porqueras.ioc.proyectom13appmovil.APIService;
-import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioInfoResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioUpdate;

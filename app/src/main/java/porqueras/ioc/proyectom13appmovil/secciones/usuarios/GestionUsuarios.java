@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import porqueras.ioc.proyectom13appmovil.ListadoUsuarios;
 import porqueras.ioc.proyectom13appmovil.R;
+import porqueras.ioc.proyectom13appmovil.RegistroUsuario;
 
 /**
  * Pantalla el administrador para gestionar usuarios
