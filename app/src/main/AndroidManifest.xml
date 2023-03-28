@@ -18,7 +18,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".GestionPeliculas"
+            android:name=".RegistroPelicula"
+            android:exported="false" />
+        <activity
+            android:name=".secciones.peliculas.GestionPeliculas"
             android:exported="false" />
         <activity
             android:name=".secciones.usuarios.ModificarRolUsuario"
@@ -33,10 +36,10 @@
             android:name=".secciones.usuarios.GestionUsuarios"
             android:exported="false" />
         <activity
-            android:name=".secciones.usuarios.PantallaAdministrador"
+            android:name=".PantallaAdministrador"
             android:exported="false" />
         <activity
-            android:name=".secciones.usuarios.PantallaUsuario"
+            android:name=".PantallaUsuario"
             android:exported="false" />
         <activity
             android:name=".secciones.usuarios.RegistroUsuario"

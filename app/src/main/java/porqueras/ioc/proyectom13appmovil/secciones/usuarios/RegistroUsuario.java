@@ -41,15 +41,15 @@ public class RegistroUsuario extends AppCompatActivity {
         setTitle("Añadir usuario");
 
         //Añadimos los campos de texto y los botones
-        nombre = (EditText) findViewById(R.id.editTextNombrer);
-        apellidos = (EditText) findViewById(R.id.editTextApellidos);
-        telefono = (EditText) findViewById(R.id.editTextTelefono);
-        email = (EditText) findViewById(R.id.editTextEmail);
-        direccion = (EditText) findViewById(R.id.editTextDireccion);
-        username = (EditText) findViewById(R.id.editTextUserName);
+        nombre = (EditText) findViewById(R.id.editTextTituloPelicula);
+        apellidos = (EditText) findViewById(R.id.editTextDirectorPelicula);
+        telefono = (EditText) findViewById(R.id.editTextGeneroPelicula);
+        email = (EditText) findViewById(R.id.editTextDuracionPelicula);
+        direccion = (EditText) findViewById(R.id.editTextYearPelicula);
+        username = (EditText) findViewById(R.id.editTextPrecioDePelicula);
         password = (EditText) findViewById(R.id.editTextPassword);
         confirmPassword = (EditText) findViewById(R.id.editTextConfirmPassword);
-        botonRegistro = (Button) findViewById(R.id.buttonRegistro);
+        botonRegistro = (Button) findViewById(R.id.buttonRegistroPelicula);
 
         //Instanciomos la incerfaz de APIService mediante Retrofit
         APIService apiService = InstanciaRetrofit.getApiService();

@@ -4,6 +4,7 @@ import java.util.List;
 
 import porqueras.ioc.proyectom13appmovil.modelos.LoginResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.LogoutResponse;
+import porqueras.ioc.proyectom13appmovil.modelos.PeliculaResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioInfoResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioListaResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioResponse;
@@ -44,6 +45,9 @@ public interface APIService {
 
     @DELETE("users/delete/{id}")
     Call<Void> deleteUsuario(@Path("id") String userId, @Query("token") String token);
+
+    @POST("peliculas/add")
+    Call<PeliculaResponse> setPelicula(@Query("token") String token, @Body PeliculaResponse peliculaResponse);
 
     @POST("login")
     Call<LoginResponse> getLogin(@Body LoginResponse loginResponse);

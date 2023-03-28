@@ -1,4 +1,4 @@
-package porqueras.ioc.proyectom13appmovil.secciones.usuarios;
+package porqueras.ioc.proyectom13appmovil;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,9 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import porqueras.ioc.proyectom13appmovil.APIService;
-import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioInfoResponse;
+import porqueras.ioc.proyectom13appmovil.secciones.peliculas.GestionPeliculas;
+import porqueras.ioc.proyectom13appmovil.secciones.usuarios.GestionUsuarios;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
 import porqueras.ioc.proyectom13appmovil.utilidades.InstanciaRetrofit;
 import porqueras.ioc.proyectom13appmovil.utilidades.Logout;
@@ -44,7 +44,7 @@ public class PantallaAdministrador extends AppCompatActivity {
         titulo = (TextView) findViewById(R.id.textViewTituloAdministrador);
         botonLogoutAdmin = (Button) findViewById(R.id.buttonLogoutAdmin);
         botonGestionUsuarios = (Button) findViewById(R.id.buttonGestionUsuarios);
-        botonGestionPeliculas=(Button)findViewById(R.id.buttonGestionPeliculas);
+        botonGestionPeliculas = (Button) findViewById(R.id.buttonGestionPeliculas);
 
         //Añadimos el título de la Activity en la barra superior
         setTitle("Menú del administrador");
@@ -93,6 +93,16 @@ public class PantallaAdministrador extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        //Acción del botón de gestión de películas
+        botonGestionPeliculas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PantallaAdministrador.this, GestionPeliculas.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     /**
