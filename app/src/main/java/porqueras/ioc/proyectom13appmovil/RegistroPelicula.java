@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaResponse;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
@@ -61,6 +62,10 @@ public class RegistroPelicula extends AppCompatActivity {
                     public void onResponse(Call<PeliculaResponse> call, Response<PeliculaResponse> response) {
                         if (response.isSuccessful()) {
                             Log.d("response", "película insertada");
+                            //Finaliza la sesión en el servidor y muestra un Toast
+                            Toast toast = Toast.makeText(getBaseContext(), "Película insertada", Toast.LENGTH_LONG);
+                            toast.show();
+                            finish();
                         }
                     }
 

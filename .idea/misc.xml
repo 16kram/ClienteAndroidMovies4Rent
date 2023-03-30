@@ -6,6 +6,7 @@
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2345" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_gestion_peliculas.xml" value="0.25" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_gestion_usuarios.xml" value="0.25" />
+        <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_listado_peliculas.xml" value="0.20606884057971014" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_listado_usuarios.xml" value="0.18614130434782608" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_modificar_rol_usuario.xml" value="0.33" />
@@ -14,6 +15,7 @@
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_pantalla_usuario.xml" value="0.33" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_registro_pelicula.xml" value="0.33" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_registro_usuario.xml" value="0.33" />
+        <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/pelicula.xml" value="0.20606884057971014" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/usuario.xml" value="0.18614130434782608" />
       </map>
     </option>

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 import porqueras.ioc.proyectom13appmovil.APIService;
+import porqueras.ioc.proyectom13appmovil.ListadoPeliculas;
 import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.RegistroPelicula;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaResponse;
@@ -20,7 +21,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class GestionPeliculas extends AppCompatActivity {
-    Button insertarPelicula;
+    Button insertarPelicula, listarPeliculas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class GestionPeliculas extends AppCompatActivity {
 
         //Añadimos los botones
         insertarPelicula=(Button) findViewById(R.id.buttonPonerPeliculas);
+        listarPeliculas=(Button)findViewById(R.id.buttonListaPeliculas);
 
         //Acción del botón añadir película
         insertarPelicula.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +46,16 @@ public class GestionPeliculas extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        //Acción del botón listar películas
+        listarPeliculas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(GestionPeliculas.this, ListadoPeliculas.class);
+                startActivity(i);
+            }
+        });
+
 
     }
 }

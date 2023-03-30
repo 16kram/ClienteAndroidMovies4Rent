@@ -4,6 +4,7 @@ import java.util.List;
 
 import porqueras.ioc.proyectom13appmovil.modelos.LoginResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.LogoutResponse;
+import porqueras.ioc.proyectom13appmovil.modelos.PeliculaListaResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioInfoResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioListaResponse;
@@ -48,6 +49,9 @@ public interface APIService {
 
     @POST("peliculas/add")
     Call<PeliculaResponse> setPelicula(@Query("token") String token, @Body PeliculaResponse peliculaResponse);
+
+    @GET("peliculas")
+    Call<PeliculaListaResponse> getPeliculas(@Query("token") String token);
 
     @POST("login")
     Call<LoginResponse> getLogin(@Body LoginResponse loginResponse);
