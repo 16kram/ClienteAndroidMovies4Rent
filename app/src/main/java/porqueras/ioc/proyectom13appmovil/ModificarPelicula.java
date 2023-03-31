@@ -18,6 +18,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Pantalla para actualizar los datos de las películas
+ *
+ * @Author Esteban Porqueras Araque
+ */
 public class ModificarPelicula extends AppCompatActivity {
     APIService apiService;
     EditText tituloModificar, directorModificar, generoModificar, duracionModificar, yearModificar, precioModificar;
@@ -97,6 +102,12 @@ public class ModificarPelicula extends AppCompatActivity {
                             Toast toast = Toast.makeText(getBaseContext(), "Película actualizada", Toast.LENGTH_LONG);
                             toast.show();
                             finish();
+                        } else {
+                            Log.d("response", "Película no actualizada, código" + response.code());
+                            //No se puede modificar la película debido a un error en el servidor y muestra un Toast
+                            Toast toast = Toast.makeText(getBaseContext(), "Película no actualizada"
+                                    + "\nCódigo de error " + response.code(), Toast.LENGTH_LONG);
+                            toast.show();
                         }
                     }
 

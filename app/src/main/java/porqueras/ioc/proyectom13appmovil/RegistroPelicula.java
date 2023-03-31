@@ -17,6 +17,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Pantalla para registrar una película
+ *
+ * @Author Esteban Porqueras Araque
+ */
 public class RegistroPelicula extends AppCompatActivity {
     EditText titulo, director, genero, duracion, year, precio;
     Button botonInsertarPelicula;

@@ -21,6 +21,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Pantalla para la gestión de las películas
+ *
+ * @Autor Esteban Porqueras Araque
+ */
 public class GestionPeliculas extends AppCompatActivity {
     Button insertarPelicula, listarPeliculas, borrarPelicula, modificarPelicula;
 
