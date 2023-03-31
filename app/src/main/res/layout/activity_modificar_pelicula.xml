@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistroPelicula">
+    tools:context=".ModificarPelicula">
+
     <EditText
-        android:id="@+id/editTextTituloPelicula"
+        android:id="@+id/editTextTituloPeliculaModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -17,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextDirectorPelicula"
+        android:id="@+id/editTextDirectorPeliculaModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -25,10 +26,10 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTituloPelicula" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextTituloPeliculaModificar" />
 
     <EditText
-        android:id="@+id/editTextGeneroPelicula"
+        android:id="@+id/editTextGeneroPeliculaModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -36,10 +37,10 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDirectorPelicula" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDirectorPeliculaModificar" />
 
     <EditText
-        android:id="@+id/editTextDuracionPelicula"
+        android:id="@+id/editTextDuracionPeliculaModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -47,10 +48,10 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextGeneroPelicula" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextGeneroPeliculaModificar" />
 
     <EditText
-        android:id="@+id/editTextYearPelicula"
+        android:id="@+id/editTextYearPeliculaModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -58,10 +59,10 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDuracionPelicula" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDuracionPeliculaModificar" />
 
     <EditText
-        android:id="@+id/editTextPrecioDePelicula"
+        android:id="@+id/editTextPrecioDePeliculaModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -69,7 +70,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextYearPelicula" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextYearPeliculaModificar" />
 
     <TextView
         android:id="@+id/textViewTituloPeliculaModificar"
@@ -83,7 +84,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewDirectorPelicula"
+        android:id="@+id/textViewDirectorPeliculaModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -94,7 +95,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewTituloPeliculaModificar" />
 
     <TextView
-        android:id="@+id/textViewGeneroPelicula"
+        android:id="@+id/textViewGeneroPeliculaModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -102,10 +103,10 @@
         android:text="Género"
         android:textSize="19dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDirectorPelicula" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDirectorPeliculaModificar" />
 
     <TextView
-        android:id="@+id/textViewDuracionPelicula"
+        android:id="@+id/textViewDuracionPeliculaModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -113,10 +114,10 @@
         android:text="Duración"
         android:textSize="19dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGeneroPelicula" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewGeneroPeliculaModificar" />
 
     <TextView
-        android:id="@+id/textViewYearPelicula"
+        android:id="@+id/textViewYearPeliculaModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -124,10 +125,10 @@
         android:text="Año"
         android:textSize="19dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDuracionPelicula" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDuracionPeliculaModificar" />
 
     <TextView
-        android:id="@+id/textViewPrecioPelicula"
+        android:id="@+id/textViewPrecioPeliculaModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -135,16 +136,16 @@
         android:text="Precio"
         android:textSize="19dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewYearPelicula" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewYearPeliculaModificar" />
 
     <Button
-        android:id="@+id/buttonRegistroPelicula"
+        android:id="@+id/buttonRegistroPeliculaModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Añadir"
+        android:text="Modificar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPrecioDePelicula" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextPrecioDePeliculaModificar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

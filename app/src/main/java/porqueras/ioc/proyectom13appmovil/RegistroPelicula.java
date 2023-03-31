@@ -62,7 +62,7 @@ public class RegistroPelicula extends AppCompatActivity {
                     public void onResponse(Call<PeliculaResponse> call, Response<PeliculaResponse> response) {
                         if (response.isSuccessful()) {
                             Log.d("response", "película insertada");
-                            //Finaliza la sesión en el servidor y muestra un Toast
+                            //Inserta la película en el servidor y muestra un Toast
                             Toast toast = Toast.makeText(getBaseContext(), "Película insertada", Toast.LENGTH_LONG);
                             toast.show();
                             finish();

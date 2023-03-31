@@ -4,6 +4,7 @@ import java.util.List;
 
 import porqueras.ioc.proyectom13appmovil.modelos.LoginResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.LogoutResponse;
+import porqueras.ioc.proyectom13appmovil.modelos.PeliculaInfoResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaListaResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioInfoResponse;
@@ -42,7 +43,7 @@ public interface APIService {
     Call<UsuarioUpdate> updateUsuario(@Query("token") String token, @Body UsuarioUpdate usuarioUpdate);
 
     @PUT("users/update/{id}/{admin}")
-    Call<Void> setAdmin(@Path("id") String userId, @Path("admin") String isAdmin, @Query("admin") boolean isAdminParam, @Query("token") String token);
+    Call<Void> setAdmin(@Path("id") String userId, @Path("admin") boolean isAdminParam, @Query("token") String token);
 
     @DELETE("users/delete/{id}")
     Call<Void> deleteUsuario(@Path("id") String userId, @Query("token") String token);
@@ -52,6 +53,15 @@ public interface APIService {
 
     @GET("peliculas")
     Call<PeliculaListaResponse> getPeliculas(@Query("token") String token);
+
+    @GET("peliculas/{id}")
+    Call<PeliculaInfoResponse> getPelicula(@Path("id")String id, @Query("token") String token);
+
+    @PUT("peliculas/update/{id}")
+    Call<PeliculaResponse> updatePelicula(@Path("id") String id,@Query("token") String token,@Body PeliculaResponse peliculaResponse);
+
+    @DELETE("peliculas/delete/{id}")
+    Call<Void> deletePelicula(@Path("id") String id, @Query("token") String token);
 
     @POST("login")
     Call<LoginResponse> getLogin(@Body LoginResponse loginResponse);

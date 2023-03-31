@@ -1,6 +1,7 @@
 package porqueras.ioc.proyectom13appmovil;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,11 @@ public class PeliculasListAdapter extends RecyclerView.Adapter<PeliculasListAdap
         //Si se pulsa un elemento se la lista
         @Override
         public void onClick(View v) {
-
+            //Coge la posición del elemento de la lista que fue pulsado
+            int posicion = getLayoutPosition();
+            Log.d("response", "Elemento pulsado=" + posicion);
+            //Enviamos al interface la posición del elemento pulsado
+            pasarIdListado.pasarPosicionListado(posicion);
         }
     }
 

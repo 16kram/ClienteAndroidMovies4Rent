@@ -102,7 +102,7 @@ public class ModificarRolUsuario extends AppCompatActivity {
      */
     private void modificaRolUsuario(boolean admin) {
         //Se hace la llamada al servidor para modificar el estado del usuario, si es administrador o no
-        Call<Void> callSetAdmin = apiService.setAdmin(id, "admin", admin, ApiUtils.TOKEN);
+        Call<Void> callSetAdmin = apiService.setAdmin(id, admin, ApiUtils.TOKEN);
         callSetAdmin.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
