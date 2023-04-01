@@ -18,13 +18,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ModificarPelicula"
+            android:name=".secciones.usuarios.CambiarPassword"
             android:exported="false" />
         <activity
-            android:name=".ListadoPeliculas"
+            android:name=".secciones.peliculas.ModificarPelicula"
             android:exported="false" />
         <activity
-            android:name=".RegistroPelicula"
+            android:name=".secciones.peliculas.ListadoPeliculas"
+            android:exported="false" />
+        <activity
+            android:name=".secciones.peliculas.RegistroPelicula"
             android:exported="false" />
         <activity
             android:name=".secciones.peliculas.GestionPeliculas"

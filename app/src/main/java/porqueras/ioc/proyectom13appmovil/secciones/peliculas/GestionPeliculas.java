@@ -9,17 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import porqueras.ioc.proyectom13appmovil.APIService;
-import porqueras.ioc.proyectom13appmovil.ListadoPeliculas;
-import porqueras.ioc.proyectom13appmovil.ModificarPelicula;
 import porqueras.ioc.proyectom13appmovil.R;
-import porqueras.ioc.proyectom13appmovil.RegistroPelicula;
-import porqueras.ioc.proyectom13appmovil.modelos.PeliculaResponse;
-import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
-import porqueras.ioc.proyectom13appmovil.utilidades.InstanciaRetrofit;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * Pantalla para la gestión de las películas

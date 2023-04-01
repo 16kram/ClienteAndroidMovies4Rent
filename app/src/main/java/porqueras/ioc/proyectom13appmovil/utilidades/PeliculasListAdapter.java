@@ -1,4 +1,4 @@
-package porqueras.ioc.proyectom13appmovil;
+package porqueras.ioc.proyectom13appmovil.utilidades;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.LinkedList;
+
+import porqueras.ioc.proyectom13appmovil.R;
 
 
 public class PeliculasListAdapter extends RecyclerView.Adapter<PeliculasListAdapter.WordViewHolder> {

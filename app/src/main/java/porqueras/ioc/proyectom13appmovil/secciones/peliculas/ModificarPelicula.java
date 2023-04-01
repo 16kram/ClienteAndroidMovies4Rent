@@ -1,4 +1,4 @@
-package porqueras.ioc.proyectom13appmovil;
+package porqueras.ioc.proyectom13appmovil.secciones.peliculas;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import porqueras.ioc.proyectom13appmovil.APIService;
+import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaInfoResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaResponse;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
@@ -103,7 +105,7 @@ public class ModificarPelicula extends AppCompatActivity {
                             toast.show();
                             finish();
                         } else {
-                            Log.d("response", "Película no actualizada, código" + response.code());
+                            Log.d("response", "Película no actualizada, código=" + response.code());
                             //No se puede modificar la película debido a un error en el servidor y muestra un Toast
                             Toast toast = Toast.makeText(getBaseContext(), "Película no actualizada"
                                     + "\nCódigo de error " + response.code(), Toast.LENGTH_LONG);

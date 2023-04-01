@@ -1,4 +1,4 @@
-package porqueras.ioc.proyectom13appmovil;
+package porqueras.ioc.proyectom13appmovil.secciones.peliculas;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,12 +16,12 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import porqueras.ioc.proyectom13appmovil.APIService;
+import porqueras.ioc.proyectom13appmovil.utilidades.PeliculasListAdapter;
+import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaListaResponse;
-import porqueras.ioc.proyectom13appmovil.modelos.UsuarioListaResponse;
-import porqueras.ioc.proyectom13appmovil.secciones.usuarios.ListadoUsuarios;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
 import porqueras.ioc.proyectom13appmovil.utilidades.InstanciaRetrofit;
-import porqueras.ioc.proyectom13appmovil.utilidades.WordListAdadpter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

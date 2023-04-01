@@ -4,6 +4,7 @@ import java.util.List;
 
 import porqueras.ioc.proyectom13appmovil.modelos.LoginResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.LogoutResponse;
+import porqueras.ioc.proyectom13appmovil.modelos.PasswordUpdate;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaInfoResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaListaResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaResponse;
@@ -29,6 +30,9 @@ import retrofit2.http.Query;
 public interface APIService {
     @GET("users")
     Call<UsuarioListaResponse> getUsuario(@Query("token") String token);
+
+    @PUT("users/changepassword")
+    Call<PasswordUpdate> changePassword(@Query("token") String token,@Body PasswordUpdate passwordUpdate);
 
     @GET("users/info")
     Call<UsuarioInfoResponse> getValue(@Query("token") String token);

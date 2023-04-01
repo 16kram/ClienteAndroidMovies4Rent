@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioInfoResponse;
+import porqueras.ioc.proyectom13appmovil.secciones.usuarios.CambiarPassword;
 import porqueras.ioc.proyectom13appmovil.secciones.usuarios.ModificarUsuario;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
 import porqueras.ioc.proyectom13appmovil.utilidades.InstanciaRetrofit;
@@ -26,7 +27,7 @@ import retrofit2.Response;
  */
 public class PantallaUsuario extends AppCompatActivity {
     private APIService apiService;
-    private Button botonLogout, modificarDatos;
+    private Button botonLogout, modificarDatos, modificarPassword;
     private TextView titulo;
     private String id;//Identificador del usuario
 
@@ -45,6 +46,7 @@ public class PantallaUsuario extends AppCompatActivity {
         titulo = (TextView) findViewById(R.id.textViewTituloUsuario);
         botonLogout = (Button) findViewById(R.id.buttonLogout);
         modificarDatos = (Button) findViewById(R.id.buttonModificarDatos);
+        modificarPassword = (Button) findViewById(R.id.buttonModificarPassword);
 
         //Instanciomos la incerfaz de APIService mediante Retrofit
         apiService = InstanciaRetrofit.getApiService();
@@ -89,6 +91,15 @@ public class PantallaUsuario extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(PantallaUsuario.this, ModificarUsuario.class);
                 i.putExtra("id", id);
+                startActivity(i);
+            }
+        });
+
+        //Acción del botón modificar Contraseña
+        modificarPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PantallaUsuario.this, CambiarPassword.class);
                 startActivity(i);
             }
         });
