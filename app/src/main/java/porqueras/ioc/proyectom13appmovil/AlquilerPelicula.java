@@ -50,7 +50,7 @@ public class AlquilerPelicula extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(AlquilerPelicula.this);
                 builder.setTitle("Alquiler de películas");
-                builder.setMessage("¿Estás seguro de que deseas alquilar esta película?");
+                builder.setMessage("¿Estás seguro de que desea alquilar esta película?");
                 builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -83,7 +83,6 @@ public class AlquilerPelicula extends AppCompatActivity {
                 dialog.show();
             }
         });
-
-
+        
     }
 }

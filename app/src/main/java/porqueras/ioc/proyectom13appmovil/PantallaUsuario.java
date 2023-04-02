@@ -1,7 +1,10 @@
 package porqueras.ioc.proyectom13appmovil;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -11,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioInfoResponse;
+import porqueras.ioc.proyectom13appmovil.secciones.peliculas.ListadoPeliculas;
 import porqueras.ioc.proyectom13appmovil.secciones.usuarios.CambiarPassword;
 import porqueras.ioc.proyectom13appmovil.secciones.usuarios.ModificarUsuario;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
@@ -27,7 +31,7 @@ import retrofit2.Response;
  */
 public class PantallaUsuario extends AppCompatActivity {
     private APIService apiService;
-    private Button botonLogout, modificarDatos, modificarPassword;
+    private Button botonLogout, modificarDatos, modificarPassword, botonAlquilarPelicula;
     private TextView titulo;
     private String id;//Identificador del usuario
 
@@ -47,6 +51,7 @@ public class PantallaUsuario extends AppCompatActivity {
         botonLogout = (Button) findViewById(R.id.buttonLogout);
         modificarDatos = (Button) findViewById(R.id.buttonModificarDatos);
         modificarPassword = (Button) findViewById(R.id.buttonModificarPassword);
+        botonAlquilarPelicula = (Button) findViewById(R.id.buttonUsuarioAlquilar);
 
         //Instanciomos la incerfaz de APIService mediante Retrofit
         apiService = InstanciaRetrofit.getApiService();
@@ -103,6 +108,47 @@ public class PantallaUsuario extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        //Acción del botón Alquilar Película
+        botonAlquilarPelicula.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(PantallaUsuario.this);
+                builder.setTitle("Atención");
+                builder.setMessage("Seleccione una película de la siguiente lista");
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent i = new Intent(PantallaUsuario.this, ListadoPeliculas.class);
+                        i.putExtra("accion", "alquilar");
+                        startActivityForResult(i, 9876);
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+    }
+
+    /**
+     * Recibimos el id de la lista de películas
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 9876 & resultCode == RESULT_OK) {
+            String idPelicula = data.getExtras().getString("idPelicula");
+            Log.d("response", "idPelícula=" + idPelicula);
+            //Enviamos los datos de idUsuario e idPelícula a la actividad de AlquilerPelicula
+            Intent i = new Intent(PantallaUsuario.this, AlquilerPelicula.class);
+            i.putExtra("idUsuario", id);
+            i.putExtra("idPelicula", idPelicula);
+            startActivity(i);
+        }
     }
 
     /**
