@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import porqueras.ioc.proyectom13appmovil.APIService;
+import porqueras.ioc.proyectom13appmovil.DetallePelicula;
 import porqueras.ioc.proyectom13appmovil.utilidades.PeliculasListAdapter;
 import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaListaResponse;
@@ -34,6 +35,7 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
     HashMap hashMap = new HashMap();
     private String accion;
     private String id;
+    private String titulo,genero,director,duracion,año,precio;
 
 
     @Override
@@ -76,12 +78,8 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
                 if (response.isSuccessful()) {
                     for (int n = 0; n < response.body().getValue().size(); n++) {
                         //Obtiene las películas y las añade a la lista
-                        mWordList.add("Título: " + response.body().getValue().get(n).getTitulo() +
-                                "\nGénero: " + response.body().getValue().get(n).getGenero() +
-                                "\nDirector: " + response.body().getValue().get(n).getDirector() +
-                                "\nDuración: " + response.body().getValue().get(n).getDuracion() +
-                                "\nAño: " + response.body().getValue().get(n).getAño() +
-                                "\nPrecio: " + response.body().getValue().get(n).getPrecio());
+                        mWordList.add(response.body().getValue().get(n).getTitulo() +
+                                "\n\nPrecio de alquiler: " + response.body().getValue().get(n).getPrecio()+" euros");
                     }
 
                     //Asociamos el id con el número de la posición de la lista
@@ -140,6 +138,11 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
                 i.putExtra("idPelicula", id);//Devolvemos el número de id de la película
                 setResult(RESULT_OK, i);
                 finish();
+                break;
+            case "listar":
+                i=new Intent(this, DetallePelicula.class);
+                i.putExtra("idPelicula",id);//Enviamos el número de id de la película
+                startActivity(i);
                 break;
         }
     }
