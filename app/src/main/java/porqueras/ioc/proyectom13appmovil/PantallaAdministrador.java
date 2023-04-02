@@ -30,6 +30,7 @@ public class PantallaAdministrador extends AppCompatActivity {
     private Button botonLogoutAdmin;
     private Button botonGestionUsuarios;
     private Button botonGestionPeliculas;
+    private Button botonGestionAlquiler;
     private TextView titulo;
 
     @Override
@@ -45,6 +46,7 @@ public class PantallaAdministrador extends AppCompatActivity {
         botonLogoutAdmin = (Button) findViewById(R.id.buttonLogoutAdmin);
         botonGestionUsuarios = (Button) findViewById(R.id.buttonGestionUsuarios);
         botonGestionPeliculas = (Button) findViewById(R.id.buttonGestionPeliculas);
+        botonGestionAlquiler = (Button) findViewById(R.id.buttonGestionAlquilerPeliculas);
 
         //Añadimos el título de la Activity en la barra superior
         setTitle("Menú del administrador");
@@ -99,6 +101,15 @@ public class PantallaAdministrador extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(PantallaAdministrador.this, GestionPeliculas.class);
+                startActivity(i);
+            }
+        });
+
+        //Acción del botón de gestión del alquiler de las películas
+        botonGestionAlquiler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PantallaAdministrador.this, GestionAlquilerPeliculas.class);
                 startActivity(i);
             }
         });

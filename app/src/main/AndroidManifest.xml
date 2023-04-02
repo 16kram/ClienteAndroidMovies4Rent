@@ -18,6 +18,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".AlquilerPelicula"
+            android:exported="false" />
+        <activity
+            android:name=".GestionAlquilerPeliculas"
+            android:exported="false" />
+        <activity
             android:name=".secciones.usuarios.CambiarPassword"
             android:exported="false" />
         <activity

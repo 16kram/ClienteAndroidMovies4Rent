@@ -50,7 +50,20 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
         Log.d("response", "accion=" + accion);
 
         //Añadimos el título de la accion a realizar en la barra superior de la activity
-        setTitle(accion.substring(0, 1).toUpperCase() + accion.substring(1) + " películas");
+        //setTitle(accion.substring(0, 1).toUpperCase() + accion.substring(1) + " películas");
+        switch (accion){
+            case "borrar":
+                setTitle("¿Qué película desea borrar?");
+                break;
+            case "modificar":
+                setTitle("¿Qué película desea modificar?");
+                break;
+            case "alquilar":
+                setTitle("¿Qué película desea alquilar?");
+                break;
+            default:
+                setTitle("Listado de las películas");
+        }
 
 
         //Instanciomos la incerfaz de APIService mediante Retrofit
@@ -122,6 +135,12 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
                 setResult(RESULT_OK, i);
                 finish();
                 break;
+            case "alquilar":
+                i = new Intent();
+                i.putExtra("idPelicula", id);//Devolvemos el número de id de la película
+                setResult(RESULT_OK, i);
+                finish();
+                break;
         }
     }
 
@@ -132,6 +151,7 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
      */
     private void borrarPelicula(String peliculaId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Eliminar Película");
         builder.setMessage("¿Estás seguro de que deseas borrar esta película?");
         builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {

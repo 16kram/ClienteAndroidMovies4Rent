@@ -54,7 +54,20 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
         Log.d("response", "accion=" + accion);
 
         //Añadimos el título de la accion a realizar en la barra superior de la activity
-        setTitle(accion.substring(0, 1).toUpperCase() + accion.substring(1) + " usuarios");
+        //setTitle(accion.substring(0, 1).toUpperCase() + accion.substring(1) + " usuarios");
+        switch (accion){
+            case "borrar":
+                setTitle("¿Qué usuario desea borrar?");
+                break;
+            case "modificar":
+                setTitle("Cambiar ROL de usuario");
+                break;
+            case "alquilar":
+                setTitle("Seleccione el usuario");
+                break;
+            default:
+                setTitle("Listado de los usuarios");
+        }
 
         //Instanciomos la incerfaz de APIService mediante Retrofit
         apiService = InstanciaRetrofit.getApiService();
@@ -70,7 +83,8 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
                                 " " + response.body().getValue().get(n).getApellidos() +
                                 "\nTeléfono: " + response.body().getValue().get(n).getTelefono()
                                 + "\ne-mail: " + response.body().getValue().get(n).getEmail()
-                                + "\nDirección: " + response.body().getValue().get(n).getDireccion());
+                                + "\nDirección: " + response.body().getValue().get(n).getDireccion()
+                        +"\nAdministrador: "+response.body().getValue().get(n).isAdmin());
                     }
 
                     //Asociamos el id con el número de la posición de la lista
@@ -119,6 +133,12 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
             case "modificar":
                 modificarRolUsuario(id);
                 break;
+            case "alquilar":
+                Intent i = new Intent();
+                i.putExtra("idUsuario", id);//Devolvemos el número de id del usuario
+                setResult(RESULT_OK, i);
+                finish();
+                break;
         }
 
     }
@@ -130,6 +150,7 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
      */
     private void borrarUsuario(String userId) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Eliminar usuario");
         builder.setMessage("¿Estás seguro de que deseas borrar este usuario?");
         builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {

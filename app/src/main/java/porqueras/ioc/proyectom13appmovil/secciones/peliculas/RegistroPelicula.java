@@ -55,32 +55,45 @@ public class RegistroPelicula extends AppCompatActivity {
         botonInsertarPelicula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PeliculaResponse peliculaResponse = new PeliculaResponse(
-                        titulo.getText().toString(),
-                        director.getText().toString(),
-                        genero.getText().toString(),
-                        Integer.parseInt(String.valueOf(duracion.getText().toString())),
-                        Integer.parseInt(String.valueOf(year.getText().toString())),
-                        Integer.parseInt(String.valueOf(precio.getText().toString())));
+                try {
+                    PeliculaResponse peliculaResponse = new PeliculaResponse(
+                            titulo.getText().toString(),
+                            genero.getText().toString(),
+                            director.getText().toString(),
+                            Integer.parseInt(String.valueOf(duracion.getText().toString())),
+                            Integer.parseInt(String.valueOf(year.getText().toString())),
+                            Integer.parseInt(String.valueOf(precio.getText().toString())));
 
-                Call<PeliculaResponse> callInsertaPelicula = apiService.setPelicula(ApiUtils.TOKEN, peliculaResponse);
-                callInsertaPelicula.enqueue(new Callback<PeliculaResponse>() {
-                    @Override
-                    public void onResponse(Call<PeliculaResponse> call, Response<PeliculaResponse> response) {
-                        if (response.isSuccessful()) {
-                            Log.d("response", "película insertada");
-                            //Inserta la película en el servidor y muestra un Toast
-                            Toast toast = Toast.makeText(getBaseContext(), "Película insertada", Toast.LENGTH_LONG);
-                            toast.show();
-                            finish();
+                    Call<PeliculaResponse> callInsertaPelicula = apiService.setPelicula(ApiUtils.TOKEN, peliculaResponse);
+                    callInsertaPelicula.enqueue(new Callback<PeliculaResponse>() {
+                        @Override
+                        public void onResponse(Call<PeliculaResponse> call, Response<PeliculaResponse> response) {
+                            if (response.isSuccessful()) {
+                                Log.d("response", "película insertada");
+                                //Inserta la película en el servidor y muestra un Toast
+                                Toast toast = Toast.makeText(getBaseContext(), "Película insertada", Toast.LENGTH_LONG);
+                                toast.show();
+                                finish();
+                            } else {
+                                //Si hay un error en la inserción de la película muestra un Toast
+                                Toast toast = Toast.makeText(getBaseContext(), "Hubo un error al insertar la película"
+                                        + "\nCódigo de error: " + response.code(), Toast.LENGTH_LONG);
+                                toast.show();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<PeliculaResponse> call, Throwable t) {
-
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<PeliculaResponse> call, Throwable t) {
+                            Log.d("response", "Error de red: " + t.getMessage());
+                        }
+                    });
+                } catch (Exception e) {
+                    Log.d("response", "Hubo un error en los campos");
+                    //Si hay un error en la inserción de la película muestra un Toast
+                    Toast toast = Toast.makeText(getBaseContext(), "Algún campo introducido es erroneo o"
+                            + "\nfalta por rellenar", Toast.LENGTH_LONG);
+                    toast.show();
+                }
             }
         });
 

@@ -32,6 +32,7 @@ public class UsuarioInfoResponse {
         private String telefono;
         private String email;
         private String direccion;
+        private boolean isAdmin;
 
         public String getId() {
             return id;
@@ -79,6 +80,14 @@ public class UsuarioInfoResponse {
 
         public void setTelefono(String telefono) {
             this.telefono = telefono;
+        }
+
+        public boolean isAdmin() {
+            return isAdmin;
+        }
+
+        public void setAdmin(boolean admin) {
+            isAdmin = admin;
         }
     }
 }

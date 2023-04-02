@@ -85,39 +85,47 @@ public class ModificarPelicula extends AppCompatActivity {
         botonModificarPelicula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Se actualizan los datos de la película
-                PeliculaResponse peliculaResponse = new PeliculaResponse(
-                        tituloModificar.getText().toString(),
-                        directorModificar.getText().toString(),
-                        generoModificar.getText().toString(),
-                        Integer.parseInt(duracionModificar.getText().toString()),
-                        Integer.parseInt(yearModificar.getText().toString()),
-                        Integer.parseInt(precioModificar.getText().toString())
-                );
-                Call<PeliculaResponse> callActualizarPelicula = apiService.updatePelicula(idPelicula, ApiUtils.TOKEN, peliculaResponse);
-                callActualizarPelicula.enqueue(new Callback<PeliculaResponse>() {
-                    @Override
-                    public void onResponse(Call<PeliculaResponse> call, Response<PeliculaResponse> response) {
-                        if (response.isSuccessful()) {
-                            Log.d("response", "Película actualizada");
-                            //Modifica la película en el servidor y muestra un Toast
-                            Toast toast = Toast.makeText(getBaseContext(), "Película actualizada", Toast.LENGTH_LONG);
-                            toast.show();
-                            finish();
-                        } else {
-                            Log.d("response", "Película no actualizada, código=" + response.code());
-                            //No se puede modificar la película debido a un error en el servidor y muestra un Toast
-                            Toast toast = Toast.makeText(getBaseContext(), "Película no actualizada"
-                                    + "\nCódigo de error " + response.code(), Toast.LENGTH_LONG);
-                            toast.show();
+                try {
+                    //Se actualizan los datos de la película
+                    PeliculaResponse peliculaResponse = new PeliculaResponse(
+                            tituloModificar.getText().toString(),
+                            directorModificar.getText().toString(),
+                            generoModificar.getText().toString(),
+                            Integer.parseInt(duracionModificar.getText().toString()),
+                            Integer.parseInt(yearModificar.getText().toString()),
+                            Integer.parseInt(precioModificar.getText().toString())
+                    );
+                    Call<PeliculaResponse> callActualizarPelicula = apiService.updatePelicula(idPelicula, ApiUtils.TOKEN, peliculaResponse);
+                    callActualizarPelicula.enqueue(new Callback<PeliculaResponse>() {
+                        @Override
+                        public void onResponse(Call<PeliculaResponse> call, Response<PeliculaResponse> response) {
+                            if (response.isSuccessful()) {
+                                Log.d("response", "Película actualizada");
+                                //Modifica la película en el servidor y muestra un Toast
+                                Toast toast = Toast.makeText(getBaseContext(), "Película actualizada", Toast.LENGTH_LONG);
+                                toast.show();
+                                finish();
+                            } else {
+                                Log.d("response", "Película no actualizada, código=" + response.code());
+                                //No se puede modificar la película debido a un error en el servidor y muestra un Toast
+                                Toast toast = Toast.makeText(getBaseContext(), "Película no actualizada"
+                                        + "\nCódigo de error " + response.code(), Toast.LENGTH_LONG);
+                                toast.show();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<PeliculaResponse> call, Throwable t) {
+                        @Override
+                        public void onFailure(Call<PeliculaResponse> call, Throwable t) {
 
-                    }
-                });
+                        }
+                    });
+                } catch (Exception e) {
+                    Log.d("response", "Hubo un error en los campos");
+                    //Si hay un error en la inserción de la película muestra un Toast
+                    Toast toast = Toast.makeText(getBaseContext(), "Algún campo introducido es erroneo o"
+                            + "\nfalta por rellenar", Toast.LENGTH_LONG);
+                    toast.show();
+                }
 
             }
         });

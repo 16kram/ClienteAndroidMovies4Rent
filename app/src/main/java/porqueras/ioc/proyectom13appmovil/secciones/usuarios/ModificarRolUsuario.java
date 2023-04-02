@@ -30,6 +30,7 @@ public class ModificarRolUsuario extends AppCompatActivity {
     private String id;//Identificador del usuario
     private Switch switchAdministrador;
     private TextView nombreUsuario;
+    private boolean isAdmin = false;//Identificador de si el usuario es un administrador
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,9 @@ public class ModificarRolUsuario extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     nombreUsuario.setText(response.body().getValue().getNombre() +
                             " " + response.body().getValue().getApellidos());
+                    //Revisa si el usuario es un administrador
+                    isAdmin = response.body().getValue().isAdmin();
+                    switchAdministrador.setChecked(isAdmin);
                 } else {
                     Log.d("response", "Ha ocurrido un error, código=" + response.code());
                 }
@@ -80,13 +84,13 @@ public class ModificarRolUsuario extends AppCompatActivity {
                 if (switchAdministrador.isChecked()) {
                     //El usuario se convierte en administrador
                     Context context = getApplicationContext();
-                    Toast toast = Toast.makeText(context, "El usuario pasa a ser administrador", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(context, "El usuario es un administrador", Toast.LENGTH_SHORT);
                     toast.show();
                     modificaRolUsuario(true);
                 } else {
                     //El usuario se convierte en usuario normal
                     Context context = getApplicationContext();
-                    Toast toast = Toast.makeText(context, "El usuario se convierte en un usuario normal", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(context, "El usuario no es un administrador", Toast.LENGTH_SHORT);
                     toast.show();
                     modificaRolUsuario(false);
                 }

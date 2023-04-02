@@ -67,6 +67,9 @@ public interface APIService {
     @DELETE("peliculas/delete/{id}")
     Call<Void> deletePelicula(@Path("id") String id, @Query("token") String token);
 
+    @POST("peliculas/alquileres/nuevo")
+    Call<Void> nuevoAlquiler(@Query("peliculaId") String peliculaId,@Query("usuariId") String usuariId,@Query("token") String token);
+
     @POST("login")
     Call<LoginResponse> getLogin(@Body LoginResponse loginResponse);
 

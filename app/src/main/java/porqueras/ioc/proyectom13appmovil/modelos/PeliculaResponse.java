@@ -13,7 +13,7 @@ public class PeliculaResponse {
     private int año;
     private int precio;
 
-    public PeliculaResponse(String titulo, String director, String genero, int duracion, int año, int precio) {
+    public PeliculaResponse(String titulo, String genero, String director, int duracion, int año, int precio) {
         this.titulo = titulo;
         this.director = director;
         this.genero = genero;
