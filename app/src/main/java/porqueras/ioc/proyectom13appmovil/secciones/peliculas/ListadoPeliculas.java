@@ -27,6 +27,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Pantalla para listar películas
+ *
+ * @Author Esteban Porqueras Araque
+ */
 public class ListadoPeliculas extends AppCompatActivity implements PeliculasListAdapter.PasarIdListado {
     private final LinkedList<String> mWordList = new LinkedList<>();
     private RecyclerView mRecyclerView;
@@ -78,8 +83,8 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
                 if (response.isSuccessful()) {
                     for (int n = 0; n < response.body().getValue().size(); n++) {
                         //Obtiene las películas y las añade a la lista
-                        mWordList.add(response.body().getValue().get(n).getTitulo() +
-                                "\n\nPrecio de alquiler: " + response.body().getValue().get(n).getPrecio()+" euros");
+                        mWordList.add("Película:\n"+response.body().getValue().get(n).getTitulo() +
+                                "\n\nPrecio del alquiler: " + response.body().getValue().get(n).getPrecio()+" euros");
                     }
 
                     //Asociamos el id con el número de la posición de la lista

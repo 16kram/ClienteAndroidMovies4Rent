@@ -14,7 +14,11 @@ import java.util.LinkedList;
 
 import porqueras.ioc.proyectom13appmovil.R;
 
-
+/**
+ * Adapdador del RecyclerView para las películas
+ *
+ * @Author Esteban Porqueras Araque
+ */
 public class PeliculasListAdapter extends RecyclerView.Adapter<PeliculasListAdapter.WordViewHolder> {
     private final LinkedList<String> mWordList;
     private LayoutInflater mInflater;

@@ -18,6 +18,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ListadoAlquileres"
+            android:exported="false" />
+        <activity
             android:name=".DetallePelicula"
             android:exported="false" />
         <activity

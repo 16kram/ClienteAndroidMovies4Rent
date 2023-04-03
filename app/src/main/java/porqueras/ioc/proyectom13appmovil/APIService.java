@@ -2,6 +2,7 @@ package porqueras.ioc.proyectom13appmovil;
 
 import java.util.List;
 
+import porqueras.ioc.proyectom13appmovil.modelos.AlquilerListaResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.LoginResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.LogoutResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.PasswordUpdate;
@@ -32,7 +33,7 @@ public interface APIService {
     Call<UsuarioListaResponse> getUsuario(@Query("token") String token);
 
     @PUT("users/changepassword")
-    Call<PasswordUpdate> changePassword(@Query("token") String token,@Body PasswordUpdate passwordUpdate);
+    Call<PasswordUpdate> changePassword(@Query("token") String token, @Body PasswordUpdate passwordUpdate);
 
     @GET("users/info")
     Call<UsuarioInfoResponse> getValue(@Query("token") String token);
@@ -59,16 +60,19 @@ public interface APIService {
     Call<PeliculaListaResponse> getPeliculas(@Query("token") String token);
 
     @GET("peliculas/{id}")
-    Call<PeliculaInfoResponse> getPelicula(@Path("id")String id, @Query("token") String token);
+    Call<PeliculaInfoResponse> getPelicula(@Path("id") String id, @Query("token") String token);
 
     @PUT("peliculas/update/{id}")
-    Call<PeliculaResponse> updatePelicula(@Path("id") String id,@Query("token") String token,@Body PeliculaResponse peliculaResponse);
+    Call<PeliculaResponse> updatePelicula(@Path("id") String id, @Query("token") String token, @Body PeliculaResponse peliculaResponse);
 
     @DELETE("peliculas/delete/{id}")
     Call<Void> deletePelicula(@Path("id") String id, @Query("token") String token);
 
     @POST("peliculas/alquileres/nuevo")
-    Call<Void> nuevoAlquiler(@Query("peliculaId") String peliculaId,@Query("usuariId") String usuariId,@Query("token") String token);
+    Call<Void> nuevoAlquiler(@Query("peliculaId") String peliculaId, @Query("usuariId") String usuariId, @Query("token") String token);
+
+    @GET("peliculas/alquileres")
+    Call<AlquilerListaResponse> getAlquileres(@Query("token") String token);
 
     @POST("login")
     Call<LoginResponse> getLogin(@Body LoginResponse loginResponse);

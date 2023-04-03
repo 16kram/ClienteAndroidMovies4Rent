@@ -7,9 +7,10 @@
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_alquiler_pelicula.xml" value="0.228125" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_cambiar_password.xml" value="0.17109375" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_detalle_pelicula.xml" value="0.228125" />
-        <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_gestion_alquiler_peliculas.xml" value="0.228125" />
+        <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_gestion_alquiler_peliculas.xml" value="0.25" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_gestion_peliculas.xml" value="0.25" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_gestion_usuarios.xml" value="0.25" />
+        <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_listado_alquileres.xml" value="0.228125" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_listado_peliculas.xml" value="0.20606884057971014" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_listado_usuarios.xml" value="0.18614130434782608" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_main.xml" value="0.33" />
@@ -20,6 +21,7 @@
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_pantalla_usuario.xml" value="0.33" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_registro_pelicula.xml" value="0.33" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_registro_usuario.xml" value="0.33" />
+        <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/alquiler.xml" value="0.22708333333333333" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/pelicula.xml" value="0.20606884057971014" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/usuario.xml" value="0.18614130434782608" />
       </map>

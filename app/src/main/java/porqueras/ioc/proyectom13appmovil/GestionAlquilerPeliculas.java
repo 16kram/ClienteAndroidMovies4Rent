@@ -22,8 +22,8 @@ import porqueras.ioc.proyectom13appmovil.utilidades.PeliculasListAdapter;
  * @Autor Esteban Porqueras Araque
  */
 public class GestionAlquilerPeliculas extends AppCompatActivity {
-    Button crearAlquiler;
-    String idPelicula,idUsuario; //Identificadores de película y usuario
+    Button crearAlquiler, botónListarAlquiler, botonEliminarAlquiler;
+    String idPelicula, idUsuario; //Identificadores de película y usuario
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +38,8 @@ public class GestionAlquilerPeliculas extends AppCompatActivity {
 
         //Añadimos los botones
         crearAlquiler = (Button) findViewById(R.id.buttonCrearAlquiler);
+        botónListarAlquiler = (Button) findViewById(R.id.buttonListarAlquiler);
+        botonEliminarAlquiler = (Button) findViewById(R.id.buttonEliminarAlquiler);
 
         //Acción del botón Crear Alquiler
         crearAlquiler.setOnClickListener(new View.OnClickListener() {
@@ -47,6 +49,23 @@ public class GestionAlquilerPeliculas extends AppCompatActivity {
                 Intent i = new Intent(GestionAlquilerPeliculas.this, ListadoUsuarios.class);
                 i.putExtra("accion", "alquilar");
                 startActivityForResult(i, 8877);
+            }
+        });
+
+        //Acción del botón Listar Alquileres
+        botónListarAlquiler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(GestionAlquilerPeliculas.this, ListadoAlquileres.class);
+                startActivity(i);
+            }
+        });
+
+        //Acción del botón Eliminar Alquiler
+        botonEliminarAlquiler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }
@@ -65,9 +84,9 @@ public class GestionAlquilerPeliculas extends AppCompatActivity {
             idPelicula = data.getExtras().getString("idPelicula");
             Log.d("response", "idPelicula=" + idPelicula);
             //Mostramos la pantalla de alquiler de películas
-            Intent i=new Intent(GestionAlquilerPeliculas.this,AlquilerPelicula.class);
-            i.putExtra("idUsuario",idUsuario);
-            i.putExtra("idPelicula",idPelicula);
+            Intent i = new Intent(GestionAlquilerPeliculas.this, AlquilerPelicula.class);
+            i.putExtra("idUsuario", idUsuario);
+            i.putExtra("idPelicula", idPelicula);
             startActivity(i);
         }
         //Recibimos el id del usuario para poder hacer el alquiler
