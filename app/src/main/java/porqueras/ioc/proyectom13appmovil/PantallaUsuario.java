@@ -31,7 +31,7 @@ import retrofit2.Response;
  */
 public class PantallaUsuario extends AppCompatActivity {
     private APIService apiService;
-    private Button botonLogout, modificarDatos, modificarPassword, botonAlquilarPelicula;
+    private Button botonLogout, modificarDatos, modificarPassword, botonAlquilarPelicula, botonVerPeliculasAlquiladas;
     private TextView titulo;
     private String id;//Identificador del usuario
 
@@ -52,6 +52,7 @@ public class PantallaUsuario extends AppCompatActivity {
         modificarDatos = (Button) findViewById(R.id.buttonModificarDatos);
         modificarPassword = (Button) findViewById(R.id.buttonModificarPassword);
         botonAlquilarPelicula = (Button) findViewById(R.id.buttonUsuarioAlquilar);
+        botonVerPeliculasAlquiladas = (Button) findViewById(R.id.buttonVerAlquileres);
 
         //Instanciomos la incerfaz de APIService mediante Retrofit
         apiService = InstanciaRetrofit.getApiService();
@@ -126,6 +127,14 @@ public class PantallaUsuario extends AppCompatActivity {
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
+            }
+        });
+
+        //Acción del botón ver películas alquiladas del usuario
+        botonVerPeliculasAlquiladas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

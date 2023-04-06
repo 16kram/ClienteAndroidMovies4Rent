@@ -3,6 +3,7 @@ package porqueras.ioc.proyectom13appmovil;
 import java.util.List;
 
 import porqueras.ioc.proyectom13appmovil.modelos.AlquilerListaResponse;
+import porqueras.ioc.proyectom13appmovil.modelos.DetalleAlquiler;
 import porqueras.ioc.proyectom13appmovil.modelos.LoginResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.LogoutResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.PasswordUpdate;
@@ -69,7 +70,7 @@ public interface APIService {
     Call<Void> deletePelicula(@Path("id") String id, @Query("token") String token);
 
     @POST("peliculas/alquileres/nuevo")
-    Call<Void> nuevoAlquiler(@Query("peliculaId") String peliculaId, @Query("usuariId") String usuariId, @Query("token") String token);
+    Call<DetalleAlquiler> newAlquiler(@Query("peliculaId") String peliculaId, @Query("usuariId") String usuariId, @Query("token") String token);
 
     @GET("peliculas/alquileres")
     Call<AlquilerListaResponse> getAlquileres(@Query("token") String token);
