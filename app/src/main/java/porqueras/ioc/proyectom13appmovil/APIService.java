@@ -3,6 +3,7 @@ package porqueras.ioc.proyectom13appmovil;
 import java.util.List;
 
 import porqueras.ioc.proyectom13appmovil.modelos.AlquilerListaResponse;
+import porqueras.ioc.proyectom13appmovil.modelos.AlquilerPeliculasPorId;
 import porqueras.ioc.proyectom13appmovil.modelos.DetalleAlquiler;
 import porqueras.ioc.proyectom13appmovil.modelos.LoginResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.LogoutResponse;
@@ -76,7 +77,13 @@ public interface APIService {
     Call<AlquilerListaResponse> getAlquileres(@Query("token") String token);
 
     @GET("/peliculas/alquileres/alquilerByUser")
-    Call<PeliculaListaResponse> getPeliculasAlquilerPorUsuario(@Query("usuarioId")String usuarioId,@Query("token")String token);
+    Call<PeliculaListaResponse> getPeliculasAlquilerPorUsuario(@Query("usuarioId") String usuarioId, @Query("token") String token);
+
+    @GET("/peliculas/alquileres/{id}")
+    Call<AlquilerPeliculasPorId> alquilerPeliculaPorId(@Query("alquilerId") String alquilerId, @Query("token") String token);
+
+    @DELETE("/peliculas/alquileres/delete/{id}")
+    Call<Void> deleteAlquiler(@Query("alquilerId") String idAlquiler, @Query("token") String token);
 
     @POST("login")
     Call<LoginResponse> getLogin(@Body LoginResponse loginResponse);

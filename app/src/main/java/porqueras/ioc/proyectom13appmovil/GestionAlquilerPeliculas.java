@@ -57,6 +57,7 @@ public class GestionAlquilerPeliculas extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(GestionAlquilerPeliculas.this, ListadoAlquileres.class);
+                i.putExtra("accion","listar");
                 startActivity(i);
             }
         });
@@ -65,7 +66,9 @@ public class GestionAlquilerPeliculas extends AppCompatActivity {
         botonEliminarAlquiler.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(GestionAlquilerPeliculas.this, ListadoAlquileres.class);
+                i.putExtra("accion","eliminar");
+                startActivity(i);
             }
         });
     }
