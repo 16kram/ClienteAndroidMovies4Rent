@@ -40,8 +40,6 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
     HashMap hashMap = new HashMap();
     private String accion;
     private String id;
-    private String titulo,genero,director,duracion,año,precio;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +56,7 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
 
         //Añadimos el título de la accion a realizar en la barra superior de la activity
         //setTitle(accion.substring(0, 1).toUpperCase() + accion.substring(1) + " películas");
-        switch (accion){
+        switch (accion) {
             case "borrar":
                 setTitle("¿Qué película desea borrar?");
                 break;
@@ -83,8 +81,8 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
                 if (response.isSuccessful()) {
                     for (int n = 0; n < response.body().getValue().size(); n++) {
                         //Obtiene las películas y las añade a la lista
-                        mWordList.add("Película:\n"+response.body().getValue().get(n).getTitulo() +
-                                "\n\nPrecio del alquiler: " + response.body().getValue().get(n).getPrecio()+" euros");
+                        mWordList.add("Película:\n" + response.body().getValue().get(n).getTitulo() +
+                                "\n\nPrecio del alquiler: " + response.body().getValue().get(n).getPrecio() + " euros");
                     }
 
                     //Asociamos el id con el número de la posición de la lista
@@ -145,8 +143,8 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
                 finish();
                 break;
             case "listar":
-                i=new Intent(this, DetallePelicula.class);
-                i.putExtra("idPelicula",id);//Enviamos el número de id de la película
+                i = new Intent(this, DetallePelicula.class);
+                i.putExtra("idPelicula", id);//Enviamos el número de id de la película
                 startActivity(i);
                 break;
         }

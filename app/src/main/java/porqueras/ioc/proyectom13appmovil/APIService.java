@@ -75,6 +75,9 @@ public interface APIService {
     @GET("peliculas/alquileres")
     Call<AlquilerListaResponse> getAlquileres(@Query("token") String token);
 
+    @GET("/peliculas/alquileres/alquilerByUser")
+    Call<PeliculaListaResponse> getPeliculasAlquilerPorUsuario(@Query("usuarioId")String usuarioId,@Query("token")String token);
+
     @POST("login")
     Call<LoginResponse> getLogin(@Body LoginResponse loginResponse);
 

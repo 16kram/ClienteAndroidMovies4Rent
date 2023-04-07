@@ -134,7 +134,9 @@ public class PantallaUsuario extends AppCompatActivity {
         botonVerPeliculasAlquiladas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            Intent i=new Intent(PantallaUsuario.this,ListarAlquileresPorUsuario.class);
+            i.putExtra("idUsuario",id);
+            startActivity(i);
             }
         });
     }
