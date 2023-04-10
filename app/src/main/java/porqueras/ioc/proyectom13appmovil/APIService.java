@@ -82,6 +82,9 @@ public interface APIService {
     @GET("/peliculas/alquileres/{id}")
     Call<AlquilerPeliculasPorId> alquilerPeliculaPorId(@Query("alquilerId") String alquilerId, @Query("token") String token);
 
+    @PUT("/peliculas/alquileres/updateStatus")
+    Call<Void> updateEstadoAlquiler(@Query("estadoAlquiler") String estadoAlquiler, @Query("alquilerId") String AlquilerId, @Query("token") String token);
+
     @DELETE("/peliculas/alquileres/delete/{id}")
     Call<Void> deleteAlquiler(@Query("alquilerId") String idAlquiler, @Query("token") String token);
 

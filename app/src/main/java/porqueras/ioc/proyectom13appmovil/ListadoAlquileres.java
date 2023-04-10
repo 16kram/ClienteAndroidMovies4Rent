@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -41,7 +42,8 @@ public class ListadoAlquileres extends AppCompatActivity implements AlquilerList
     private String accion;
     private String idUsuario;
     private String idPelicula;
-    HashMap hashMap = new HashMap();
+    private String usuario;
+    private HashMap hashMap = new HashMap();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,11 +63,13 @@ public class ListadoAlquileres extends AppCompatActivity implements AlquilerList
             case "listar":
                 setTitle("Listar películas alquiladas");
                 break;
+            case "modificar":
+                setTitle("Modificar películas alquiladas");
+                break;
             case "eliminar":
                 setTitle("Eliminar película alquilada");
                 break;
         }
-
 
         //Instanciomos la incerfaz de APIService mediante Retrofit
         apiService = InstanciaRetrofit.getApiService();
@@ -83,64 +87,108 @@ public class ListadoAlquileres extends AppCompatActivity implements AlquilerList
                         idPelicula = response.body().getValue().get(n).getPeliculaId();
                         //Asociamos el id con el número de la posición de la lista
                         hashMap.put(n, response.body().getValue().get(n).getId());
-                        //Hacemos una petición al servidor para que nos envíe el nombre y apellidos del usuario
-                        Call<UsuarioInfoResponse> callMostrarUsuario = apiService.getUsuarioId(idUsuario, ApiUtils.TOKEN);
-                        callMostrarUsuario.enqueue(new Callback<UsuarioInfoResponse>() {
-                            @Override
-                            public void onResponse(Call<UsuarioInfoResponse> call, Response<UsuarioInfoResponse> response) {
-                                if (response.isSuccessful()) {
-                                    String usuario = response.body().getValue().getNombre() + " " +
-                                            response.body().getValue().getApellidos();
-                                    //Hacemos una petición al servidor para que nos muestre la película
-                                    Call<PeliculaInfoResponse> callMostrarPelicula = apiService.getPelicula(idPelicula, ApiUtils.TOKEN);
-                                    callMostrarPelicula.enqueue(new Callback<PeliculaInfoResponse>() {
-                                        @Override
-                                        public void onResponse(Call<PeliculaInfoResponse> call, Response<PeliculaInfoResponse> response) {
-                                            if (response.isSuccessful()) {
-                                                String pelicula = response.body().getValue().getTitulo();
-                                                Log.d("response", "Usuario= " + usuario + "-->Película: " + pelicula);
-                                                mWordList.add("Usuario: " + usuario + "\n\nPelícula:\n" + pelicula);
+                        Log.d("response", "idUsuario=" + idUsuario);
+                        Log.d("response", "idPelicula=" + idPelicula);
 
-                                                //Obtiene un identificador para la vista del RecyclerView
-                                                mRecyclerView = findViewById(R.id.recyclerviewAlquileres);
-                                                //Crea un adaptador para proporcionar los datos mostrados
-                                                mAdapter = new AlquilerListAdapter(ListadoAlquileres.this, mWordList, ListadoAlquileres.this);
-                                                //Conecta el adaptador con el RecyclerView
-                                                mRecyclerView.setAdapter(mAdapter);
-                                                //Da al RecyclerView un layout manager por defecto
-                                                mRecyclerView.setLayoutManager(new LinearLayoutManager(ListadoAlquileres.this));
-                                            } else {
-                                                Log.d("response", "Ha ocurrido un error obteniendo película, código=" + response.code());
-                                            }
-                                        }
+                        //Hacemos una petición de búsqueda de un usuario y esperamos un tiempo
+                        //para que finalice el hilo
+                        buscarUsuario(idUsuario);
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
 
-                                        @Override
-                                        public void onFailure(Call<PeliculaInfoResponse> call, Throwable t) {
-                                            Log.d("response", "Error de red: " + t.getMessage());
-                                        }
-                                    });
-                                } else {
-                                    Log.d("response", "Ha ocurrido un error obteniendo usuario, código=" + response.code());
-                                }
-                            }
+                        //Hacemos una petición de búsqueda de una película y esperamos un tiempo
+                        //para que finalice el hilo
+                        buscarPelicula(idPelicula);
+                        try {
+                            Thread.sleep(100);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
 
-                            @Override
-                            public void onFailure(Call<UsuarioInfoResponse> call, Throwable t) {
-                                Log.d("response", "Error de red: " + t.getMessage());
-                            }
-                        });
                     }
-                } else {
-                    Log.d("response", "Ocurrió un error al listar los alquileres, código=" + response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<AlquilerListaResponse> call, Throwable t) {
-                Log.d("response", "Error de red: " + t.getMessage());
+                Log.d("response", "Error de lista de alquiler " + t.getMessage());
+            }
+        });
+
+
+    }
+
+    /**
+     * Realiza la búsqueda de un usuario mediante el id de usuario y se añade en la variable usuario
+     * el nombre del usuario
+     *
+     * @param idUsuario el identificador del usuario
+     */
+    private void buscarUsuario(String idUsuario) {
+        //Hacemos una petición al servidor para que nos envíe el nombre y apellidos del usuario
+        Call<UsuarioInfoResponse> callMostrarUsuario = apiService.getUsuarioId(idUsuario, ApiUtils.TOKEN);
+
+        callMostrarUsuario.enqueue(new Callback<UsuarioInfoResponse>() {
+            @Override
+            public void onResponse(Call<UsuarioInfoResponse> call, Response<UsuarioInfoResponse> response) {
+                if (response.isSuccessful()) {
+                    usuario = response.body().getValue().getNombre() + " " +
+                            response.body().getValue().getApellidos();
+                } else {
+                    Log.d("response", "No se puede mostrar el usuario, código=" + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UsuarioInfoResponse> call, Throwable t) {
+                Log.d("response", "Error de usuario " + t.getMessage());
             }
         });
     }
+
+
+    /**
+     * Realiza la búsqueda de una película mediante el id de la película y se añade en la variable película
+     * el nombre de la película
+     *
+     * @param idPelicula el identificador de la película
+     */
+    private void buscarPelicula(String idPelicula) {
+
+        //Hacemos una petición al servidor para que nos muestre la película
+        Call<PeliculaInfoResponse> callMostrarPelicula = apiService.getPelicula(idPelicula, ApiUtils.TOKEN);
+        callMostrarPelicula.enqueue(new Callback<PeliculaInfoResponse>() {
+            @Override
+            public void onResponse(Call<PeliculaInfoResponse> call, Response<PeliculaInfoResponse> response) {
+                if (response.isSuccessful()) {
+                    String pelicula = response.body().getValue().getTitulo();
+                    Log.d("response", "Usuario= " + usuario + "-->Película: " + pelicula + " " + idPelicula);
+                    mWordList.add("Usuario: " + usuario + "\n\nPelícula:\n" + pelicula);
+
+                    //Obtiene un identificador para la vista del RecyclerView
+                    mRecyclerView = findViewById(R.id.recyclerviewAlquileres);
+                    //Crea un adaptador para proporcionar los datos mostrados
+                    mAdapter = new AlquilerListAdapter(ListadoAlquileres.this, mWordList, ListadoAlquileres.this);
+                    //Conecta el adaptador con el RecyclerView
+                    mRecyclerView.setAdapter(mAdapter);
+                    //Da al RecyclerView un layout manager por defecto
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(ListadoAlquileres.this));
+                } else {
+                    Log.d("response", "No se puede mostrar la película, código=" + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PeliculaInfoResponse> call, Throwable t) {
+                Log.d("response", "Error de película " + t.getMessage());
+            }
+        });
+
+    }
+
 
     /**
      * Recibe el número de posición que se ha seleccionado
@@ -156,6 +204,12 @@ public class ListadoAlquileres extends AppCompatActivity implements AlquilerList
         switch (accion) {
             case "listar":
                 detallePelicula(id);
+                break;
+            case "modificar":
+                Intent i = new Intent();
+                i.putExtra("idAlquiler", id);//Devolvemos el número de id del alquiler de la película
+                setResult(RESULT_OK, i);
+                finish();
                 break;
             case "eliminar":
                 borrarAlquiler(id);

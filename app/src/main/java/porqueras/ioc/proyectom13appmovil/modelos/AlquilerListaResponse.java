@@ -55,7 +55,7 @@ public class AlquilerListaResponse {
         }
 
         public void setUsuariId(String usuariId) {
-            usuariId = usuariId;
+            this.usuariId = usuariId;
         }
 
         public String getFechaInicio() {

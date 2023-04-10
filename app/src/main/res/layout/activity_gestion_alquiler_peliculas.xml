@@ -33,6 +33,18 @@
         android:layout_marginTop="16dp"
         android:text="Eliminar alquiler"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonActualizarEstadoAlquiler" />
+
+    <Button
+        android:id="@+id/buttonActualizarEstadoAlquiler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Actualizar estado alquiler"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonListarAlquiler" />
 </androidx.constraintlayout.widget.ConstraintLayout>
