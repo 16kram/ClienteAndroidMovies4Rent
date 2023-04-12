@@ -58,8 +58,8 @@ public class RegistroPelicula extends AppCompatActivity {
                 try {
                     PeliculaResponse peliculaResponse = new PeliculaResponse(
                             titulo.getText().toString(),
-                            genero.getText().toString(),
                             director.getText().toString(),
+                            genero.getText().toString(),
                             Integer.parseInt(String.valueOf(duracion.getText().toString())),
                             Integer.parseInt(String.valueOf(year.getText().toString())),
                             Integer.parseInt(String.valueOf(precio.getText().toString())));

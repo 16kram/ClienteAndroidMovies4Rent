@@ -31,8 +31,9 @@ import retrofit2.http.Query;
  * @author Esteban Porqueras Araque
  */
 public interface APIService {
-    @GET("users")
-    Call<UsuarioListaResponse> getUsuario(@Query("token") String token);
+
+    @GET("users/")
+    Call<UsuarioListaResponse> getUsuarios(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token);
 
     @PUT("users/changepassword")
     Call<PasswordUpdate> changePassword(@Query("token") String token, @Body PasswordUpdate passwordUpdate);
@@ -76,8 +77,8 @@ public interface APIService {
     @GET("peliculas/alquileres")
     Call<AlquilerListaResponse> getAlquileres(@Query("token") String token);
 
-    @GET("/peliculas/alquileres/alquilerByUser")
-    Call<PeliculaListaResponse> getPeliculasAlquilerPorUsuario(@Query("usuarioId") String usuarioId, @Query("token") String token);
+    @GET("/peliculas/alquileres/alquilerByUser/{usuarioId}")
+    Call<PeliculaListaResponse> getPeliculasAlquilerPorUsuario(@Path("usuarioId") String usuarioId, @Query("token") String token);
 
     @GET("/peliculas/alquileres/{id}")
     Call<AlquilerPeliculasPorId> alquilerPeliculaPorId(@Query("alquilerId") String alquilerId, @Query("token") String token);

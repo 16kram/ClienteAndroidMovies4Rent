@@ -11,6 +11,13 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -39,6 +46,12 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
     HashMap hashMap = new HashMap();
     private String accion;
     private String id;
+    private Button botonPagAtras, botonPagAdelante;
+    private TextView textoIndicadorNumPagina;
+    private int numPagina = 0;
+    private int tamPagina = 2;
+    private int paginasTotales;
+    private final int NUM_MAX_USUARIOS = 1000;//Número máximo de usuarios para listar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +67,7 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
         Log.d("response", "accion=" + accion);
 
         //Añadimos el título de la accion a realizar en la barra superior de la activity
-        //setTitle(accion.substring(0, 1).toUpperCase() + accion.substring(1) + " usuarios");
-        switch (accion){
+        switch (accion) {
             case "borrar":
                 setTitle("¿Qué usuario desea borrar?");
                 break;
@@ -69,29 +81,75 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
                 setTitle("Listado de los usuarios");
         }
 
+        //Añadimos los botones y los TextView
+        botonPagAtras = (Button) findViewById(R.id.buttonAtrasarPagina);
+        botonPagAdelante = (Button) findViewById(R.id.buttonAvanzarPagina);
+        textoIndicadorNumPagina = (TextView) findViewById(R.id.textViewNumPagina);
+
+        //Acción del botón adelantar página
+        botonPagAdelante.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (numPagina < paginasTotales) {
+                    mWordList.clear();
+                    //Incrementamos el número de pagina
+                    numPagina++;
+                    textoIndicadorNumPagina.setText("pag " + Integer.toString(numPagina) + " de " + paginasTotales);
+                    listarUsuarios();
+                }
+            }
+        });
+
+        //Acción del botón página atrás
+        botonPagAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mWordList.clear();
+                //Decrementamos el número de pagina si es mayor que cero
+                if (numPagina > 0) {
+                    numPagina--;
+                    textoIndicadorNumPagina.setText("pag " + Integer.toString(numPagina) + " de " + paginasTotales);
+                    listarUsuarios();
+                }
+            }
+        });
+
         //Instanciomos la incerfaz de APIService mediante Retrofit
         apiService = InstanciaRetrofit.getApiService();
 
-        Call<UsuarioListaResponse> callUsuarioListaResponse = apiService.getUsuario(ApiUtils.TOKEN);
+        //Mostramos el número de página al inicializar la actividad
+        numMaxPaginas();
+
+        //Mostramos en el RecyclerView los usuarios
+        listarUsuarios();
+
+    }
+
+    /**
+     * Mostramos los usuarios en el RecyclerView
+     */
+    private void listarUsuarios() {
+        Call<UsuarioListaResponse> callUsuarioListaResponse = apiService.getUsuarios(numPagina, tamPagina, ApiUtils.TOKEN);
         callUsuarioListaResponse.enqueue(new Callback<UsuarioListaResponse>() {
             @Override
             public void onResponse(Call<UsuarioListaResponse> call, Response<UsuarioListaResponse> response) {
                 if (response.isSuccessful()) {
-                    for (int n = 0; n < response.body().getValue().size(); n++) {
+                    Log.d("response", "Pág totales=" + paginasTotales);
+                    for (int n = 0; n < response.body().getValue().getContent().size(); n++) {
                         //Obtiene los usuarios y los añade a la lista
-                        mWordList.add(response.body().getValue().get(n).getNombre() +
-                                " " + response.body().getValue().get(n).getApellidos() +
-                                "\nTeléfono: " + response.body().getValue().get(n).getTelefono()
-                                + "\ne-mail: " + response.body().getValue().get(n).getEmail()
-                                + "\nDirección: " + response.body().getValue().get(n).getDireccion()
-                        +"\nAdministrador: "+response.body().getValue().get(n).isAdmin());
+                        mWordList.add(response.body().getValue().getContent().get(n).getNombre() +
+                                " " + response.body().getValue().getContent().get(n).getApellidos() +
+                                "\nTeléfono: " + response.body().getValue().getContent().get(n).getTelefono()
+                                + "\ne-mail: " + response.body().getValue().getContent().get(n).getEmail()
+                                + "\nDirección: " + response.body().getValue().getContent().get(n).getDireccion()
+                                + "\nAdministrador: " + response.body().getValue().getContent().get(n).isAdmin());
                     }
 
                     //Asociamos el id con el número de la posición de la lista
                     for (int n = 0; n < mWordList.size(); n++) {
-                        hashMap.put(n, response.body().getValue().get(n).getId());
+                        hashMap.put(n, response.body().getValue().getContent().get(n).getId());
                         Log.d("respose", "response hasMap n=" + n + " id=" + hashMap.get(n) + " " +
-                                response.body().getValue().get(n).getNombre());
+                                response.body().getValue().getContent().get(n).getNombre());
                     }
 
                     //Obtiene un identificador para la vista del RecyclerView
@@ -112,7 +170,29 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
                 Log.d("response", "Error de red-->" + t.getMessage());
             }
         });
+    }
 
+    /**
+     * Calcula el número máximo de páginas en función de los usuarios
+     */
+    private void numMaxPaginas() {
+        Call<UsuarioListaResponse> callUsuarioListaResponse = apiService.getUsuarios(0, NUM_MAX_USUARIOS, ApiUtils.TOKEN);
+        callUsuarioListaResponse.enqueue(new Callback<UsuarioListaResponse>() {
+            @Override
+            public void onResponse(Call<UsuarioListaResponse> call, Response<UsuarioListaResponse> response) {
+                if (response.isSuccessful()) {
+                    paginasTotales = response.body().getValue().getContent().size() / tamPagina;
+                    textoIndicadorNumPagina.setText("pag " + Integer.toString(numPagina) + " de " + paginasTotales);
+                } else {
+                    Log.d("response", "No se puede mostrar el num máximo de páginas");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UsuarioListaResponse> call, Throwable t) {
+                Log.d("response", "Error de red-->" + t.getMessage());
+            }
+        });
     }
 
     /**
@@ -199,5 +279,64 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
         Intent i = new Intent(ListadoUsuarios.this, ModificarRolUsuario.class);
         i.putExtra("id", id);
         startActivity(i);
+    }
+
+    /**
+     * Creamos un menú para indicar el número máximo de usuarios que se tienen que mostrar por página
+     *
+     * @param menu
+     * @return
+     */
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_listado_usuarios, menu);
+        return true;
+    }
+
+    /**
+     * Acciones en función de lo que se pulse en el menú
+     *
+     * @param item
+     * @return
+     */
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.usuariosPorPagina:
+                preguntarNumUsuariosPorPag();
+                break;
+        }
+        return false;
+    }
+
+    /**
+     * Pregunta el número máximo de usuarios que se han de mostrar por página
+     */
+    private void preguntarNumUsuariosPorPag() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("¿Número máximo de usuarios por página?");
+        final EditText numMaxUsuarios = new EditText(this);
+        builder.setView(numMaxUsuarios);
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                tamPagina = Integer.parseInt(numMaxUsuarios.getText().toString());
+                Log.d("response", "Tam página=" + tamPagina);
+                mWordList.clear();
+                numPagina = 0;
+                numMaxPaginas();
+                //Mostramos en el RecyclerView los usuarios
+                listarUsuarios();
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
     }
 }

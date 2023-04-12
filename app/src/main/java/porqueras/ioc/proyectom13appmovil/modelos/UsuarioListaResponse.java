@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class UsuarioListaResponse {
     private String message;
-    private List<UsuarioListaResponse.Usuario> value;
+    private Value value;
 
     public String getMessage() {
         return message;
@@ -19,13 +19,27 @@ public class UsuarioListaResponse {
         this.message = message;
     }
 
-    public List<UsuarioListaResponse.Usuario> getValue() {
+    public Value getValue() {
         return value;
     }
 
-    public void setValue(List<UsuarioListaResponse.Usuario> value) {
+    public void setValue(Value value) {
         this.value = value;
     }
+
+
+    public class Value {
+        private List<Usuario> content;
+
+        public List<Usuario> getContent() {
+            return content;
+        }
+
+        public void setContent(List<Usuario> content) {
+            this.content = content;
+        }
+    }
+
 
     public class Usuario {
         private String id;
@@ -60,6 +74,14 @@ public class UsuarioListaResponse {
             this.apellidos = apellidos;
         }
 
+        public String getTelefono() {
+            return telefono;
+        }
+
+        public void setTelefono(String telefono) {
+            this.telefono = telefono;
+        }
+
         public String getEmail() {
             return email;
         }
@@ -76,14 +98,6 @@ public class UsuarioListaResponse {
             this.direccion = direccion;
         }
 
-        public String getTelefono() {
-            return telefono;
-        }
-
-        public void setTelefono(String telefono) {
-            this.telefono = telefono;
-        }
-
         public boolean isAdmin() {
             return isAdmin;
         }
@@ -92,4 +106,6 @@ public class UsuarioListaResponse {
             isAdmin = admin;
         }
     }
+
 }
+
