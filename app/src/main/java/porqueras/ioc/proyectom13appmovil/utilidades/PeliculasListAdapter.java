@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.LinkedList;
 
+import porqueras.ioc.proyectom13appmovil.Pelicula;
 import porqueras.ioc.proyectom13appmovil.R;
+import porqueras.ioc.proyectom13appmovil.Usuario;
 
 /**
  * Adapdador del RecyclerView para las películas
@@ -20,14 +22,15 @@ import porqueras.ioc.proyectom13appmovil.R;
  * @Author Esteban Porqueras Araque
  */
 public class PeliculasListAdapter extends RecyclerView.Adapter<PeliculasListAdapter.WordViewHolder> {
-    private final LinkedList<String> mWordList;
+    private LinkedList<Pelicula> peliculas = new LinkedList<>();
     private LayoutInflater mInflater;
     final private PasarIdListado pasarIdListado;
+    private Pelicula pelicula;
 
     //Constructor, obtiene el inflador del contexto y sus datos
-    public PeliculasListAdapter(Context context, LinkedList<String> mWordList, PasarIdListado pasarIdListado) {
+    public PeliculasListAdapter(Context context, LinkedList<Pelicula> peliculas, PasarIdListado pasarIdListado) {
         mInflater = LayoutInflater.from(context);
-        this.mWordList = mWordList;
+        this.peliculas = peliculas;
         this.pasarIdListado = pasarIdListado;
     }
 
@@ -42,25 +45,27 @@ public class PeliculasListAdapter extends RecyclerView.Adapter<PeliculasListAdap
     //Asocia los datos con el ViewHolder para una posición dada en el RecyclerView
     @Override
     public void onBindViewHolder(@NonNull WordViewHolder holder, int position) {
-        String mCurrent = mWordList.get(position);
-        holder.movie.setText(mCurrent);
+        Pelicula peliculaActual = peliculas.get(position);
+        holder.tituloPelicula.setText(peliculaActual.getTituloPelicula());
+        holder.precioAlquiler.setText("Precio del alquiler: " + Integer.toString(peliculaActual.getPrecioAlquiler()) + " euros");
     }
 
     //Retorna el número de elementos de datos disponibles para mostrar
     @Override
     public int getItemCount() {
-        return mWordList.size();
+        return peliculas.size();
     }
-
 
     //Clase interna
     public class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView movie;
+        public TextView tituloPelicula;
+        public TextView precioAlquiler;
         public PeliculasListAdapter mAdapter;
 
         public WordViewHolder(@NonNull View itemView, PeliculasListAdapter adadpter) {
             super(itemView);
-            movie = itemView.findViewById(R.id.movie);
+            tituloPelicula = itemView.findViewById(R.id.titulo_pelicula);
+            precioAlquiler = itemView.findViewById(R.id.precio_alquiler);
             this.mAdapter = adadpter;
             itemView.setOnClickListener(this);
         }

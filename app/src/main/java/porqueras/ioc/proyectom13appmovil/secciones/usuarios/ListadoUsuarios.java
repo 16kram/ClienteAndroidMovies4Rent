@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +26,7 @@ import java.util.LinkedList;
 
 import porqueras.ioc.proyectom13appmovil.APIService;
 import porqueras.ioc.proyectom13appmovil.R;
+import porqueras.ioc.proyectom13appmovil.Usuario;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioListaResponse;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
 import porqueras.ioc.proyectom13appmovil.utilidades.InstanciaRetrofit;
@@ -39,7 +41,7 @@ import retrofit2.Response;
  * @author Esteban Porqueras Araque
  */
 public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpter.PasarIdListado {
-    private final LinkedList<String> mWordList = new LinkedList<>();
+    private final LinkedList<Usuario> usuarios = new LinkedList<>();
     private RecyclerView mRecyclerView;
     private WordListAdadpter mAdapter;
     APIService apiService;
@@ -49,7 +51,7 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
     private Button botonPagAtras, botonPagAdelante;
     private TextView textoIndicadorNumPagina;
     private int numPagina = 0;
-    private int tamPagina = 2;
+    private int tamPagina = 3;
     private int paginasTotales;
     private final int NUM_MAX_USUARIOS = 1000;//Número máximo de usuarios para listar
 
@@ -91,7 +93,7 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
             @Override
             public void onClick(View v) {
                 if (numPagina < paginasTotales) {
-                    mWordList.clear();
+                    usuarios.clear();
                     //Incrementamos el número de pagina
                     numPagina++;
                     textoIndicadorNumPagina.setText("pag " + Integer.toString(numPagina) + " de " + paginasTotales);
@@ -104,7 +106,7 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
         botonPagAtras.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mWordList.clear();
+                usuarios.clear();
                 //Decrementamos el número de pagina si es mayor que cero
                 if (numPagina > 0) {
                     numPagina--;
@@ -137,16 +139,18 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
                     Log.d("response", "Pág totales=" + paginasTotales);
                     for (int n = 0; n < response.body().getValue().getContent().size(); n++) {
                         //Obtiene los usuarios y los añade a la lista
-                        mWordList.add(response.body().getValue().getContent().get(n).getNombre() +
-                                " " + response.body().getValue().getContent().get(n).getApellidos() +
-                                "\nTeléfono: " + response.body().getValue().getContent().get(n).getTelefono()
-                                + "\ne-mail: " + response.body().getValue().getContent().get(n).getEmail()
-                                + "\nDirección: " + response.body().getValue().getContent().get(n).getDireccion()
-                                + "\nAdministrador: " + response.body().getValue().getContent().get(n).isAdmin());
+                        Usuario usuario = new Usuario();
+                        usuario.setNombre(response.body().getValue().getContent().get(n).getNombre());
+                        usuario.setApellidos(response.body().getValue().getContent().get(n).getApellidos());
+                        usuario.setTelefono(response.body().getValue().getContent().get(n).getTelefono());
+                        usuario.setEmail(response.body().getValue().getContent().get(n).getEmail());
+                        usuario.setDireccion(response.body().getValue().getContent().get(n).getDireccion());
+                        usuario.setAdmin(response.body().getValue().getContent().get(n).isAdmin());
+                        usuarios.add(usuario);
                     }
 
                     //Asociamos el id con el número de la posición de la lista
-                    for (int n = 0; n < mWordList.size(); n++) {
+                    for (int n = 0; n < usuarios.size(); n++) {
                         hashMap.put(n, response.body().getValue().getContent().get(n).getId());
                         Log.d("respose", "response hasMap n=" + n + " id=" + hashMap.get(n) + " " +
                                 response.body().getValue().getContent().get(n).getNombre());
@@ -155,7 +159,7 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
                     //Obtiene un identificador para la vista del RecyclerView
                     mRecyclerView = findViewById(R.id.recyclerview);
                     //Crea un adaptador para proporcionar los datos mostrados
-                    mAdapter = new WordListAdadpter(ListadoUsuarios.this, mWordList, ListadoUsuarios.this);
+                    mAdapter = new WordListAdadpter(ListadoUsuarios.this, usuarios, ListadoUsuarios.this);
                     //Conecta el adaptador con el RecyclerView
                     mRecyclerView.setAdapter(mAdapter);
                     //Da al RecyclerView un layout manager por defecto
@@ -279,6 +283,7 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
         Intent i = new Intent(ListadoUsuarios.this, ModificarRolUsuario.class);
         i.putExtra("id", id);
         startActivity(i);
+        finish();
     }
 
     /**
@@ -316,17 +321,30 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("¿Número máximo de usuarios por página?");
         final EditText numMaxUsuarios = new EditText(this);
+        numMaxUsuarios.setInputType(InputType.TYPE_CLASS_NUMBER);//Seleccionamos el teclado numérico
         builder.setView(numMaxUsuarios);
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                tamPagina = Integer.parseInt(numMaxUsuarios.getText().toString());
-                Log.d("response", "Tam página=" + tamPagina);
-                mWordList.clear();
-                numPagina = 0;
-                numMaxPaginas();
-                //Mostramos en el RecyclerView los usuarios
-                listarUsuarios();
+                try {
+                    tamPagina = Integer.parseInt(numMaxUsuarios.getText().toString());
+                    Log.d("response", "Tam página=" + tamPagina);
+                    if (tamPagina > 0) {
+                        usuarios.clear();
+                        numPagina = 0;
+                        numMaxPaginas();
+                        //Mostramos en el RecyclerView los usuarios
+                        listarUsuarios();
+                    } else {
+                        //Muestra un Toast indicando que el número de usuarios por página no puede ser menor que 1
+                        Toast toast = Toast.makeText(getBaseContext(), "El número de usuarios por página no puede ser menor que 1", Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                } catch (Exception e) {
+                    //Muestra un Toast indicando que ha ocurrido un error
+                    Toast toast = Toast.makeText(getBaseContext(), "Ha ocurrido un error, inténtelo de nuevo", Toast.LENGTH_LONG);
+                    toast.show();
+                }
             }
         });
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -337,6 +355,6 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-
     }
+
 }

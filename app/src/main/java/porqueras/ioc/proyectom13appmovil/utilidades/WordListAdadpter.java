@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.LinkedList;
 
 import porqueras.ioc.proyectom13appmovil.R;
+import porqueras.ioc.proyectom13appmovil.Usuario;
 
 /**
  * Adaptador del RecyclerView
@@ -20,14 +21,15 @@ import porqueras.ioc.proyectom13appmovil.R;
  * @author Esteban Porqueras Araque
  */
 public class WordListAdadpter extends RecyclerView.Adapter<WordListAdadpter.WordViewHolder> {
-    private final LinkedList<String> mWordList;
+    private LinkedList<Usuario> usuarios = new LinkedList<>();
     private LayoutInflater mInflater;
     final private PasarIdListado pasarIdListado;
+    private Usuario usuario;
 
     //Constructor, obtiene el inflador del contexto y sus datos
-    public WordListAdadpter(Context context, LinkedList<String> mWordList, PasarIdListado pasarIdListado) {
+    public WordListAdadpter(Context context, LinkedList<Usuario> usuarios, PasarIdListado pasarIdListado) {
         mInflater = LayoutInflater.from(context);
-        this.mWordList = mWordList;
+        this.usuarios = usuarios;
         this.pasarIdListado = pasarIdListado;
     }
 
@@ -42,24 +44,30 @@ public class WordListAdadpter extends RecyclerView.Adapter<WordListAdadpter.Word
     //Asocia los datos con el ViewHolder para una posición dada en el RecyclerView
     @Override
     public void onBindViewHolder(@NonNull WordViewHolder holder, int position) {
-        String mCurrent = mWordList.get(position);
-        holder.usuario.setText(mCurrent);
+        Usuario usuarioActual = usuarios.get(position);
+        holder.usuario.setText(usuarioActual.getNombre() + " " + usuarioActual.getApellidos());
+        holder.informacionAdicional.setText("Dirección: " + usuarioActual.getDireccion() +
+                "\nTeléfono: " + usuarioActual.getTelefono() +
+                "\ne-mail: " + usuarioActual.getEmail() +
+                "\nAdministrador: " + usuarioActual.isAdmin());
     }
 
     //Retorna el número de elementos de datos disponibles para mostrar
     @Override
     public int getItemCount() {
-        return mWordList.size();
+        return usuarios.size();
     }
 
     //Clase interna
     public class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView usuario;
+        public TextView informacionAdicional;
         public WordListAdadpter mAdapter;
 
         public WordViewHolder(@NonNull View itemView, WordListAdadpter adadpter) {
             super(itemView);
-            usuario = itemView.findViewById(R.id.user);
+            usuario = itemView.findViewById(R.id.nombre_apellidos);
+            informacionAdicional = itemView.findViewById(R.id.informacion_adicional);
             this.mAdapter = adadpter;
             itemView.setOnClickListener(this);
         }

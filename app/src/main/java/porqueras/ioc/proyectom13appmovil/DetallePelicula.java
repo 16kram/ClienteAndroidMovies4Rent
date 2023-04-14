@@ -58,9 +58,9 @@ public class DetallePelicula extends AppCompatActivity {
                     tituloView.setText(response.body().getValue().getTitulo());
                     generoView.setText("Género: " + response.body().getValue().getGenero());
                     directorView.setText("Director: " + response.body().getValue().getDirector());
-                    duracionView.setText("Duración: " + Integer.toString(response.body().getValue().getDuracion()));
+                    duracionView.setText("Duración: " + Integer.toString(response.body().getValue().getDuracion())+" minutos");
                     añoView.setText("Año: " + Integer.toString(response.body().getValue().getAño()));
-                    precioView.setText("Precio: " + Integer.toString(response.body().getValue().getPrecio()));
+                    precioView.setText("Precio: " + Integer.toString(response.body().getValue().getPrecio())+" euros");
                 }
             }
 

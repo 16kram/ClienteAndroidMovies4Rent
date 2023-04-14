@@ -11,6 +11,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -18,6 +21,8 @@ import java.util.LinkedList;
 
 import porqueras.ioc.proyectom13appmovil.APIService;
 import porqueras.ioc.proyectom13appmovil.DetallePelicula;
+import porqueras.ioc.proyectom13appmovil.Pelicula;
+import porqueras.ioc.proyectom13appmovil.Usuario;
 import porqueras.ioc.proyectom13appmovil.utilidades.PeliculasListAdapter;
 import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaListaResponse;
@@ -33,13 +38,19 @@ import retrofit2.Response;
  * @Author Esteban Porqueras Araque
  */
 public class ListadoPeliculas extends AppCompatActivity implements PeliculasListAdapter.PasarIdListado {
-    private final LinkedList<String> mWordList = new LinkedList<>();
+    private final LinkedList<Pelicula> peliculas = new LinkedList<>();
     private RecyclerView mRecyclerView;
     private PeliculasListAdapter mAdapter;
     APIService apiService;
     HashMap hashMap = new HashMap();
     private String accion;
     private String id;
+    private Button botonPagAtras, botonPagAdelante;
+    private TextView textoIndicadorNumPagina;
+    private int numPagina = 0;
+    private int tamPagina = 3;
+    private int paginasTotales;
+    private final int NUM_MAX_USUARIOS = 1000;//Número máximo de usuarios para listar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,10 +81,54 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
                 setTitle("Listado de las películas");
         }
 
+        //Añadimos los botones y los TextView
+        botonPagAtras = (Button) findViewById(R.id.buttonAtrasarPaginaPelicula);
+        botonPagAdelante = (Button) findViewById(R.id.buttonAvanzarPaginaPelicula);
+        textoIndicadorNumPagina = (TextView) findViewById(R.id.textViewNumPaginaPelicula);
+
+        //Acción del botón adelantar página
+        botonPagAdelante.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (numPagina < paginasTotales) {
+                    peliculas.clear();
+                    //Incrementamos el número de pagina
+                    numPagina++;
+                    textoIndicadorNumPagina.setText("pag " + Integer.toString(numPagina) + " de " + paginasTotales);
+                    listarPeliculas();
+                }
+            }
+        });
+
+        //Acción del botón página atrás
+        botonPagAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                peliculas.clear();
+                //Decrementamos el número de pagina si es mayor que cero
+                if (numPagina > 0) {
+                    numPagina--;
+                    textoIndicadorNumPagina.setText("pag " + Integer.toString(numPagina) + " de " + paginasTotales);
+                    listarPeliculas();
+                }
+            }
+        });
 
         //Instanciomos la incerfaz de APIService mediante Retrofit
         apiService = InstanciaRetrofit.getApiService();
 
+        //Mostramos el número de página al inicializar la actividad
+        numMaxPaginas();
+
+        //Mostramos en el RecyclerView los usuarios
+        listarPeliculas();
+
+    }
+
+    /**
+     * Mostramos las películas en el RecyclerView
+     */
+    private void listarPeliculas() {
         Call<PeliculaListaResponse> callPeliculaListaResponse = apiService.getPeliculas(ApiUtils.TOKEN);
         callPeliculaListaResponse.enqueue(new Callback<PeliculaListaResponse>() {
             @Override
@@ -81,12 +136,14 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
                 if (response.isSuccessful()) {
                     for (int n = 0; n < response.body().getValue().size(); n++) {
                         //Obtiene las películas y las añade a la lista
-                        mWordList.add("Película:\n" + response.body().getValue().get(n).getTitulo() +
-                                "\n\nPrecio del alquiler: " + response.body().getValue().get(n).getPrecio() + " euros");
+                        Pelicula pelicula = new Pelicula();
+                        pelicula.setTituloPelicula(response.body().getValue().get(n).getTitulo());
+                        pelicula.setPrecioAlquiler(response.body().getValue().get(n).getPrecio());
+                        peliculas.add(pelicula);
                     }
 
                     //Asociamos el id con el número de la posición de la lista
-                    for (int n = 0; n < mWordList.size(); n++) {
+                    for (int n = 0; n < peliculas.size(); n++) {
                         hashMap.put(n, response.body().getValue().get(n).getId());
                         Log.d("respose", "response hasMap n=" + n + " id=" + hashMap.get(n) + " " +
                                 response.body().getValue().get(n).getTitulo());
@@ -95,7 +152,7 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
                     //Obtiene un identificador para la vista del RecyclerView
                     mRecyclerView = findViewById(R.id.recyclerviewPeliculas);
                     //Crea un adaptador para proporcionar los datos mostrados
-                    mAdapter = new PeliculasListAdapter(ListadoPeliculas.this, mWordList, ListadoPeliculas.this);
+                    mAdapter = new PeliculasListAdapter(ListadoPeliculas.this, peliculas, ListadoPeliculas.this);
                     //Conecta el adaptador con el RecyclerView
                     mRecyclerView.setAdapter(mAdapter);
                     //Da al RecyclerView un layout manager por defecto
@@ -112,6 +169,29 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
             }
         });
 
+    }
+
+    /**
+     * Calcula el número máximo de páginas en función de las películas
+     */
+    private void numMaxPaginas() {
+        Call<PeliculaListaResponse> peliculaListaResponseCall = apiService.getPeliculas(ApiUtils.TOKEN);
+        peliculaListaResponseCall.enqueue(new Callback<PeliculaListaResponse>() {
+            @Override
+            public void onResponse(Call<PeliculaListaResponse> call, Response<PeliculaListaResponse> response) {
+                if (response.isSuccessful()) {
+                    paginasTotales = response.body().getValue().size() / tamPagina;
+                    textoIndicadorNumPagina.setText("pag " + Integer.toString(numPagina) + " de " + paginasTotales);
+                } else {
+                    Log.d("response", "No se puede mostrar el num máximo de páginas");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PeliculaListaResponse> call, Throwable t) {
+                Log.d("response", "Error de red-->" + t.getMessage());
+            }
+        });
 
     }
 

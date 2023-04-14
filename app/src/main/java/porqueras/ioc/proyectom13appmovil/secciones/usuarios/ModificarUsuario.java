@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import porqueras.ioc.proyectom13appmovil.APIService;
 import porqueras.ioc.proyectom13appmovil.R;
@@ -100,9 +101,15 @@ public class ModificarUsuario extends AppCompatActivity {
                     public void onResponse(Call<UsuarioUpdate> call, Response<UsuarioUpdate> response) {
                         if (response.isSuccessful()) {
                             Log.d("response", "Usuario actualizado");
+                            //Muestra un Toast indicando que el usuario ha sido actualizado
+                            Toast toast = Toast.makeText(getBaseContext(), "El usuario ha sido actualizado", Toast.LENGTH_LONG);
+                            toast.show();
                             finish();
                         } else {
                             Log.d("response", "Ha ocurrido un error , código=" + response.code());
+                            //Muestra un Toast indicando que ha ocurrido un error
+                            Toast toast = Toast.makeText(getBaseContext(), "Ha ocurrido un error, inténtelo de nuevo", Toast.LENGTH_LONG);
+                            toast.show();
                         }
                     }
 

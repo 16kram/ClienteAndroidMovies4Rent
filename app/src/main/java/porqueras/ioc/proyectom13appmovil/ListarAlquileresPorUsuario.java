@@ -31,7 +31,7 @@ import retrofit2.Response;
  * @Author Esteban Porqueras Araque
  */
 public class ListarAlquileresPorUsuario extends AppCompatActivity implements PeliculasListAdapter.PasarIdListado {
-    private final LinkedList<String> mWordList = new LinkedList<>();
+    private LinkedList<Pelicula> peliculas = new LinkedList<>();
     private RecyclerView mRecyclerView;
     private PeliculasListAdapter mAdapter;
     APIService apiService;
@@ -65,12 +65,14 @@ public class ListarAlquileresPorUsuario extends AppCompatActivity implements Pel
                 if (response.isSuccessful()) {
                     for (int n = 0; n < response.body().getValue().size(); n++) {
                         //Obtiene las películas y las añade a la lista
-                        mWordList.add("Película:\n" + response.body().getValue().get(n).getTitulo() +
-                                "\n\nPrecio del alquiler: " + response.body().getValue().get(n).getPrecio() + " euros");
+                        Pelicula pelicula = new Pelicula();
+                        pelicula.setTituloPelicula(response.body().getValue().get(n).getTitulo());
+                        pelicula.setPrecioAlquiler(response.body().getValue().get(n).getPrecio());
+                        peliculas.add(pelicula);
                     }
 
                     //Asociamos el id con el número de la posición de la lista
-                    for (int n = 0; n < mWordList.size(); n++) {
+                    for (int n = 0; n < peliculas.size(); n++) {
                         hashMap.put(n, response.body().getValue().get(n).getId());
                         Log.d("respose", "response hasMap n=" + n + " id=" + hashMap.get(n) + " " +
                                 response.body().getValue().get(n).getTitulo());
@@ -79,7 +81,7 @@ public class ListarAlquileresPorUsuario extends AppCompatActivity implements Pel
                     //Obtiene un identificador para la vista del RecyclerView
                     mRecyclerView = findViewById(R.id.recyclerviewPeliculas);
                     //Crea un adaptador para proporcionar los datos mostrados
-                    mAdapter = new PeliculasListAdapter(ListarAlquileresPorUsuario.this, mWordList, ListarAlquileresPorUsuario.this);
+                    mAdapter = new PeliculasListAdapter(ListarAlquileresPorUsuario.this, peliculas, ListarAlquileresPorUsuario.this);
                     //Conecta el adaptador con el RecyclerView
                     mRecyclerView.setAdapter(mAdapter);
                     //Da al RecyclerView un layout manager por defecto

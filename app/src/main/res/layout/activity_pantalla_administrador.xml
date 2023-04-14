@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="Finalizar Sesión"
+        android:backgroundTint="#818288"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -34,7 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Gestión de usuarios"
-        app:backgroundTint="#64B5F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTituloAdministrador" />
@@ -45,21 +45,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Gestión películas"
-        app:backgroundTint="#64B5F6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonGestionUsuarios" />
-
-    <Button
-        android:id="@+id/buttonMantenimientoInventario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Mantenimiento del inventario"
-        app:backgroundTint="#64B5F6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonGestionPeliculas" />
 
     <Button
         android:id="@+id/buttonRankingPeliculas"
@@ -67,10 +55,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Ranking de las películas"
-        app:backgroundTint="#64B5F6"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonMantenimientoInventario" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonGestionAlquilerPeliculas" />
 
     <Button
         android:id="@+id/buttonGestionAlquilerPeliculas"
@@ -78,10 +66,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Gestión del alquiler de las películas"
-        app:backgroundTint="#64B5F6"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.615"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonRankingPeliculas" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonGestionPeliculas" />
 
     <Button
         android:id="@+id/buttonCorreoAvisoUsuarios"
@@ -89,9 +77,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Correo de aviso a los usuarios"
-        app:backgroundTint="#64B5F6"
         app:iconTint="#7986CB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonGestionAlquilerPeliculas" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonRankingPeliculas" />
 </androidx.constraintlayout.widget.ConstraintLayout>
