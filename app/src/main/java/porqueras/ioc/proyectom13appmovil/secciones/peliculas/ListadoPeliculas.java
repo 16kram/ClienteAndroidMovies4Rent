@@ -11,6 +11,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -275,5 +278,33 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+    /**
+     * Creamos un menú para indicar el número máximo de películas que se tienen que mostrar por página
+     *
+     * @param menu
+     * @return
+     */
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_listado_peliculas, menu);
+        return true;
+    }
+
+    /**
+     * Acciones en función de lo que se pulse en el menú
+     *
+     * @param item
+     * @return
+     */
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.peliculasPorPagina:
+                //preguntarNumUsuariosPorPag();
+                break;
+        }
+        return false;
     }
 }

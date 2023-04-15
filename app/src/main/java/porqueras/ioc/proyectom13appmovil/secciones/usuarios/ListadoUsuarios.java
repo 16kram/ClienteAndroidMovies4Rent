@@ -1,5 +1,6 @@
 package porqueras.ioc.proyectom13appmovil.secciones.usuarios;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -69,18 +70,31 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
         Log.d("response", "accion=" + accion);
 
         //Añadimos el título de la accion a realizar en la barra superior de la activity
+        setTitle("Movies4Rent");
         switch (accion) {
             case "borrar":
-                setTitle("¿Qué usuario desea borrar?");
+                ActionBar actionBar = getSupportActionBar();
+                actionBar.setSubtitle("¿Qué usuario desea borrar?");
+                actionBar.setDisplayShowHomeEnabled(true);
+                actionBar.setIcon(R.drawable.ic_baseline_person_off_24);
                 break;
             case "modificar":
-                setTitle("Cambiar ROL de usuario");
+                actionBar = getSupportActionBar();
+                actionBar.setSubtitle("Cambiar ROL de usuario");
+                actionBar.setDisplayShowHomeEnabled(true);
+                actionBar.setIcon(R.drawable.ic_baseline_person_pin_24);
                 break;
             case "alquilar":
-                setTitle("Seleccione el usuario");
+                actionBar = getSupportActionBar();
+                actionBar.setSubtitle("Seleccione el usuario");
+                actionBar.setDisplayShowHomeEnabled(true);
+                actionBar.setIcon(R.drawable.ic_baseline_person_pin_24);
                 break;
             default:
-                setTitle("Listado de los usuarios");
+                actionBar = getSupportActionBar();
+                actionBar.setSubtitle("Listado de los usuarios");
+                actionBar.setDisplayShowHomeEnabled(true);
+                actionBar.setIcon(R.drawable.ic_baseline_people_24);
         }
 
         //Añadimos los botones y los TextView
