@@ -1,6 +1,7 @@
 package porqueras.ioc.proyectom13appmovil;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -44,7 +45,11 @@ public class PantallaUsuario extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //Añadimos el título de la Activity en la barra superior
-        setTitle("Menú del usuario");
+        setTitle("Movies4Rent");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setSubtitle("Menú del usuario");
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.ic_baseline_local_movies_24);
 
         //Añadimos los campos de texto y los botones
         titulo = (TextView) findViewById(R.id.textViewTituloUsuario);

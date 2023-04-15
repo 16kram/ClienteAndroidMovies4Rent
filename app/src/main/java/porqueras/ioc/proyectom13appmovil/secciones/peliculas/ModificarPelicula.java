@@ -1,5 +1,6 @@
 package porqueras.ioc.proyectom13appmovil.secciones.peliculas;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.pm.ActivityInfo;
@@ -39,7 +40,11 @@ public class ModificarPelicula extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //Añadimos el título de la Activity en la barra superior
-        setTitle("Modificar películas");
+        setTitle("Movies4Rent");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setSubtitle("Modificar películas");
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.ic_baseline_update_24);
 
         //Recogemos el id de la película seleccionada el listado de las películas
         Bundle extras = getIntent().getExtras();

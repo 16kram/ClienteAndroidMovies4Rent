@@ -1,5 +1,6 @@
 package porqueras.ioc.proyectom13appmovil.secciones.usuarios;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -38,7 +39,11 @@ public class RegistroUsuario extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //Añadimos el título de la Activity en la barra superior
-        setTitle("Añadir usuario");
+        setTitle("Movies4Rent");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setSubtitle("Añadir usuario");
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.ic_baseline_person_add_24);
 
         //Añadimos los campos de texto y los botones
         nombre = (EditText) findViewById(R.id.editTextTituloPelicula);

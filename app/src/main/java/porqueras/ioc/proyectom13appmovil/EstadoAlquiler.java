@@ -1,5 +1,6 @@
 package porqueras.ioc.proyectom13appmovil;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.pm.ActivityInfo;
@@ -37,7 +38,11 @@ public class EstadoAlquiler extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //Añadimos el título de la Activity en la barra superior
-        setTitle("Actualizar estado del alquiler");
+        setTitle("Movies4Rent");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setSubtitle("Actualizar estado del alquiler");
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.ic_baseline_update_24);
 
         //Recuperamos el idAlquiler de la actividad anterior
         Bundle extras = getIntent().getExtras();

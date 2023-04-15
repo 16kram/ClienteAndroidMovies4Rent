@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2525" />
+        <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.2525" />
+        <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/drawable/ic_baseline_arrow_circle_right_24.xml" value="0.2525" />
+        <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.2525" />
+        <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/drawable/ic_baseline_fast_forward_24.xml" value="0.2525" />
+        <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/drawable/ic_baseline_local_movies_24.xml" value="0.2525" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2345" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_alquiler_pelicula.xml" value="0.228125" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_cambiar_password.xml" value="0.17109375" />
@@ -13,7 +19,7 @@
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_gestion_usuarios.xml" value="0.25" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_listado_alquileres.xml" value="0.228125" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_listado_peliculas.xml" value="0.20606884057971014" />
-        <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_listado_usuarios.xml" value="0.18518518518518517" />
+        <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_listado_usuarios.xml" value="0.25" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_listar_alquileres_por_usuario.xml" value="0.228125" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/activity_modificar_pelicula.xml" value="0.228125" />
@@ -27,6 +33,8 @@
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/pelicula.xml" value="0.20606884057971014" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/layout/usuario.xml" value="0.18614130434782608" />
         <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/menu/menu_listado_usuarios.xml" value="0.246875" />
+        <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2525" />
+        <entry key="..\:/Users/char_/AndroidStudioProjects/ProyectoM13AppMovil/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.2525" />
       </map>
     </option>
   </component>

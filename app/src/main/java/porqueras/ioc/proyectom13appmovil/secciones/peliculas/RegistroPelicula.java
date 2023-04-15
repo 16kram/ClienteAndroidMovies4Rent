@@ -1,5 +1,6 @@
 package porqueras.ioc.proyectom13appmovil.secciones.peliculas;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.pm.ActivityInfo;
@@ -37,7 +38,11 @@ public class RegistroPelicula extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //Añadimos el título de la Activity en la barra superior
-        setTitle("Registro de películas");
+        setTitle("Movies4Rent");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setSubtitle("Registro de películas");
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.ic_baseline_post_add_24);
 
         //Añadimos los campos de texto y los botones
         titulo = (EditText) findViewById(R.id.editTextTituloPelicula);

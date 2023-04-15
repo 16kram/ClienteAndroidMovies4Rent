@@ -1,5 +1,6 @@
 package porqueras.ioc.proyectom13appmovil.secciones.usuarios;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.pm.ActivityInfo;
@@ -42,7 +43,12 @@ public class ModificarUsuario extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //Añadimos el título de la Activity en la barra superior
-        setTitle("Actualizar datos del usuario");
+        setTitle("Movies4Rent");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setSubtitle("Actualizar datos del usuario");
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.ic_baseline_person_24);
+
 
         //Recupera el id del usuario enviado desde la actividad anterior
         Bundle extras = getIntent().getExtras();

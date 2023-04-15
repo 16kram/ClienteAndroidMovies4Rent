@@ -1,5 +1,6 @@
 package porqueras.ioc.proyectom13appmovil;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -49,7 +50,11 @@ public class PantallaAdministrador extends AppCompatActivity {
         botonGestionAlquiler = (Button) findViewById(R.id.buttonGestionAlquilerPeliculas);
 
         //Añadimos el título de la Activity en la barra superior
-        setTitle("Menú del administrador");
+        setTitle("Movies4Rent");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setSubtitle("Menú del administrador");
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.ic_baseline_admin_panel_settings_24);
 
         //Instanciomos la incerfaz de APIService mediante Retrofit
         apiService = InstanciaRetrofit.getApiService();

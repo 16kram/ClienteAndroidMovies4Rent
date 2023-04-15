@@ -1,5 +1,6 @@
 package porqueras.ioc.proyectom13appmovil.secciones.usuarios;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.pm.ActivityInfo;
@@ -38,7 +39,11 @@ public class CambiarPassword extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //Añadimos el título de la Activity en la barra superior
-        setTitle("Moficar la contraseña");
+        setTitle("Movies4Rent");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setSubtitle("Modificar la contraseña");
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.ic_baseline_password_24);
 
         //Añadimos los campos de texto y los botones
         cambiarContraseña = (EditText) findViewById(R.id.editTextModificarPassword);

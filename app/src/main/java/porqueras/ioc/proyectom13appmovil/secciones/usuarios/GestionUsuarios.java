@@ -1,5 +1,6 @@
 package porqueras.ioc.proyectom13appmovil.secciones.usuarios;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -27,7 +28,11 @@ public class GestionUsuarios extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //Añadimos el título de la Activity en la barra superior
-        setTitle("Gestión de usuarios");
+        setTitle("Movies4Rent");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setSubtitle("Gestión de usuarios");
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.ic_baseline_supervised_user_circle_24);
 
         //Añadimos los campos de texto y los botones
         listarUsuarios = (Button) findViewById(R.id.buttonListaUsuarios);

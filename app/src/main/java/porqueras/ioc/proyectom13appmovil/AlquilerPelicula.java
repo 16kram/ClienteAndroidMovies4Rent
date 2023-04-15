@@ -1,5 +1,6 @@
 package porqueras.ioc.proyectom13appmovil;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -41,7 +42,11 @@ public class AlquilerPelicula extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //Añadimos el título de la Activity en la barra superior
-        setTitle("Alquiler de películas");
+        setTitle("Movies4Rent");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setSubtitle("Alquiler de películas");
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.ic_baseline_video_call_24);
 
         //Recuperamos el idUsuario e idPelicula
         Bundle extras = getIntent().getExtras();

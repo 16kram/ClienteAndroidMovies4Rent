@@ -1,5 +1,6 @@
 package porqueras.ioc.proyectom13appmovil.secciones.usuarios;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -41,7 +42,11 @@ public class ModificarRolUsuario extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //Añadimos el título de la Activity en la barra superior
-        setTitle("Modificar el rol del usuario");
+        setTitle("Movies4Rent");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setSubtitle("Modificar el rol del usuario");
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.ic_baseline_lock_person_24);
 
         //Añadimos el texto y el switch
         nombreUsuario = (TextView) findViewById(R.id.textViewRolUsuario);

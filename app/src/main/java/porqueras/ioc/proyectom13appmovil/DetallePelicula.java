@@ -1,5 +1,6 @@
 package porqueras.ioc.proyectom13appmovil;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.pm.ActivityInfo;
@@ -33,7 +34,11 @@ public class DetallePelicula extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //Añadimos el título de la Activity en la barra superior
-        setTitle("Detalle de la película");
+        setTitle("Movies4Rent");
+        ActionBar actionBar=getSupportActionBar();
+        actionBar.setSubtitle("Detalle de la película");
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.ic_baseline_personal_video_24);
 
         //Añadimos el texto
         tituloView = (TextView) findViewById(R.id.textViewDetalleTitulo);
