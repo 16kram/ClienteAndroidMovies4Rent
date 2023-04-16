@@ -3,14 +3,13 @@ package porqueras.ioc.proyectom13appmovil.modelos;
 import java.util.List;
 
 /**
- * Clase DTO lista de películas
+ * Clase DTO para listar las películas alquiladas por id
  *
- * @author Esteban Porqueras Araque
+ * @Author Esteban Porqueras Araque
  */
-
-public class PeliculaListaResponse {
+public class PeliculaListaResponseAlquilerPorId {
     private String message;
-    private Value value;
+    private List<Pelicula> value;
 
     public String getMessage() {
         return message;
@@ -20,37 +19,22 @@ public class PeliculaListaResponse {
         this.message = message;
     }
 
-    public Value getValue() {
+    public List<Pelicula> getValue() {
         return value;
     }
 
-    public void setValue(Value value) {
+    public void setValue(List<Pelicula> value) {
         this.value = value;
     }
-
-
-    public class Value {
-        private List<Pelicula> content;
-
-        public List<Pelicula> getContent() {
-            return content;
-        }
-
-        public void setContent(List<Pelicula> content) {
-            this.content = content;
-        }
-    }
-
 
     public class Pelicula {
         private String id;
         private String titulo;
-        private String director;
         private String genero;
+        private String director;
         private int duracion;
         private int año;
         private int precio;
-        private int vecesAlquilada;
 
         public String getId() {
             return id;
@@ -68,20 +52,20 @@ public class PeliculaListaResponse {
             this.titulo = titulo;
         }
 
-        public String getDirector() {
-            return director;
-        }
-
-        public void setDirector(String director) {
-            this.director = director;
-        }
-
         public String getGenero() {
             return genero;
         }
 
         public void setGenero(String genero) {
             this.genero = genero;
+        }
+
+        public String getDirector() {
+            return director;
+        }
+
+        public void setDirector(String director) {
+            this.director = director;
         }
 
         public int getDuracion() {
@@ -107,14 +91,5 @@ public class PeliculaListaResponse {
         public void setPrecio(int precio) {
             this.precio = precio;
         }
-
-        public int getVecesAlquilada() {
-            return vecesAlquilada;
-        }
-
-        public void setVecesAlquilada(int vecesAlquilada) {
-            this.vecesAlquilada = vecesAlquilada;
-        }
     }
 }
-

@@ -4,10 +4,12 @@ import java.util.List;
 
 /**
  * Clase DTO lista alquileres
+ *
+ * @Author Esteban Porqueras Araque
  */
 public class AlquilerListaResponse {
     private String message;
-    private List<AlquilerListaResponse.Alquiler> value;
+    private Value value;
 
     public String getMessage() {
         return message;
@@ -17,20 +19,34 @@ public class AlquilerListaResponse {
         this.message = message;
     }
 
-    public List<Alquiler> getValue() {
+    public Value getValue() {
         return value;
     }
 
-    public void setValue(List<Alquiler> value) {
+    public void setValue(Value value) {
         this.value = value;
     }
 
+
+    public class Value {
+        private List<Alquiler> content;
+
+        public List<Alquiler> getContent() {
+            return content;
+        }
+
+        public void setContent(List<Alquiler> content) {
+            this.content = content;
+        }
+    }
+
+
     public class Alquiler {
         private String id;
-        private String peliculaId;
-        private String usuariId;
+        private String pelicula;
+        private String usuari;
         private String fechaInicio;
-        private String fechafin;
+        private String fechaFin;
         private int precio;
         private String estado;
 
@@ -42,20 +58,20 @@ public class AlquilerListaResponse {
             this.id = id;
         }
 
-        public String getPeliculaId() {
-            return peliculaId;
+        public String getPelicula() {
+            return pelicula;
         }
 
-        public void setPeliculaId(String peliculaId) {
-            this.peliculaId = peliculaId;
+        public void setPelicula(String pelicula) {
+            this.pelicula = pelicula;
         }
 
-        public String getUsuariId() {
-            return usuariId;
+        public String getUsuari() {
+            return usuari;
         }
 
-        public void setUsuariId(String usuariId) {
-            this.usuariId = usuariId;
+        public void setUsuari(String usuari) {
+            this.usuari = usuari;
         }
 
         public String getFechaInicio() {
@@ -66,12 +82,12 @@ public class AlquilerListaResponse {
             this.fechaInicio = fechaInicio;
         }
 
-        public String getFechafin() {
-            return fechafin;
+        public String getFechaFin() {
+            return fechaFin;
         }
 
-        public void setFechafin(String fechafin) {
-            this.fechafin = fechafin;
+        public void setFechaFin(String fechaFin) {
+            this.fechaFin = fechaFin;
         }
 
         public int getPrecio() {
@@ -91,3 +107,4 @@ public class AlquilerListaResponse {
         }
     }
 }
+

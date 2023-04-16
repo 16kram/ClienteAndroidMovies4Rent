@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Crear alquiler"
+        app:icon="@drawable/ic_baseline_add_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Listar alquileres"
+        app:icon="@drawable/ic_baseline_format_list_bulleted_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonCrearAlquiler" />
@@ -32,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Eliminar alquiler"
+        app:icon="@drawable/ic_baseline_delete_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,6 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Actualizar estado alquiler"
+        app:icon="@drawable/ic_baseline_update_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"

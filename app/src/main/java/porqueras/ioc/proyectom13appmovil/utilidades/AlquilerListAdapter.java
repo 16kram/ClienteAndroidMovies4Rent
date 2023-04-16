@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.LinkedList;
 
+import porqueras.ioc.proyectom13appmovil.Alquiler;
+import porqueras.ioc.proyectom13appmovil.Pelicula;
 import porqueras.ioc.proyectom13appmovil.R;
 
 /**
@@ -20,14 +22,16 @@ import porqueras.ioc.proyectom13appmovil.R;
  * @Author Esteban Porqueras Araque
  */
 public class AlquilerListAdapter extends RecyclerView.Adapter<AlquilerListAdapter.WordViewHolder> {
-    private final LinkedList<String> mWordList;
+    //private final LinkedList<String> mWordList;
+    private LinkedList<Alquiler> alquileres = new LinkedList<>();
     private LayoutInflater mInflater;
     final private AlquilerListAdapter.PasarIdListado pasarIdListado;
+    private Alquiler alquiler;
 
     //Constructor, obtiene el inflador del contexto y sus datos
-    public AlquilerListAdapter(Context context, LinkedList<String> mWordList,PasarIdListado pasarIdListado) {
+    public AlquilerListAdapter(Context context, LinkedList<Alquiler> alquileres,PasarIdListado pasarIdListado) {
         mInflater = LayoutInflater.from(context);
-        this.mWordList = mWordList;
+        this.alquileres = alquileres;
         this.pasarIdListado = pasarIdListado;
     }
 
@@ -42,23 +46,26 @@ public class AlquilerListAdapter extends RecyclerView.Adapter<AlquilerListAdapte
     @Override
     //Asocia los datos con el ViewHolder para una posición dada en el RecyclerView
     public void onBindViewHolder(@NonNull AlquilerListAdapter.WordViewHolder holder, int position) {
-        String mCurrent = mWordList.get(position);
-        holder.alquiler.setText(mCurrent);
+        Alquiler alquilerActual=alquileres.get(position);
+        holder.tituloPelicula.setText(alquilerActual.getTituloPelicula());
+        holder.usuario.setText("Usuario: "+alquilerActual.getUsuario());
     }
 
     @Override
     public int getItemCount() {
-        return mWordList.size();
+        return alquileres.size();
     }
 
     //Clase interna
     public class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        public TextView alquiler;
+        public TextView tituloPelicula;
+        public TextView usuario;
         public AlquilerListAdapter mAdapter;
 
         public WordViewHolder(@NonNull View itemView, AlquilerListAdapter adadpter) {
             super(itemView);
-            alquiler = itemView.findViewById(R.id.alquiler);
+            tituloPelicula = itemView.findViewById(R.id.listar_peliculas_alquiladas_titulo);
+            usuario=itemView.findViewById(R.id.listar_peliculas_alquiladas_usuario);
             this.mAdapter = adadpter;
             itemView.setOnClickListener(this);
         }

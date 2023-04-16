@@ -10,6 +10,7 @@ import porqueras.ioc.proyectom13appmovil.modelos.LogoutResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.PasswordUpdate;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaInfoResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaListaResponse;
+import porqueras.ioc.proyectom13appmovil.modelos.PeliculaListaResponseAlquilerPorId;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioInfoResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioListaResponse;
@@ -59,8 +60,8 @@ public interface APIService {
     @POST("peliculas/add")
     Call<PeliculaResponse> setPelicula(@Query("token") String token, @Body PeliculaResponse peliculaResponse);
 
-    @GET("peliculas")
-    Call<PeliculaListaResponse> getPeliculas(@Query("token") String token);
+    @GET("peliculas/")
+    Call<PeliculaListaResponse> getPeliculas(@Query("page") int page,@Query("pageSize") int pageSize,@Query("token") String token);
 
     @GET("peliculas/{id}")
     Call<PeliculaInfoResponse> getPelicula(@Path("id") String id, @Query("token") String token);
@@ -74,11 +75,15 @@ public interface APIService {
     @POST("peliculas/alquileres/nuevo")
     Call<DetalleAlquiler> newAlquiler(@Query("peliculaId") String peliculaId, @Query("usuariId") String usuariId, @Query("token") String token);
 
-    @GET("peliculas/alquileres")
-    Call<AlquilerListaResponse> getAlquileres(@Query("token") String token);
+    /*@GET("peliculas/alquileres")
+    Call<AlquilerListaResponse> getAlquileres(@Query("token") String token);*/
+
+    @GET("/peliculas/alquileres/")
+    Call<AlquilerListaResponse> getAlquileres(@Query("page") int page,@Query("pageSize") int pageSize,@Query("token") String token);
+
 
     @GET("/peliculas/alquileres/alquilerByUser/{usuarioId}")
-    Call<PeliculaListaResponse> getPeliculasAlquilerPorUsuario(@Path("usuarioId") String usuarioId, @Query("token") String token);
+    Call<PeliculaListaResponseAlquilerPorId> getPeliculasAlquilerPorUsuario(@Path("usuarioId") String usuarioId, @Query("token") String token);
 
     @GET("/peliculas/alquileres/{alquilerId}")
     Call<AlquilerPeliculasPorId> alquilerPeliculaPorId(@Path("alquilerId") String alquilerId, @Query("token") String token);

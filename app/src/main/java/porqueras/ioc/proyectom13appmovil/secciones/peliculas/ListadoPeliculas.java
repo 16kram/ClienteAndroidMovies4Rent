@@ -1,5 +1,6 @@
 package porqueras.ioc.proyectom13appmovil.secciones.peliculas;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,12 +11,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,9 +54,9 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
     private Button botonPagAtras, botonPagAdelante;
     private TextView textoIndicadorNumPagina;
     private int numPagina = 0;
-    private int tamPagina = 3;
+    private int tamPagina = 4;
     private int paginasTotales;
-    private final int NUM_MAX_USUARIOS = 1000;//Número máximo de usuarios para listar
+    private final int NUM_MAX_PELICULAS = 1000;//Número máximo de películas para listar
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,19 +72,31 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
         Log.d("response", "accion=" + accion);
 
         //Añadimos el título de la accion a realizar en la barra superior de la activity
-        //setTitle(accion.substring(0, 1).toUpperCase() + accion.substring(1) + " películas");
+        setTitle("Movies4Rent");
         switch (accion) {
             case "borrar":
-                setTitle("¿Qué película desea borrar?");
+                ActionBar actionBar = getSupportActionBar();
+                actionBar.setSubtitle("¿Qué película desea borrar?");
+                actionBar.setDisplayShowHomeEnabled(true);
+                actionBar.setIcon(R.drawable.ic_baseline_delete_24);
                 break;
             case "modificar":
-                setTitle("¿Qué película desea modificar?");
+                actionBar = getSupportActionBar();
+                actionBar.setSubtitle("¿Qué película desea modificar?");
+                actionBar.setDisplayShowHomeEnabled(true);
+                actionBar.setIcon(R.drawable.ic_baseline_update_24);
                 break;
             case "alquilar":
-                setTitle("¿Qué película desea alquilar?");
+                actionBar = getSupportActionBar();
+                actionBar.setSubtitle("¿Qué película desea alquilar?");
+                actionBar.setDisplayShowHomeEnabled(true);
+                actionBar.setIcon(R.drawable.ic_baseline_local_movies_24);
                 break;
             default:
-                setTitle("Listado de las películas");
+                actionBar = getSupportActionBar();
+                actionBar.setSubtitle("Listado de las películas");
+                actionBar.setDisplayShowHomeEnabled(true);
+                actionBar.setIcon(R.drawable.ic_baseline_format_list_bulleted_24);
         }
 
         //Añadimos los botones y los TextView
@@ -132,24 +147,24 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
      * Mostramos las películas en el RecyclerView
      */
     private void listarPeliculas() {
-        Call<PeliculaListaResponse> callPeliculaListaResponse = apiService.getPeliculas(ApiUtils.TOKEN);
+        Call<PeliculaListaResponse> callPeliculaListaResponse = apiService.getPeliculas(numPagina, tamPagina, ApiUtils.TOKEN);
         callPeliculaListaResponse.enqueue(new Callback<PeliculaListaResponse>() {
             @Override
             public void onResponse(Call<PeliculaListaResponse> call, Response<PeliculaListaResponse> response) {
                 if (response.isSuccessful()) {
-                    for (int n = 0; n < response.body().getValue().size(); n++) {
+                    for (int n = 0; n < response.body().getValue().getContent().size(); n++) {
                         //Obtiene las películas y las añade a la lista
                         Pelicula pelicula = new Pelicula();
-                        pelicula.setTituloPelicula(response.body().getValue().get(n).getTitulo());
-                        pelicula.setPrecioAlquiler(response.body().getValue().get(n).getPrecio());
+                        pelicula.setTituloPelicula(response.body().getValue().getContent().get(n).getTitulo());
+                        pelicula.setPrecioAlquiler(response.body().getValue().getContent().get(n).getPrecio());
                         peliculas.add(pelicula);
                     }
 
                     //Asociamos el id con el número de la posición de la lista
                     for (int n = 0; n < peliculas.size(); n++) {
-                        hashMap.put(n, response.body().getValue().get(n).getId());
+                        hashMap.put(n, response.body().getValue().getContent().get(n).getId());
                         Log.d("respose", "response hasMap n=" + n + " id=" + hashMap.get(n) + " " +
-                                response.body().getValue().get(n).getTitulo());
+                                response.body().getValue().getContent().get(n).getTitulo());
                     }
 
                     //Obtiene un identificador para la vista del RecyclerView
@@ -178,12 +193,12 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
      * Calcula el número máximo de páginas en función de las películas
      */
     private void numMaxPaginas() {
-        Call<PeliculaListaResponse> peliculaListaResponseCall = apiService.getPeliculas(ApiUtils.TOKEN);
+        Call<PeliculaListaResponse> peliculaListaResponseCall = apiService.getPeliculas(0, NUM_MAX_PELICULAS, ApiUtils.TOKEN);
         peliculaListaResponseCall.enqueue(new Callback<PeliculaListaResponse>() {
             @Override
             public void onResponse(Call<PeliculaListaResponse> call, Response<PeliculaListaResponse> response) {
                 if (response.isSuccessful()) {
-                    paginasTotales = response.body().getValue().size() / tamPagina;
+                    paginasTotales = response.body().getValue().getContent().size() / tamPagina;
                     textoIndicadorNumPagina.setText("pag " + Integer.toString(numPagina) + " de " + paginasTotales);
                 } else {
                     Log.d("response", "No se puede mostrar el num máximo de páginas");
@@ -302,9 +317,52 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.peliculasPorPagina:
-                //preguntarNumUsuariosPorPag();
+                preguntarNumPeliculasPorPag();
                 break;
         }
         return false;
+    }
+
+    /**
+     * Pregunta el número máximo de películas que se han de mostrar por página
+     */
+    private void preguntarNumPeliculasPorPag() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("¿Número máximo de usuarios por página?");
+        final EditText numMaxUsuarios = new EditText(this);
+        numMaxUsuarios.setInputType(InputType.TYPE_CLASS_NUMBER);//Seleccionamos el teclado numérico
+        builder.setView(numMaxUsuarios);
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    tamPagina = Integer.parseInt(numMaxUsuarios.getText().toString());
+                    Log.d("response", "Tam página=" + tamPagina);
+                    if (tamPagina > 0) {
+                        peliculas.clear();
+                        numPagina = 0;
+                        numMaxPaginas();
+                        //Mostramos en el RecyclerView las películas
+                        listarPeliculas();
+                    } else {
+                        //Muestra un Toast indicando que el número de películas por página no puede ser menor que 1
+                        Toast toast = Toast.makeText(getBaseContext(), "El número de películas por página no puede ser menor que 1", Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                } catch (Exception e) {
+                    //Muestra un Toast indicando que ha ocurrido un error
+                    Toast toast = Toast.makeText(getBaseContext(), "Ha ocurrido un error, inténtelo de nuevo", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

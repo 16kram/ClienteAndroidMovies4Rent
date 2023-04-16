@@ -1,5 +1,6 @@
 package porqueras.ioc.proyectom13appmovil;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,6 +9,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -15,6 +19,7 @@ import java.util.LinkedList;
 import porqueras.ioc.proyectom13appmovil.modelos.AlquilerListaResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaInfoResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaListaResponse;
+import porqueras.ioc.proyectom13appmovil.modelos.PeliculaListaResponseAlquilerPorId;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioInfoResponse;
 import porqueras.ioc.proyectom13appmovil.secciones.peliculas.ListadoPeliculas;
 import porqueras.ioc.proyectom13appmovil.utilidades.AlquilerListAdapter;
@@ -48,7 +53,11 @@ public class ListarAlquileresPorUsuario extends AppCompatActivity implements Pel
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //Añadimos el título de la accion a realizar en la barra superior de la activity
-        setTitle("Peliculas alquiladas");
+        setTitle("Movies4Rent");
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setSubtitle("Películas alquiladas");
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setIcon(R.drawable.ic_baseline_ondemand_video_24);
 
         //Instanciomos la incerfaz de APIService mediante Retrofit
         apiService = InstanciaRetrofit.getApiService();
@@ -58,10 +67,10 @@ public class ListarAlquileresPorUsuario extends AppCompatActivity implements Pel
         idUsuario = extras.getString("idUsuario");
 
         //Mostramos las peliculas alquiladas del usuario
-        Call<PeliculaListaResponse> listadoPelicualasAlquiladas = apiService.getPeliculasAlquilerPorUsuario(idUsuario, ApiUtils.TOKEN);
-        listadoPelicualasAlquiladas.enqueue(new Callback<PeliculaListaResponse>() {
+        Call<PeliculaListaResponseAlquilerPorId> listadoPelicualasAlquiladas = apiService.getPeliculasAlquilerPorUsuario(idUsuario, ApiUtils.TOKEN);
+        listadoPelicualasAlquiladas.enqueue(new Callback<PeliculaListaResponseAlquilerPorId>() {
             @Override
-            public void onResponse(Call<PeliculaListaResponse> call, Response<PeliculaListaResponse> response) {
+            public void onResponse(Call<PeliculaListaResponseAlquilerPorId> call, Response<PeliculaListaResponseAlquilerPorId> response) {
                 if (response.isSuccessful()) {
                     for (int n = 0; n < response.body().getValue().size(); n++) {
                         //Obtiene las películas y las añade a la lista
@@ -92,10 +101,19 @@ public class ListarAlquileresPorUsuario extends AppCompatActivity implements Pel
             }
 
             @Override
-            public void onFailure(Call<PeliculaListaResponse> call, Throwable t) {
+            public void onFailure(Call<PeliculaListaResponseAlquilerPorId> call, Throwable t) {
                 Log.d("response", "Ha ocurrido un error");
             }
         });
+
+        //Ocultamos el texto que indica el número de página,
+        //y los botones de avanzar y atrasar ya que en esta pantalla no hay paginación
+        Button botonAtrasar = (Button) findViewById(R.id.buttonAtrasarPaginaPelicula);
+        botonAtrasar.setVisibility(View.GONE);
+        Button botonAdelantar = (Button) findViewById(R.id.buttonAvanzarPaginaPelicula);
+        botonAdelantar.setVisibility(View.GONE);
+        TextView numPag = (TextView) findViewById(R.id.textViewNumPaginaPelicula);
+        numPag.setVisibility(View.GONE);
 
     }
 
