@@ -1,4 +1,4 @@
-package porqueras.ioc.proyectom13appmovil;
+package porqueras.ioc.proyectom13appmovil.secciones.peliculas;
 
 /**
  * Clase película que utiliza el RecyclerView para mostrar las películas

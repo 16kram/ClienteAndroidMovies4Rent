@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.LinkedList;
 
 import porqueras.ioc.proyectom13appmovil.R;
-import porqueras.ioc.proyectom13appmovil.Usuario;
+import porqueras.ioc.proyectom13appmovil.secciones.usuarios.Usuario;
 
 /**
  * Adaptador del RecyclerView

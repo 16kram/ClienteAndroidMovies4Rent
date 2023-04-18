@@ -26,9 +26,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import porqueras.ioc.proyectom13appmovil.APIService;
-import porqueras.ioc.proyectom13appmovil.DetallePelicula;
-import porqueras.ioc.proyectom13appmovil.Pelicula;
-import porqueras.ioc.proyectom13appmovil.Usuario;
 import porqueras.ioc.proyectom13appmovil.utilidades.PeliculasListAdapter;
 import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaListaResponse;

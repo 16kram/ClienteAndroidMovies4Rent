@@ -1,4 +1,4 @@
-package porqueras.ioc.proyectom13appmovil;
+package porqueras.ioc.proyectom13appmovil.secciones.peliculas;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import porqueras.ioc.proyectom13appmovil.APIService;
+import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaInfoResponse;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
 import porqueras.ioc.proyectom13appmovil.utilidades.InstanciaRetrofit;

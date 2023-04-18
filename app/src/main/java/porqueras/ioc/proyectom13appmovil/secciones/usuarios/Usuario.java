@@ -1,4 +1,4 @@
-package porqueras.ioc.proyectom13appmovil;
+package porqueras.ioc.proyectom13appmovil.secciones.usuarios;
 
 /**
  * Clase usuario que utiliza el RecyclerView para mostrar los usuarios

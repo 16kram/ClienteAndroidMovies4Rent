@@ -1,8 +1,7 @@
-package porqueras.ioc.proyectom13appmovil;
+package porqueras.ioc.proyectom13appmovil.secciones.alquileres;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -11,11 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import porqueras.ioc.proyectom13appmovil.secciones.peliculas.GestionPeliculas;
+import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.secciones.peliculas.ListadoPeliculas;
-import porqueras.ioc.proyectom13appmovil.secciones.peliculas.ModificarPelicula;
 import porqueras.ioc.proyectom13appmovil.secciones.usuarios.ListadoUsuarios;
-import porqueras.ioc.proyectom13appmovil.utilidades.PeliculasListAdapter;
 
 /**
  * Pantalla para la gestión del alquiler de las películas

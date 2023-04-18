@@ -1,4 +1,4 @@
-package porqueras.ioc.proyectom13appmovil;
+package porqueras.ioc.proyectom13appmovil.secciones.alquileres;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import porqueras.ioc.proyectom13appmovil.APIService;
+import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.modelos.AlquilerPeliculasPorId;
 import porqueras.ioc.proyectom13appmovil.modelos.DetalleAlquiler;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;

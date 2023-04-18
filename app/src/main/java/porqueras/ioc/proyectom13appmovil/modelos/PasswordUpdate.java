@@ -2,6 +2,8 @@ package porqueras.ioc.proyectom13appmovil.modelos;
 
 /**
  * Clase DTO para mofificar la contraseña del usuario
+ *
+ * @Author Esteban porqueras Araque
  */
 public class PasswordUpdate {
     String password;

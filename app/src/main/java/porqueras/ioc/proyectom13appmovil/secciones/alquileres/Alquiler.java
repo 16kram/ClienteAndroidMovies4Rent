@@ -1,5 +1,10 @@
-package porqueras.ioc.proyectom13appmovil;
+package porqueras.ioc.proyectom13appmovil.secciones.alquileres;
 
+/**
+ * Clase película que utiliza el RecyclerView para mostrar los alquileres
+ *
+ * @Author Esteban Porqueras Araque
+ */
 public class Alquiler {
     private String usuario;
     private String tituloPelicula;

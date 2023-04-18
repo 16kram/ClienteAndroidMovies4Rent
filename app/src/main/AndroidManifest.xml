@@ -18,22 +18,22 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31" >
         <activity
-            android:name=".EstadoAlquiler"
+            android:name=".secciones.alquileres.EstadoAlquiler"
             android:exported="false" />
         <activity
-            android:name=".ListarAlquileresPorUsuario"
+            android:name=".secciones.alquileres.ListarAlquileresPorUsuario"
             android:exported="false" />
         <activity
-            android:name=".ListadoAlquileres"
+            android:name=".secciones.alquileres.ListadoAlquileres"
             android:exported="false" />
         <activity
-            android:name=".DetallePelicula"
+            android:name=".secciones.peliculas.DetallePelicula"
             android:exported="false" />
         <activity
-            android:name=".AlquilerPelicula"
+            android:name=".secciones.alquileres.AlquilerPelicula"
             android:exported="false" />
         <activity
-            android:name=".GestionAlquilerPeliculas"
+            android:name=".secciones.alquileres.GestionAlquilerPeliculas"
             android:exported="false" />
         <activity
             android:name=".secciones.usuarios.CambiarPassword"

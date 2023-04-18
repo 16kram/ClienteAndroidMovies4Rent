@@ -12,8 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.LinkedList;
 
-import porqueras.ioc.proyectom13appmovil.Alquiler;
-import porqueras.ioc.proyectom13appmovil.Pelicula;
+import porqueras.ioc.proyectom13appmovil.secciones.alquileres.Alquiler;
 import porqueras.ioc.proyectom13appmovil.R;
 
 /**

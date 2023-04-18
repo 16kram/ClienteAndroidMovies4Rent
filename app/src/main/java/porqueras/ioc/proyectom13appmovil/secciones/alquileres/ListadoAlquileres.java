@@ -1,4 +1,4 @@
-package porqueras.ioc.proyectom13appmovil;
+package porqueras.ioc.proyectom13appmovil.secciones.alquileres;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,20 +21,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import porqueras.ioc.proyectom13appmovil.APIService;
+import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.modelos.AlquilerListaResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.AlquilerPeliculasPorId;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaInfoResponse;
-import porqueras.ioc.proyectom13appmovil.modelos.PeliculaListaResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioInfoResponse;
-import porqueras.ioc.proyectom13appmovil.secciones.peliculas.ListadoPeliculas;
+import porqueras.ioc.proyectom13appmovil.secciones.peliculas.DetallePelicula;
 import porqueras.ioc.proyectom13appmovil.utilidades.AlquilerListAdapter;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
 import porqueras.ioc.proyectom13appmovil.utilidades.InstanciaRetrofit;
-import porqueras.ioc.proyectom13appmovil.utilidades.PeliculasListAdapter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

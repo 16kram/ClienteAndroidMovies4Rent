@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioInfoResponse;
+import porqueras.ioc.proyectom13appmovil.secciones.alquileres.AlquilerPelicula;
+import porqueras.ioc.proyectom13appmovil.secciones.alquileres.ListarAlquileresPorUsuario;
 import porqueras.ioc.proyectom13appmovil.secciones.peliculas.ListadoPeliculas;
 import porqueras.ioc.proyectom13appmovil.secciones.usuarios.CambiarPassword;
 import porqueras.ioc.proyectom13appmovil.secciones.usuarios.ModificarUsuario;
@@ -139,7 +141,7 @@ public class PantallaUsuario extends AppCompatActivity {
         botonVerPeliculasAlquiladas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent i=new Intent(PantallaUsuario.this,ListarAlquileresPorUsuario.class);
+            Intent i=new Intent(PantallaUsuario.this, ListarAlquileresPorUsuario.class);
             i.putExtra("idUsuario",id);
             startActivity(i);
             }

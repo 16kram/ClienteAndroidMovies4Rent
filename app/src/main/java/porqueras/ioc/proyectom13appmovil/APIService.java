@@ -61,7 +61,7 @@ public interface APIService {
     Call<PeliculaResponse> setPelicula(@Query("token") String token, @Body PeliculaResponse peliculaResponse);
 
     @GET("peliculas/")
-    Call<PeliculaListaResponse> getPeliculas(@Query("page") int page,@Query("pageSize") int pageSize,@Query("token") String token);
+    Call<PeliculaListaResponse> getPeliculas(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token);
 
     @GET("peliculas/{id}")
     Call<PeliculaInfoResponse> getPelicula(@Path("id") String id, @Query("token") String token);
@@ -75,12 +75,8 @@ public interface APIService {
     @POST("peliculas/alquileres/nuevo")
     Call<DetalleAlquiler> newAlquiler(@Query("peliculaId") String peliculaId, @Query("usuariId") String usuariId, @Query("token") String token);
 
-    /*@GET("peliculas/alquileres")
-    Call<AlquilerListaResponse> getAlquileres(@Query("token") String token);*/
-
     @GET("/peliculas/alquileres/")
-    Call<AlquilerListaResponse> getAlquileres(@Query("page") int page,@Query("pageSize") int pageSize,@Query("token") String token);
-
+    Call<AlquilerListaResponse> getAlquileres(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token);
 
     @GET("/peliculas/alquileres/alquilerByUser/{usuarioId}")
     Call<PeliculaListaResponseAlquilerPorId> getPeliculasAlquilerPorUsuario(@Path("usuarioId") String usuarioId, @Query("token") String token);

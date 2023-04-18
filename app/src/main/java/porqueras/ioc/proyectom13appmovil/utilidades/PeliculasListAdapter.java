@@ -12,9 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.LinkedList;
 
-import porqueras.ioc.proyectom13appmovil.Pelicula;
+import porqueras.ioc.proyectom13appmovil.secciones.peliculas.Pelicula;
 import porqueras.ioc.proyectom13appmovil.R;
-import porqueras.ioc.proyectom13appmovil.Usuario;
 
 /**
  * Adapdador del RecyclerView para las películas
