@@ -3,9 +3,11 @@ package porqueras.ioc.proyectom13appmovil.secciones.usuarios;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,7 +46,7 @@ public class ModificarUsuario extends AppCompatActivity {
 
         //Añadimos el título de la Activity en la barra superior
         setTitle("Movies4Rent");
-        ActionBar actionBar=getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setSubtitle("Actualizar datos del usuario");
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.ic_baseline_person_24);
@@ -93,6 +95,32 @@ public class ModificarUsuario extends AppCompatActivity {
         botonActualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Comprueba que el campo del correo electrónico está bien formado
+                boolean isValidEmail = Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches();
+                if (isValidEmail) {
+                    // el correo electrónico es válido
+                    Log.d("response", "correo electrónico valido=" + email.getText().toString());
+                } else {
+                    // el correo electrónico es inválido
+                    Log.d("response", "correo electrónico no valido=" + email.getText().toString());
+                    Context context = getApplicationContext();
+                    Toast toast = Toast.makeText(context, "Correo electrónico no válido", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+                //Comprueba que el campo del número de teléfono está bien formado
+                boolean isValidPhoneNumber = Patterns.PHONE.matcher(telefono.getText().toString()).matches();
+                if (isValidPhoneNumber) {
+                    // el número es válido
+                    Log.d("response", "número de teléfono valido=" + telefono.getText().toString());
+                } else {
+                    // el número es inválido
+                    Log.d("response", "número de teléfono no valido=" + telefono.getText().toString());
+                    Context context = getApplicationContext();
+                    Toast toast = Toast.makeText(context, "Número de teléfono no válido", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
                 //Se actualizan los datos del usuario
                 UsuarioUpdate user = new UsuarioUpdate(
                         nombre.getText().toString(),
