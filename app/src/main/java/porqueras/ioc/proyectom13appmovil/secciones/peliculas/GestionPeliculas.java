@@ -30,7 +30,7 @@ public class GestionPeliculas extends AppCompatActivity {
 
         //Añadimos el título de la Activity en la barra superior
         setTitle("Movies4Rent");
-        ActionBar actionBar=getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setSubtitle("Gestión de películas");
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.ic_baseline_local_movies_24);
@@ -76,32 +76,11 @@ public class GestionPeliculas extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(GestionPeliculas.this, ListadoPeliculas.class);
                 i.putExtra("accion", "modificar");
-                startActivityForResult(i, 1234);
+                startActivity(i);
+                //startActivityForResult(i, 1234);
             }
         });
 
     }
 
-    /**
-     * El recyclerView nos devuelve el número de id de la película
-     * y lo enviamos a la actividad modificar película
-     *
-     * @param requestCode
-     * @param resultCode
-     * @param data
-     */
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1234 & resultCode == RESULT_OK) {
-            //Recogemos el id de la película enviado por la actividad ListadoPeliculas
-            String idPelicula = data.getExtras().getString("idPelicula");
-            Log.d("response", "idPelicula=" + idPelicula);
-            //Llamamos a la actividad modificar película
-            Intent i = new Intent(GestionPeliculas.this, ModificarPelicula.class);
-            //Le enviamos a la actividad ModificarPelicula
-            //el id de la película seleccionada para que pueda modificar los datos
-            i.putExtra("idPelicula", idPelicula);
-            startActivity(i);
-        }
-    }
 }

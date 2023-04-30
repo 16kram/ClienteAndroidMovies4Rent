@@ -1,12 +1,23 @@
 package porqueras.ioc.proyectom13appmovil.utilidades;
 
+import static android.os.Build.VERSION_CODES.R;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.InputStream;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
 import porqueras.ioc.proyectom13appmovil.APIService;
+import porqueras.ioc.proyectom13appmovil.MainActivity;
+import porqueras.ioc.proyectom13appmovil.PantallaUsuario;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
 import porqueras.ioc.proyectom13appmovil.utilidades.NullConverterFactory;
 import retrofit2.Retrofit;
@@ -29,6 +40,8 @@ public class InstanciaRetrofit {
         if (retrofit == null) {
             //Configuración de la conexión de red
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .sslSocketFactory(ApiUtils.sslContext.getSocketFactory(), (X509TrustManager) ApiUtils.trustAllCerts[0])
+                    .hostnameVerifier((hostname, session) -> true)
                     .connectTimeout(5, TimeUnit.SECONDS)
                     .build();
 

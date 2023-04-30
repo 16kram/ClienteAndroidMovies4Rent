@@ -144,11 +144,30 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
      * Mostramos las películas en el RecyclerView
      */
     private void listarPeliculas() {
-        Call<PeliculaListaResponse> callPeliculaListaResponse = apiService.getPeliculas(numPagina, tamPagina, ApiUtils.TOKEN);
+        Call<PeliculaListaResponse> callPeliculaListaResponse = apiService.getTodasLasPeliculas(numPagina, tamPagina, ApiUtils.TOKEN);
+        switch (ApiUtils.filtroPeliculas) {
+            case ApiUtils.AÑO:
+                callPeliculaListaResponse = apiService.getPeliculasAño(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.año);
+                break;
+            case ApiUtils.VECESALQUILADA:
+                callPeliculaListaResponse = apiService.getPeliculasVecesAlquilada(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.año);
+                break;
+            case ApiUtils.AÑO_VECESALQUILADA:
+                callPeliculaListaResponse = apiService.getPeliculasAñoVecesAlquilada(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.año, ApiUtils.vecesAlquilada);
+                break;
+            case ApiUtils.DIRECTORGENERO:
+                callPeliculaListaResponse = apiService.getPeliculasDirectorGenero(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero);
+                break;
+        }
         callPeliculaListaResponse.enqueue(new Callback<PeliculaListaResponse>() {
             @Override
             public void onResponse(Call<PeliculaListaResponse> call, Response<PeliculaListaResponse> response) {
                 if (response.isSuccessful()) {
+                    if (response.body().getValue().getContent().size() == 0) {
+                        //Muestra un Toast conforme no hay películas que mostrar
+                        Toast toast = Toast.makeText(getBaseContext(), "No hay ninguna película para mostrar", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
                     for (int n = 0; n < response.body().getValue().getContent().size(); n++) {
                         //Obtiene las películas y las añade a la lista
                         Pelicula pelicula = new Pelicula();
@@ -190,7 +209,21 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
      * Calcula el número máximo de páginas en función de las películas
      */
     private void numMaxPaginas() {
-        Call<PeliculaListaResponse> peliculaListaResponseCall = apiService.getPeliculas(0, NUM_MAX_PELICULAS, ApiUtils.TOKEN);
+        Call<PeliculaListaResponse> peliculaListaResponseCall = apiService.getTodasLasPeliculas(0, NUM_MAX_PELICULAS, ApiUtils.TOKEN);
+        switch (ApiUtils.filtroPeliculas) {
+            case ApiUtils.AÑO:
+                peliculaListaResponseCall = apiService.getPeliculasAño(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.año);
+                break;
+            case ApiUtils.VECESALQUILADA:
+                peliculaListaResponseCall = apiService.getPeliculasVecesAlquilada(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.año);
+                break;
+            case ApiUtils.AÑO_VECESALQUILADA:
+                peliculaListaResponseCall = apiService.getPeliculasAñoVecesAlquilada(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.año, ApiUtils.vecesAlquilada);
+                break;
+            case ApiUtils.DIRECTORGENERO:
+                peliculaListaResponseCall = apiService.getPeliculasDirectorGenero(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero);
+                break;
+        }
         peliculaListaResponseCall.enqueue(new Callback<PeliculaListaResponse>() {
             @Override
             public void onResponse(Call<PeliculaListaResponse> call, Response<PeliculaListaResponse> response) {
@@ -226,9 +259,11 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
                 borrarPelicula(id);
                 break;
             case "modificar":
-                Intent i = new Intent();
-                i.putExtra("idPelicula", id);//Devolvemos el número de id de la película
-                setResult(RESULT_OK, i);
+                //Llamamos a la actividad modificar película
+                Intent i = new Intent(this, ModificarPelicula.class);
+                //Le enviamos a la actividad ModificarPelicula el id de la película seleccionada para que pueda modificar los datos
+                i.putExtra("idPelicula", id);
+                startActivity(i);
                 finish();
                 break;
             case "alquilar":
@@ -315,6 +350,11 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
         switch (item.getItemId()) {
             case R.id.peliculasPorPagina:
                 preguntarNumPeliculasPorPag();
+                break;
+            case R.id.filtrosPeliculas:
+                Intent i = new Intent(this, FiltroPeliculas.class);
+                i.putExtra("accion", accion);
+                startActivity(i);
                 break;
         }
         return false;

@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">ProyectoM13AppMovil</string>
+    <string-array name="my_spinner_items_peliculas">
+        <item>Ninguno</item>
+        <item>Director ascendente</item>
+        <item>Director descendente</item>
+        <item>Genero ascendente</item>
+        <item>Genero descendente</item>
+        <item>Año ascendente</item>
+        <item>Año descendente</item>
+        <item>Veces alquilada ascendente</item>
+        <item>Veces alquilada descendente</item>
+    </string-array>
 </resources>

@@ -1,5 +1,7 @@
 package porqueras.ioc.proyectom13appmovil;
 
+import androidx.annotation.Nullable;
+
 import java.util.List;
 
 import porqueras.ioc.proyectom13appmovil.modelos.AlquilerListaResponse;
@@ -33,7 +35,7 @@ import retrofit2.http.Query;
  */
 public interface APIService {
 
-    @GET("users/")
+    @GET("users")
     Call<UsuarioListaResponse> getUsuarios(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token);
 
     @PUT("users/changepassword")
@@ -60,8 +62,20 @@ public interface APIService {
     @POST("peliculas/add")
     Call<PeliculaResponse> setPelicula(@Query("token") String token, @Body PeliculaResponse peliculaResponse);
 
-    @GET("peliculas/")
-    Call<PeliculaListaResponse> getPeliculas(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token);
+    @GET("peliculas")
+    Call<PeliculaListaResponse> getPeliculasAñoVecesAlquilada(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("director") String director, @Query("genero") String genero, @Query("año") int año, @Query("vecesAlquilada") int vecesAlquilada);
+
+    @GET("peliculas")
+    Call<PeliculaListaResponse> getPeliculasAño(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("director") String director, @Query("genero") String genero, @Query("año") int año);
+
+    @GET("peliculas")
+    Call<PeliculaListaResponse> getPeliculasVecesAlquilada(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("director") String director, @Query("genero") String genero, @Query("vecesAlquilada") int vecesAlquilada);
+
+    @GET("peliculas")
+    Call<PeliculaListaResponse> getPeliculasDirectorGenero(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("director") String director, @Query("genero") String genero);
+
+    @GET("peliculas")
+    Call<PeliculaListaResponse> getTodasLasPeliculas(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token);
 
     @GET("peliculas/{id}")
     Call<PeliculaInfoResponse> getPelicula(@Path("id") String id, @Query("token") String token);
@@ -75,7 +89,7 @@ public interface APIService {
     @POST("peliculas/alquileres/nuevo")
     Call<DetalleAlquiler> newAlquiler(@Query("peliculaId") String peliculaId, @Query("usuariId") String usuariId, @Query("token") String token);
 
-    @GET("/peliculas/alquileres/")
+    @GET("/peliculas/alquileres")
     Call<AlquilerListaResponse> getAlquileres(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token);
 
     @GET("/peliculas/alquileres/alquilerByUser/{usuarioId}")
