@@ -145,10 +145,21 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
      */
     private void listarUsuarios() {
         Call<UsuarioListaResponse> callUsuarioListaResponse = apiService.getUsuarios(numPagina, tamPagina, ApiUtils.TOKEN);
+        switch (ApiUtils.filtroUsuarios) {
+            case ApiUtils.FILTROS:
+                callUsuarioListaResponse = apiService.getUsuariosFiltros(numPagina, tamPagina, ApiUtils.TOKEN,
+                        ApiUtils.nombre, ApiUtils.apellidos, ApiUtils.username, ApiUtils.ordenarUsuariosPor);
+                break;
+        }
         callUsuarioListaResponse.enqueue(new Callback<UsuarioListaResponse>() {
             @Override
             public void onResponse(Call<UsuarioListaResponse> call, Response<UsuarioListaResponse> response) {
                 if (response.isSuccessful()) {
+                    if (response.body().getValue().getContent().size() == 0) {
+                        //Muestra un Toast conforme no hay usuarios que mostrar
+                        Toast toast = Toast.makeText(getBaseContext(), "No hay ningún usuario para mostrar", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
                     Log.d("response", "Pág totales=" + paginasTotales);
                     for (int n = 0; n < response.body().getValue().getContent().size(); n++) {
                         //Obtiene los usuarios y los añade a la lista
@@ -194,6 +205,12 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
      */
     private void numMaxPaginas() {
         Call<UsuarioListaResponse> callUsuarioListaResponse = apiService.getUsuarios(0, NUM_MAX_USUARIOS, ApiUtils.TOKEN);
+        switch (ApiUtils.filtroUsuarios) {
+            case ApiUtils.FILTROS:
+                callUsuarioListaResponse = apiService.getUsuariosFiltros(numPagina, tamPagina, ApiUtils.TOKEN,
+                        ApiUtils.nombre, ApiUtils.apellidos, ApiUtils.username, ApiUtils.ordenarUsuariosPor);
+                break;
+        }
         callUsuarioListaResponse.enqueue(new Callback<UsuarioListaResponse>() {
             @Override
             public void onResponse(Call<UsuarioListaResponse> call, Response<UsuarioListaResponse> response) {
@@ -323,6 +340,12 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
             case R.id.usuariosPorPagina:
                 preguntarNumUsuariosPorPag();
                 break;
+            case R.id.filtrosUsuarios:
+                Intent i = new Intent(ListadoUsuarios.this, FiltroUsuarios.class);
+                i.putExtra("accion", accion);
+                startActivity(i);
+                break;
+
         }
         return false;
     }

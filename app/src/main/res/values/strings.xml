@@ -2,13 +2,22 @@
     <string name="app_name">ProyectoM13AppMovil</string>
     <string-array name="my_spinner_items_peliculas">
         <item>Ninguno</item>
-        <item>Director ascendente</item>
-        <item>Director descendente</item>
-        <item>Genero ascendente</item>
-        <item>Genero descendente</item>
-        <item>Año ascendente</item>
-        <item>Año descendente</item>
-        <item>Veces alquilada ascendente</item>
-        <item>Veces alquilada descendente</item>
+        <item>directorAsc</item>
+        <item>directorDesc</item>
+        <item>generoAsc</item>
+        <item>generoDesc</item>
+        <item>añoAsc</item>
+        <item>añoDesc</item>
+        <item>vecesAlquiladaAsc</item>
+        <item>vecesAlquiladaDesc</item>
+    </string-array>
+    <string-array name="my_spinner_items_usuarios">
+        <item>Ninguno</item>
+        <item>nombreAsc</item>
+        <item>nombreDesc</item>
+        <item>apellidosAsc</item>
+        <item>apellidosDesc</item>
+        <item>usernameAsc</item>
+        <item>usernameDesc</item>
     </string-array>
 </resources>

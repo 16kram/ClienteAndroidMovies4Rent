@@ -80,6 +80,9 @@ public class FiltroPeliculas extends AppCompatActivity {
                         && filtroPeliculasVecesAlquilada.getText().toString().equals("")) {
                     ApiUtils.filtroPeliculas = ApiUtils.DIRECTORGENERO;
                 }
+                if (!ApiUtils.ordenarPeliculasPor.equals("Ninguno")) {
+                    ApiUtils.filtroPeliculas = ApiUtils.ASCDESC;
+                }
 
                 Log.d("response", "Número de filtro para las películas=" + ApiUtils.filtroPeliculas);
 
@@ -89,11 +92,11 @@ public class FiltroPeliculas extends AppCompatActivity {
             }
         });
 
-        //Acción del spinner
+        //Acción del Spinner
         spinnerPelicula.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("response", "Ha selccionado " + parent.getItemAtPosition(position).toString());
+                Log.d("response", "Ha seleccionado " + parent.getItemAtPosition(position).toString());
                 ApiUtils.ordenarPeliculasPor = parent.getItemAtPosition(position).toString();
             }
 
@@ -113,4 +116,5 @@ public class FiltroPeliculas extends AppCompatActivity {
         super.onDestroy();
         ApiUtils.filtroPeliculas = ApiUtils.TODAS;
     }
+
 }

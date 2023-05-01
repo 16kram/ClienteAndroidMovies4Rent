@@ -38,6 +38,9 @@ public interface APIService {
     @GET("users")
     Call<UsuarioListaResponse> getUsuarios(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token);
 
+    @GET("users")
+    Call<UsuarioListaResponse> getUsuariosFiltros(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("nombre") String nombre, @Query("apellidos") String apellidos, @Query("username") String username, @Query("orden")String orden);
+
     @PUT("users/changepassword")
     Call<PasswordUpdate> changePassword(@Query("token") String token, @Body PasswordUpdate passwordUpdate);
 
@@ -73,6 +76,9 @@ public interface APIService {
 
     @GET("peliculas")
     Call<PeliculaListaResponse> getPeliculasDirectorGenero(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("director") String director, @Query("genero") String genero);
+
+    @GET("peliculas")
+    Call<PeliculaListaResponse> getPeliculasAscDesc(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("orden") String orden);
 
     @GET("peliculas")
     Call<PeliculaListaResponse> getTodasLasPeliculas(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token);

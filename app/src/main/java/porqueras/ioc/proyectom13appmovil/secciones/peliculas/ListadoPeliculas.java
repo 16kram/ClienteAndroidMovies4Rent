@@ -158,6 +158,9 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
             case ApiUtils.DIRECTORGENERO:
                 callPeliculaListaResponse = apiService.getPeliculasDirectorGenero(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero);
                 break;
+            case ApiUtils.ASCDESC:
+                callPeliculaListaResponse = apiService.getPeliculasAscDesc(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.ordenarPeliculasPor);
+                break;
         }
         callPeliculaListaResponse.enqueue(new Callback<PeliculaListaResponse>() {
             @Override
@@ -222,6 +225,9 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
                 break;
             case ApiUtils.DIRECTORGENERO:
                 peliculaListaResponseCall = apiService.getPeliculasDirectorGenero(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero);
+                break;
+            case ApiUtils.ASCDESC:
+                peliculaListaResponseCall = apiService.getPeliculasAscDesc(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.ordenarPeliculasPor);
                 break;
         }
         peliculaListaResponseCall.enqueue(new Callback<PeliculaListaResponse>() {
