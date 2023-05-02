@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import porqueras.ioc.proyectom13appmovil.APIService;
+import porqueras.ioc.proyectom13appmovil.FiltroAlquileres;
 import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.modelos.AlquilerListaResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.AlquilerPeliculasPorId;
@@ -411,6 +412,10 @@ public class ListadoAlquileres extends AppCompatActivity implements AlquilerList
         switch (item.getItemId()) {
             case R.id.alquilerPorPagina:
                 preguntarNumAlquileresPorPag();
+                break;
+            case R.id.filtrosAlquileres:
+                Intent i=new Intent(this, FiltroAlquileres.class);
+                startActivity(i);
                 break;
         }
         return false;

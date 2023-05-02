@@ -20,4 +20,17 @@
         <item>usernameAsc</item>
         <item>usernameDesc</item>
     </string-array>
+    <string-array name="my_spinner_items_alquileres">
+        <item>Ninguno</item>
+        <item>peliculaIdAsc</item>
+        <item>peliculaIdDesc</item>
+        <item>usuariIdAsc</item>
+        <item>usuariIdDesc</item>
+        <item>fechaInicioAsc</item>
+        <item>fechaInicioDesc</item>
+        <item>fechaFinAsc</item>
+        <item>fechaFinDesc</item>
+        <item>precioAsc</item>
+        <item>precioDesc</item>
+    </string-array>
 </resources>

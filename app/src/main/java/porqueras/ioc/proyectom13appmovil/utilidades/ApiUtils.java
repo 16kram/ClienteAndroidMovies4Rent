@@ -25,7 +25,7 @@ public class ApiUtils {
     public static SSLContext sslContext;
 
     //Filtros usuarios
-    public static final int TODOS = 0, FILTROS=1;
+    public static final int TODOS = 0, FILTROS = 1;
     public static int filtroUsuarios = 0;
     public static String nombre;
     public static String apellidos;
@@ -40,5 +40,16 @@ public class ApiUtils {
     public static int año = 0;
     public static int vecesAlquilada = 0;
     public static String ordenarPeliculasPor = "Ninguno";
+
+    //Filtro alquileres
+    public static int TODO=0,FILTRO_PRECIO=1,FILTRO_STRING=2;
+    public static int filtroAlquileres = 0;
+    public static String usuario;
+    public static String pelicula;
+    public static String fechaInicio;
+    public static String fechaFin;
+    public static int precio;
+    public static String ordenarAlquileresPor;
+
 
 }
