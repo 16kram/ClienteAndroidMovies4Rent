@@ -39,7 +39,7 @@ public interface APIService {
     Call<UsuarioListaResponse> getUsuarios(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token);
 
     @GET("users")
-    Call<UsuarioListaResponse> getUsuariosFiltros(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("nombre") String nombre, @Query("apellidos") String apellidos, @Query("username") String username, @Query("orden")String orden);
+    Call<UsuarioListaResponse> getUsuariosFiltros(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("nombre") String nombre, @Query("apellidos") String apellidos, @Query("username") String username, @Query("orden") String orden);
 
     @PUT("users/changepassword")
     Call<PasswordUpdate> changePassword(@Query("token") String token, @Body PasswordUpdate passwordUpdate);
@@ -97,6 +97,12 @@ public interface APIService {
 
     @GET("/peliculas/alquileres")
     Call<AlquilerListaResponse> getAlquileres(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token);
+
+    @GET("/peliculas/alquileres")
+    Call<AlquilerListaResponse> getAlquileresFiltroPrecio(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("peliculaId") String peliculaId, @Query("usuariId") String usuariId, @Query("fechaInicio") String fechaInicio, @Query("fechaFin") String fechaFin, @Query("precio") int precio, @Query("orden") String orden);
+
+    @GET("/peliculas/alquileres")
+    Call<AlquilerListaResponse> getAlquileresFiltros(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("peliculaId") String peliculaId, @Query("usuariId") String usuariId, @Query("fechaInicio") String fechaInicio, @Query("fechaFin") String fechaFin, @Query("orden") String orden);
 
     @GET("/peliculas/alquileres/alquilerByUser/{usuarioId}")
     Call<PeliculaListaResponseAlquilerPorId> getPeliculasAlquilerPorUsuario(@Path("usuarioId") String usuarioId, @Query("token") String token);

@@ -63,6 +63,7 @@ public class FiltroUsuarios extends AppCompatActivity {
                 ApiUtils.apellidos = filtroUsuariosApellidos.getText().toString();
                 ApiUtils.username = filtroUsuariosUsername.getText().toString();
 
+                //Si hay texto en algún campo de texto se aplican los filtros
                 if (!filtroUsuariosNombre.getText().toString().equals("") ||
                         !filtroUsuariosApellidos.getText().toString().equals("") ||
                         !filtroUsuariosUsername.getText().toString().equals("") ||
@@ -70,6 +71,7 @@ public class FiltroUsuarios extends AppCompatActivity {
                     ApiUtils.filtroUsuarios = ApiUtils.FILTROS;
                 }
 
+                //Si en los campos no hay texto las variables pasan a null
                 if (filtroUsuariosNombre.getText().toString().equals("")) {
                     ApiUtils.nombre = null;
                 }
@@ -78,9 +80,6 @@ public class FiltroUsuarios extends AppCompatActivity {
                 }
                 if (filtroUsuariosUsername.getText().toString().equals("")) {
                     ApiUtils.username = null;
-                }
-                if (ApiUtils.ordenarUsuariosPor == null || ApiUtils.ordenarUsuariosPor.equals("Ninguno")) {
-                    ApiUtils.ordenarUsuariosPor = null;
                 }
 
                 Log.d("response", "Número de filtro para los usuarios=" + ApiUtils.filtroUsuarios);
@@ -98,6 +97,9 @@ public class FiltroUsuarios extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("response", "Ha seleccionado " + parent.getItemAtPosition(position).toString());
                 ApiUtils.ordenarUsuariosPor = parent.getItemAtPosition(position).toString();
+                if (ApiUtils.ordenarUsuariosPor.equals("Ninguno")) {
+                    ApiUtils.ordenarUsuariosPor = null;
+                }
             }
 
             @Override

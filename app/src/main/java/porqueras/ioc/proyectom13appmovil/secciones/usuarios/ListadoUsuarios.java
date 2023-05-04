@@ -207,7 +207,7 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
         Call<UsuarioListaResponse> callUsuarioListaResponse = apiService.getUsuarios(0, NUM_MAX_USUARIOS, ApiUtils.TOKEN);
         switch (ApiUtils.filtroUsuarios) {
             case ApiUtils.FILTROS:
-                callUsuarioListaResponse = apiService.getUsuariosFiltros(numPagina, tamPagina, ApiUtils.TOKEN,
+                callUsuarioListaResponse = apiService.getUsuariosFiltros(0, NUM_MAX_USUARIOS, ApiUtils.TOKEN,
                         ApiUtils.nombre, ApiUtils.apellidos, ApiUtils.username, ApiUtils.ordenarUsuariosPor);
                 break;
         }

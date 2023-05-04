@@ -42,14 +42,14 @@ public class ApiUtils {
     public static String ordenarPeliculasPor = "Ninguno";
 
     //Filtro alquileres
-    public static int TODO=0,FILTRO_PRECIO=1,FILTRO_STRING=2;
+    public static final int TODO = 0, FILTRO_PRECIO = 1, FILTRO_STRING = 2;
     public static int filtroAlquileres = 0;
     public static String usuario;
     public static String pelicula;
     public static String fechaInicio;
     public static String fechaFin;
     public static int precio;
-    public static String ordenarAlquileresPor;
+    public static String ordenarAlquileresPor = "Ninguno";
 
 
 }

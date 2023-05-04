@@ -147,6 +147,14 @@ public class ListadoAlquileres extends AppCompatActivity implements AlquilerList
     private void listarAlquileres() {
         //Hacemos una petición al servidor para que nos envíe una lista con los alquileres
         Call<AlquilerListaResponse> callListaAlquileres = apiService.getAlquileres(numPagina, tamPagina, ApiUtils.TOKEN);
+        switch (ApiUtils.filtroAlquileres) {
+            case ApiUtils.FILTRO_PRECIO:
+                callListaAlquileres = apiService.getAlquileresFiltroPrecio(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.pelicula, ApiUtils.usuario, ApiUtils.fechaInicio, ApiUtils.fechaFin, ApiUtils.precio, ApiUtils.ordenarAlquileresPor);
+                break;
+            case ApiUtils.FILTRO_STRING:
+                callListaAlquileres = apiService.getAlquileresFiltros(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.pelicula, ApiUtils.usuario, ApiUtils.fechaInicio, ApiUtils.fechaFin, ApiUtils.ordenarAlquileresPor);
+                break;
+        }
         callListaAlquileres.enqueue(new Callback<AlquilerListaResponse>() {
             @Override
             public void onResponse(Call<AlquilerListaResponse> call, Response<AlquilerListaResponse> response) {
@@ -196,6 +204,14 @@ public class ListadoAlquileres extends AppCompatActivity implements AlquilerList
      */
     private void numMaxPaginas() {
         Call<AlquilerListaResponse> alquilerListaResponseCall = apiService.getAlquileres(0, NUM_MAX_ALQUILERES, ApiUtils.TOKEN);
+        switch (ApiUtils.filtroAlquileres) {
+            case ApiUtils.FILTRO_PRECIO:
+                alquilerListaResponseCall = apiService.getAlquileresFiltroPrecio(0, NUM_MAX_ALQUILERES, ApiUtils.TOKEN, ApiUtils.pelicula, ApiUtils.usuario, ApiUtils.fechaInicio, ApiUtils.fechaFin, ApiUtils.precio, ApiUtils.ordenarAlquileresPor);
+                break;
+            case ApiUtils.FILTRO_STRING:
+                alquilerListaResponseCall = apiService.getAlquileresFiltros(0, NUM_MAX_ALQUILERES, ApiUtils.TOKEN, ApiUtils.pelicula, ApiUtils.usuario, ApiUtils.fechaInicio, ApiUtils.fechaFin, ApiUtils.ordenarAlquileresPor);
+                break;
+        }
         alquilerListaResponseCall.enqueue(new Callback<AlquilerListaResponse>() {
             @Override
             public void onResponse(Call<AlquilerListaResponse> call, Response<AlquilerListaResponse> response) {
@@ -414,7 +430,8 @@ public class ListadoAlquileres extends AppCompatActivity implements AlquilerList
                 preguntarNumAlquileresPorPag();
                 break;
             case R.id.filtrosAlquileres:
-                Intent i=new Intent(this, FiltroAlquileres.class);
+                Intent i = new Intent(this, FiltroAlquileres.class);
+                i.putExtra("accion", accion);
                 startActivity(i);
                 break;
         }
