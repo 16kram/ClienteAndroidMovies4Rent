@@ -159,6 +159,11 @@ public class ListadoAlquileres extends AppCompatActivity implements AlquilerList
             @Override
             public void onResponse(Call<AlquilerListaResponse> call, Response<AlquilerListaResponse> response) {
                 if (response.isSuccessful()) {
+                    if (response.body().getValue().getContent().size() == 0) {
+                        //Muestra un Toast conforme no hay alquileres que mostrar
+                        Toast toast = Toast.makeText(getBaseContext(), "No hay ningún alquiler para mostrar", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
                     for (int n = 0; n < response.body().getValue().getContent().size(); n++) {
                         //Obtenemos el id del usuario
                         idUsuario = response.body().getValue().getContent().get(n).getUsuari();
@@ -221,6 +226,9 @@ public class ListadoAlquileres extends AppCompatActivity implements AlquilerList
                     textoIndicadorNumPagina.setText("pag " + Integer.toString(numPagina) + " de " + paginasTotales);
                 } else {
                     Log.d("response", "No se puede mostrar el num máximo de páginas");
+                    //Muestra un Toast conforme no hay alquileres que mostrar
+                    Toast toast = Toast.makeText(getBaseContext(), "No hay ningún alquiler para mostrar", Toast.LENGTH_SHORT);
+                    toast.show();
                 }
             }
 
