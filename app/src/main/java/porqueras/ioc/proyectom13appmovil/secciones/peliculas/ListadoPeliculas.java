@@ -365,15 +365,15 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
      */
     private void preguntarNumPeliculasPorPag() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("¿Número máximo de usuarios por página?");
-        final EditText numMaxUsuarios = new EditText(this);
-        numMaxUsuarios.setInputType(InputType.TYPE_CLASS_NUMBER);//Seleccionamos el teclado numérico
-        builder.setView(numMaxUsuarios);
+        builder.setTitle("¿Número máximo de películas por página?");
+        final EditText numMaxPeliculas = new EditText(this);
+        numMaxPeliculas.setInputType(InputType.TYPE_CLASS_NUMBER);//Seleccionamos el teclado numérico
+        builder.setView(numMaxPeliculas);
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 try {
-                    tamPagina = Integer.parseInt(numMaxUsuarios.getText().toString());
+                    tamPagina = Integer.parseInt(numMaxPeliculas.getText().toString());
                     Log.d("response", "Tam página=" + tamPagina);
                     if (tamPagina > 0) {
                         peliculas.clear();

@@ -66,16 +66,16 @@ public interface APIService {
     Call<PeliculaResponse> setPelicula(@Query("token") String token, @Body PeliculaResponse peliculaResponse);
 
     @GET("peliculas")
-    Call<PeliculaListaResponse> getPeliculasAñoVecesAlquilada(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("director") String director, @Query("genero") String genero, @Query("año") int año, @Query("vecesAlquilada") int vecesAlquilada,@Query("orden") String orden);
+    Call<PeliculaListaResponse> getPeliculasAñoVecesAlquilada(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("director") String director, @Query("genero") String genero, @Query("año") int año, @Query("vecesAlquilada") int vecesAlquilada, @Query("orden") String orden);
 
     @GET("peliculas")
-    Call<PeliculaListaResponse> getPeliculasAño(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("director") String director, @Query("genero") String genero, @Query("año") int año,@Query("orden")String orden);
+    Call<PeliculaListaResponse> getPeliculasAño(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("director") String director, @Query("genero") String genero, @Query("año") int año, @Query("orden") String orden);
 
     @GET("peliculas")
-    Call<PeliculaListaResponse> getPeliculasVecesAlquilada(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("director") String director, @Query("genero") String genero, @Query("vecesAlquilada") int vecesAlquilada,@Query("orden") String orden);
+    Call<PeliculaListaResponse> getPeliculasVecesAlquilada(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("director") String director, @Query("genero") String genero, @Query("vecesAlquilada") int vecesAlquilada, @Query("orden") String orden);
 
     @GET("peliculas")
-    Call<PeliculaListaResponse> getPeliculasDirectorGenero(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("director") String director, @Query("genero") String genero,@Query("orden") String orden);
+    Call<PeliculaListaResponse> getPeliculasDirectorGenero(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("director") String director, @Query("genero") String genero, @Query("orden") String orden);
 
     @GET("peliculas")
     Call<PeliculaListaResponse> getTodasLasPeliculas(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token);
@@ -112,6 +112,9 @@ public interface APIService {
 
     @DELETE("/peliculas/alquileres/delete/{alquilerId}")
     Call<Void> deleteAlquiler(@Path("alquilerId") String idAlquiler, @Query("token") String token);
+
+    @GET("/peliculas/ranking")
+    Call<PeliculaListaResponse> getRanking(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token);
 
     @POST("login")
     Call<LoginResponse> getLogin(@Body LoginResponse loginResponse);

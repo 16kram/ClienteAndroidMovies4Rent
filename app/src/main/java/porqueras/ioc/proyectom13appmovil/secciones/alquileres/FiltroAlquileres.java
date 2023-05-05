@@ -1,4 +1,4 @@
-package porqueras.ioc.proyectom13appmovil;
+package porqueras.ioc.proyectom13appmovil.secciones.alquileres;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,12 +14,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import porqueras.ioc.proyectom13appmovil.APIService;
+import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaInfoResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioInfoResponse;
-import porqueras.ioc.proyectom13appmovil.secciones.alquileres.GestionAlquilerPeliculas;
-import porqueras.ioc.proyectom13appmovil.secciones.alquileres.ListadoAlquileres;
 import porqueras.ioc.proyectom13appmovil.secciones.peliculas.ListadoPeliculas;
-import porqueras.ioc.proyectom13appmovil.secciones.usuarios.FiltroUsuarios;
 import porqueras.ioc.proyectom13appmovil.secciones.usuarios.ListadoUsuarios;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
 import porqueras.ioc.proyectom13appmovil.utilidades.InstanciaRetrofit;

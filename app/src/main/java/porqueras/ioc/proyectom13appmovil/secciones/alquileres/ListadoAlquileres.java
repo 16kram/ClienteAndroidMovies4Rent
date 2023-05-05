@@ -25,7 +25,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import porqueras.ioc.proyectom13appmovil.APIService;
-import porqueras.ioc.proyectom13appmovil.FiltroAlquileres;
 import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.modelos.AlquilerListaResponse;
 import porqueras.ioc.proyectom13appmovil.modelos.AlquilerPeliculasPorId;
@@ -451,15 +450,15 @@ public class ListadoAlquileres extends AppCompatActivity implements AlquilerList
      */
     private void preguntarNumAlquileresPorPag() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("¿Número máximo de usuarios por página?");
-        final EditText numMaxUsuarios = new EditText(this);
-        numMaxUsuarios.setInputType(InputType.TYPE_CLASS_NUMBER);//Seleccionamos el teclado numérico
-        builder.setView(numMaxUsuarios);
+        builder.setTitle("¿Número máximo de alquileres por página?");
+        final EditText numMaxAlquileres = new EditText(this);
+        numMaxAlquileres.setInputType(InputType.TYPE_CLASS_NUMBER);//Seleccionamos el teclado numérico
+        builder.setView(numMaxAlquileres);
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 try {
-                    tamPagina = Integer.parseInt(numMaxUsuarios.getText().toString());
+                    tamPagina = Integer.parseInt(numMaxAlquileres.getText().toString());
                     Log.d("response", "Tam página=" + tamPagina);
                     if (tamPagina > 0) {
                         alquileres.clear();
@@ -469,7 +468,7 @@ public class ListadoAlquileres extends AppCompatActivity implements AlquilerList
                         listarAlquileres();
                     } else {
                         //Muestra un Toast indicando que el número de películas por página no puede ser menor que 1
-                        Toast toast = Toast.makeText(getBaseContext(), "El número de películas por página no puede ser menor que 1", Toast.LENGTH_LONG);
+                        Toast toast = Toast.makeText(getBaseContext(), "El número de alquileres por página no puede ser menor que 1", Toast.LENGTH_LONG);
                         toast.show();
                     }
                 } catch (Exception e) {

@@ -18,7 +18,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".FiltroAlquileres"
+            android:name=".secciones.ranking.Ranking"
+            android:exported="false" />
+        <activity
+            android:name=".secciones.alquileres.FiltroAlquileres"
             android:exported="false" />
         <activity
             android:name=".secciones.usuarios.FiltroUsuarios"

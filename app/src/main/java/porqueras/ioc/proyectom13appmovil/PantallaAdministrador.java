@@ -14,6 +14,7 @@ import android.widget.TextView;
 import porqueras.ioc.proyectom13appmovil.modelos.UsuarioInfoResponse;
 import porqueras.ioc.proyectom13appmovil.secciones.alquileres.GestionAlquilerPeliculas;
 import porqueras.ioc.proyectom13appmovil.secciones.peliculas.GestionPeliculas;
+import porqueras.ioc.proyectom13appmovil.secciones.ranking.Ranking;
 import porqueras.ioc.proyectom13appmovil.secciones.usuarios.GestionUsuarios;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
 import porqueras.ioc.proyectom13appmovil.utilidades.InstanciaRetrofit;
@@ -33,6 +34,7 @@ public class PantallaAdministrador extends AppCompatActivity {
     private Button botonGestionUsuarios;
     private Button botonGestionPeliculas;
     private Button botonGestionAlquiler;
+    private Button botonRanking;
     private TextView titulo;
 
     @Override
@@ -49,6 +51,7 @@ public class PantallaAdministrador extends AppCompatActivity {
         botonGestionUsuarios = (Button) findViewById(R.id.buttonGestionUsuarios);
         botonGestionPeliculas = (Button) findViewById(R.id.buttonGestionPeliculas);
         botonGestionAlquiler = (Button) findViewById(R.id.buttonGestionAlquilerPeliculas);
+        botonRanking=(Button)findViewById(R.id.buttonRankingPeliculas);
 
         //Añadimos el título de la Activity en la barra superior
         setTitle("Movies4Rent");
@@ -116,6 +119,15 @@ public class PantallaAdministrador extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(PantallaAdministrador.this, GestionAlquilerPeliculas.class);
+                startActivity(i);
+            }
+        });
+
+        //Acción del botón ranking
+        botonRanking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PantallaAdministrador.this, Ranking.class);
                 startActivity(i);
             }
         });
