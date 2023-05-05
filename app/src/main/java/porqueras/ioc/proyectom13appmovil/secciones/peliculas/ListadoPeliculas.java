@@ -147,19 +147,16 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
         Call<PeliculaListaResponse> callPeliculaListaResponse = apiService.getTodasLasPeliculas(numPagina, tamPagina, ApiUtils.TOKEN);
         switch (ApiUtils.filtroPeliculas) {
             case ApiUtils.AÑO:
-                callPeliculaListaResponse = apiService.getPeliculasAño(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.año);
+                callPeliculaListaResponse = apiService.getPeliculasAño(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.año, ApiUtils.ordenarPeliculasPor);
                 break;
             case ApiUtils.VECESALQUILADA:
-                callPeliculaListaResponse = apiService.getPeliculasVecesAlquilada(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.año);
+                callPeliculaListaResponse = apiService.getPeliculasVecesAlquilada(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.año, ApiUtils.ordenarPeliculasPor);
                 break;
             case ApiUtils.AÑO_VECESALQUILADA:
-                callPeliculaListaResponse = apiService.getPeliculasAñoVecesAlquilada(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.año, ApiUtils.vecesAlquilada);
+                callPeliculaListaResponse = apiService.getPeliculasAñoVecesAlquilada(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.año, ApiUtils.vecesAlquilada, ApiUtils.ordenarPeliculasPor);
                 break;
             case ApiUtils.DIRECTORGENERO:
-                callPeliculaListaResponse = apiService.getPeliculasDirectorGenero(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero);
-                break;
-            case ApiUtils.ASCDESC:
-                callPeliculaListaResponse = apiService.getPeliculasAscDesc(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.ordenarPeliculasPor);
+                callPeliculaListaResponse = apiService.getPeliculasDirectorGenero(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.ordenarPeliculasPor);
                 break;
         }
         callPeliculaListaResponse.enqueue(new Callback<PeliculaListaResponse>() {
@@ -215,19 +212,16 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
         Call<PeliculaListaResponse> peliculaListaResponseCall = apiService.getTodasLasPeliculas(0, NUM_MAX_PELICULAS, ApiUtils.TOKEN);
         switch (ApiUtils.filtroPeliculas) {
             case ApiUtils.AÑO:
-                peliculaListaResponseCall = apiService.getPeliculasAño(0, NUM_MAX_PELICULAS, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.año);
+                peliculaListaResponseCall = apiService.getPeliculasAño(0, NUM_MAX_PELICULAS, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.año, ApiUtils.ordenarPeliculasPor);
                 break;
             case ApiUtils.VECESALQUILADA:
-                peliculaListaResponseCall = apiService.getPeliculasVecesAlquilada(0, NUM_MAX_PELICULAS, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.año);
+                peliculaListaResponseCall = apiService.getPeliculasVecesAlquilada(0, NUM_MAX_PELICULAS, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.año, ApiUtils.ordenarPeliculasPor);
                 break;
             case ApiUtils.AÑO_VECESALQUILADA:
-                peliculaListaResponseCall = apiService.getPeliculasAñoVecesAlquilada(0, NUM_MAX_PELICULAS, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.año, ApiUtils.vecesAlquilada);
+                peliculaListaResponseCall = apiService.getPeliculasAñoVecesAlquilada(0, NUM_MAX_PELICULAS, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.año, ApiUtils.vecesAlquilada, ApiUtils.ordenarPeliculasPor);
                 break;
             case ApiUtils.DIRECTORGENERO:
-                peliculaListaResponseCall = apiService.getPeliculasDirectorGenero(0, NUM_MAX_PELICULAS, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero);
-                break;
-            case ApiUtils.ASCDESC:
-                peliculaListaResponseCall = apiService.getPeliculasAscDesc(0, NUM_MAX_PELICULAS, ApiUtils.TOKEN, ApiUtils.ordenarPeliculasPor);
+                peliculaListaResponseCall = apiService.getPeliculasDirectorGenero(0, NUM_MAX_PELICULAS, ApiUtils.TOKEN, ApiUtils.director, ApiUtils.genero, ApiUtils.ordenarPeliculasPor);
                 break;
         }
         peliculaListaResponseCall.enqueue(new Callback<PeliculaListaResponse>() {

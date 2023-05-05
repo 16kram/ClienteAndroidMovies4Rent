@@ -33,7 +33,7 @@ public class ApiUtils {
     public static String ordenarUsuariosPor = "Ninguno";
 
     //Filtros películas
-    public static final int TODAS = 0, AÑO = 1, VECESALQUILADA = 2, AÑO_VECESALQUILADA = 3, DIRECTORGENERO = 4, ASCDESC = 5;
+    public static final int TODAS = 0, AÑO = 1, VECESALQUILADA = 2, AÑO_VECESALQUILADA = 3, DIRECTORGENERO = 4;
     public static int filtroPeliculas = 0;
     public static String director = null;
     public static String genero = null;

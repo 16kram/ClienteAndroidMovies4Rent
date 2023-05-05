@@ -60,29 +60,34 @@ public class FiltroPeliculas extends AppCompatActivity {
         botonFiltrarPelicula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Si no hay ningún campo rellenado, no se activa ningún filtro, y se visualizan todas las películas
                 ApiUtils.filtroPeliculas = ApiUtils.TODAS;
                 ApiUtils.director = filtroPeliculasDirector.getText().toString();
                 ApiUtils.genero = filtroPeliculasGenero.getText().toString();
+                //Si hay un número en el campo año se activa el filtro de años
                 try {
                     ApiUtils.año = Integer.valueOf(filtroPeliculasAño.getText().toString());
                     ApiUtils.filtroPeliculas += ApiUtils.AÑO;
                 } catch (Exception e) {
 
                 }
+                //Si hay algún número en el campo vecesAlquilada se activa el filtro de veces alquilada
+                //Si hay números en los dos campos, año y veces alquiladas, se activa el filtro para años y veces alquilada
                 try {
                     ApiUtils.vecesAlquilada = Integer.valueOf(filtroPeliculasVecesAlquilada.getText().toString());
                     ApiUtils.filtroPeliculas += ApiUtils.VECESALQUILADA;
                 } catch (Exception e) {
 
                 }
-                if ((!filtroPeliculasDirector.getText().toString().equals("") || !filtroPeliculasGenero.getText().toString().equals(""))
+                //Si hay texto en algún campo de texto se aplican los filtros
+                if ((!filtroPeliculasDirector.getText().toString().equals("") ||
+                        !filtroPeliculasGenero.getText().toString().equals("") ||
+                        ApiUtils.ordenarPeliculasPor != null)
                         && filtroPeliculasAño.getText().toString().equals("")
                         && filtroPeliculasVecesAlquilada.getText().toString().equals("")) {
                     ApiUtils.filtroPeliculas = ApiUtils.DIRECTORGENERO;
                 }
-                if (!ApiUtils.ordenarPeliculasPor.equals("Ninguno")) {
-                    ApiUtils.filtroPeliculas = ApiUtils.ASCDESC;
-                }
+
 
                 Log.d("response", "Número de filtro para las películas=" + ApiUtils.filtroPeliculas);
 
@@ -98,6 +103,9 @@ public class FiltroPeliculas extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("response", "Ha seleccionado " + parent.getItemAtPosition(position).toString());
                 ApiUtils.ordenarPeliculasPor = parent.getItemAtPosition(position).toString();
+                if (ApiUtils.ordenarPeliculasPor.equals("Ninguno")) {
+                    ApiUtils.ordenarPeliculasPor = null;
+                }
             }
 
             @Override

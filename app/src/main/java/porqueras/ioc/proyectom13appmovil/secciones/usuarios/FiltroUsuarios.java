@@ -67,7 +67,7 @@ public class FiltroUsuarios extends AppCompatActivity {
                 if (!filtroUsuariosNombre.getText().toString().equals("") ||
                         !filtroUsuariosApellidos.getText().toString().equals("") ||
                         !filtroUsuariosUsername.getText().toString().equals("") ||
-                        !ApiUtils.ordenarUsuariosPor.equals("Ninguno")) {
+                        ApiUtils.ordenarUsuariosPor!=null) {
                     ApiUtils.filtroUsuarios = ApiUtils.FILTROS;
                 }
 
