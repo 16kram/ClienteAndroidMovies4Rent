@@ -29,7 +29,6 @@ import porqueras.ioc.proyectom13appmovil.R;
 import porqueras.ioc.proyectom13appmovil.utilidades.RankingAdapter;
 import porqueras.ioc.proyectom13appmovil.modelos.PeliculaListaResponse;
 import porqueras.ioc.proyectom13appmovil.secciones.peliculas.DetallePelicula;
-import porqueras.ioc.proyectom13appmovil.secciones.peliculas.FiltroPeliculas;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
 import porqueras.ioc.proyectom13appmovil.utilidades.InstanciaRetrofit;
 import retrofit2.Call;
@@ -116,6 +115,14 @@ public class Ranking extends AppCompatActivity implements RankingAdapter.PasarId
 
     private void listarPeliculas() {
         Call<PeliculaListaResponse> listaResponseCall = apiService.getRanking(numPagina, tamPagina, ApiUtils.TOKEN);
+        switch (ApiUtils.filtroRanking) {
+            case ApiUtils.SOLO_FILTRO_AÑO:
+                listaResponseCall = apiService.getRankingFiltroAño(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.tituloRanking, ApiUtils.directorRanking, ApiUtils.generoRanking, ApiUtils.añoRanking);
+                break;
+            case ApiUtils.SOLO_FILTRO_STRING:
+                listaResponseCall = apiService.getRankingFiltros(numPagina, tamPagina, ApiUtils.TOKEN, ApiUtils.tituloRanking, ApiUtils.directorRanking, ApiUtils.generoRanking);
+                break;
+        }
         listaResponseCall.enqueue(new Callback<PeliculaListaResponse>() {
             @Override
             public void onResponse(Call<PeliculaListaResponse> call, Response<PeliculaListaResponse> response) {
@@ -161,6 +168,14 @@ public class Ranking extends AppCompatActivity implements RankingAdapter.PasarId
      */
     private void numMaxPaginas() {
         Call<PeliculaListaResponse> listaResponseCall = apiService.getRanking(0, NUM_MAX_PELICULAS, ApiUtils.TOKEN);
+        switch (ApiUtils.filtroRanking) {
+            case ApiUtils.SOLO_FILTRO_AÑO:
+                listaResponseCall = apiService.getRankingFiltroAño(0, NUM_MAX_PELICULAS, ApiUtils.TOKEN, ApiUtils.tituloRanking, ApiUtils.directorRanking, ApiUtils.generoRanking, ApiUtils.añoRanking);
+                break;
+            case ApiUtils.SOLO_FILTRO_STRING:
+                listaResponseCall = apiService.getRankingFiltros(0, NUM_MAX_PELICULAS, ApiUtils.TOKEN, ApiUtils.tituloRanking, ApiUtils.directorRanking, ApiUtils.generoRanking);
+                break;
+        }
         listaResponseCall.enqueue(new Callback<PeliculaListaResponse>() {
             @Override
             public void onResponse(Call<PeliculaListaResponse> call, Response<PeliculaListaResponse> response) {
@@ -220,8 +235,7 @@ public class Ranking extends AppCompatActivity implements RankingAdapter.PasarId
                 preguntarNumPeliculasPorPag();
                 break;
             case R.id.filtrosRanking:
-                Intent i = new Intent(this, FiltroPeliculas.class);
-                i.putExtra("accion", accion);
+                Intent i = new Intent(this, FiltroRanking.class);
                 startActivity(i);
                 break;
         }
@@ -269,5 +283,17 @@ public class Ranking extends AppCompatActivity implements RankingAdapter.PasarId
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    /**
+     * Si se sale de la actividad se pone el filtro para que en el RecyclerView
+     * se puedan visualizar todos los rankings de las películas
+     */
+    protected void onDestroy() {
+        super.onDestroy();
+        ApiUtils.filtroRanking = ApiUtils.TODOS_LOS_FILTROS;
+        ApiUtils.tituloRanking = null;
+        ApiUtils.directorRanking = null;
+        ApiUtils.generoRanking = null;
     }
 }

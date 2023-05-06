@@ -18,6 +18,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".secciones.ranking.FiltroRanking"
+            android:exported="false" />
+        <activity
             android:name=".secciones.ranking.Ranking"
             android:exported="false" />
         <activity

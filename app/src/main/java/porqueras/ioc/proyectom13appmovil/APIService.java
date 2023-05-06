@@ -116,6 +116,12 @@ public interface APIService {
     @GET("/peliculas/ranking")
     Call<PeliculaListaResponse> getRanking(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token);
 
+    @GET("/peliculas/ranking")
+    Call<PeliculaListaResponse> getRankingFiltroAño(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("titulo") String titulo, @Query("director") String director, @Query("genero") String genero, @Query("ano") int año);
+
+    @GET("/peliculas/ranking")
+    Call<PeliculaListaResponse> getRankingFiltros(@Query("page") int page, @Query("pageSize") int pageSize, @Query("token") String token, @Query("titulo") String titulo, @Query("director") String director, @Query("genero") String genero);
+
     @POST("login")
     Call<LoginResponse> getLogin(@Body LoginResponse loginResponse);
 

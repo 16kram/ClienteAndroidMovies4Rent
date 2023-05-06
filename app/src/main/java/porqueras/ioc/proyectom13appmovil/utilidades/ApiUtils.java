@@ -51,5 +51,13 @@ public class ApiUtils {
     public static int precio;
     public static String ordenarAlquileresPor = "Ninguno";
 
+    //Filtro ranking
+    public static final int TODOS_LOS_FILTROS = 0, SOLO_FILTRO_AÑO = 1, SOLO_FILTRO_STRING = 2;
+    public static int filtroRanking=0;
+    public static String tituloRanking;
+    public static String directorRanking;
+    public static String generoRanking;
+    public static int añoRanking;
+
 
 }

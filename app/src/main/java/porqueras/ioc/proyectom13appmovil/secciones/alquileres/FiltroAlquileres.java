@@ -109,6 +109,10 @@ public class FiltroAlquileres extends AppCompatActivity {
                     ApiUtils.filtroAlquileres = ApiUtils.FILTRO_STRING;
                 }
 
+                //Añadimos los campos de texto a las variables
+                ApiUtils.fechaInicio=fechaInicio.getText().toString();
+                ApiUtils.fechaFin=fechaFin.getText().toString();
+
                 //Si en los campos no hay texto las variables pasan a null
                 if (idUsuario != null) {
                     ApiUtils.usuario = idUsuario;
