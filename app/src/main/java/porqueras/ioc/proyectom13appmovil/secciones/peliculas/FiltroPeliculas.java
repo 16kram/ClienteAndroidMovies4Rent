@@ -114,6 +114,9 @@ public class FiltroPeliculas extends AppCompatActivity {
             }
         });
 
+        //Deshabilitamos la opción del menú para filtrar elementos
+        ApiUtils.menuFiltrarPeliculas =false;
+
     }
 
     /**
@@ -123,6 +126,7 @@ public class FiltroPeliculas extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         ApiUtils.filtroPeliculas = ApiUtils.TODAS;
+        ApiUtils.menuFiltrarPeliculas = true;
     }
 
 }

@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import porqueras.ioc.proyectom13appmovil.R;
+import porqueras.ioc.proyectom13appmovil.secciones.alquileres.EstadoAlquiler;
+import porqueras.ioc.proyectom13appmovil.secciones.alquileres.GestionAlquilerPeliculas;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
 
 /**
@@ -70,5 +72,19 @@ public class FiltroRanking extends AppCompatActivity {
             }
         });
 
+        //Deshabilitamos la opción del menú para filtrar elementos
+        ApiUtils.menuFiltrarRanking = false;
+
+    }
+
+
+    /**
+     * Si se sale de la actividad se pone el filtro para que en el RecyclerView
+     * se puedan visualizar los rankings de las películas
+     */
+    protected void onDestroy() {
+        super.onDestroy();
+        ApiUtils.filtroRanking = ApiUtils.TODOS_LOS_FILTROS;
+        ApiUtils.menuFiltrarRanking = true;
     }
 }

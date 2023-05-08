@@ -35,8 +35,8 @@ public class ApiUtils {
     //Filtros películas
     public static final int TODAS = 0, AÑO = 1, VECESALQUILADA = 2, AÑO_VECESALQUILADA = 3, DIRECTORGENERO = 4;
     public static int filtroPeliculas = 0;
-    public static String director = null;
-    public static String genero = null;
+    public static String director;
+    public static String genero;
     public static int año = 0;
     public static int vecesAlquilada = 0;
     public static String ordenarPeliculasPor = "Ninguno";
@@ -53,11 +53,17 @@ public class ApiUtils {
 
     //Filtro ranking
     public static final int TODOS_LOS_FILTROS = 0, SOLO_FILTRO_AÑO = 1, SOLO_FILTRO_STRING = 2;
-    public static int filtroRanking=0;
+    public static int filtroRanking = 0;
     public static String tituloRanking;
     public static String directorRanking;
     public static String generoRanking;
     public static int añoRanking;
+
+    //Activa o desactiva la opción del menú para filtrar elementos en los RecyclerView
+    public static boolean menuFiltrarUsuarios = true;
+    public static boolean menuFiltrarPeliculas = true;
+    public static boolean menuFiltrarAlquileres = true;
+    public static boolean menuFiltrarRanking = true;
 
 
 }

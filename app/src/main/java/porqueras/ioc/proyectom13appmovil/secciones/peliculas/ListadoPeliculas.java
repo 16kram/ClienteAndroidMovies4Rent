@@ -352,9 +352,17 @@ public class ListadoPeliculas extends AppCompatActivity implements PeliculasList
                 preguntarNumPeliculasPorPag();
                 break;
             case R.id.filtrosPeliculas:
-                Intent i = new Intent(this, FiltroPeliculas.class);
-                i.putExtra("accion", accion);
-                startActivity(i);
+                if (ApiUtils.menuFiltrarPeliculas) {
+                    Intent i = new Intent(this, FiltroPeliculas.class);
+                    i.putExtra("accion", accion);
+                    startActivity(i);
+                } else {
+                    //Muestra un Toast conforme no se pueden filtrar películas en esta pantalla
+                    Toast toast = Toast.makeText(getBaseContext(), "Esta opción no está disponible" +
+                            " en esta pantalla," +
+                            " regrese atrás...", Toast.LENGTH_LONG);
+                    toast.show();
+                }
                 break;
         }
         return false;

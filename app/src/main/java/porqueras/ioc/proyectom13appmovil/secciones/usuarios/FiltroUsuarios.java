@@ -108,6 +108,8 @@ public class FiltroUsuarios extends AppCompatActivity {
             }
         });
 
+        //Deshabilitamos la opción del menú para filtrar elementos
+        ApiUtils.menuFiltrarUsuarios =false;
     }
 
     /**
@@ -117,6 +119,7 @@ public class FiltroUsuarios extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         ApiUtils.filtroUsuarios = ApiUtils.TODOS;
+        ApiUtils.menuFiltrarUsuarios =true;
     }
 
 }

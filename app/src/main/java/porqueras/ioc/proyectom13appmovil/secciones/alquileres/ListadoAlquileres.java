@@ -437,9 +437,16 @@ public class ListadoAlquileres extends AppCompatActivity implements AlquilerList
                 preguntarNumAlquileresPorPag();
                 break;
             case R.id.filtrosAlquileres:
+                if(ApiUtils.menuFiltrarAlquileres){
                 Intent i = new Intent(this, FiltroAlquileres.class);
                 i.putExtra("accion", accion);
-                startActivity(i);
+                startActivity(i);}else{
+                    //Muestra un Toast conforme no se pueden filtrar alquileres en esta pantalla
+                    Toast toast = Toast.makeText(getBaseContext(), "Esta opción no está disponible" +
+                            " en esta pantalla," +
+                            " regrese atrás...", Toast.LENGTH_LONG);
+                    toast.show();
+                }
                 break;
         }
         return false;

@@ -110,8 +110,8 @@ public class FiltroAlquileres extends AppCompatActivity {
                 }
 
                 //Añadimos los campos de texto a las variables
-                ApiUtils.fechaInicio=fechaInicio.getText().toString();
-                ApiUtils.fechaFin=fechaFin.getText().toString();
+                ApiUtils.fechaInicio = fechaInicio.getText().toString();
+                ApiUtils.fechaFin = fechaFin.getText().toString();
 
                 //Si en los campos no hay texto las variables pasan a null
                 if (idUsuario != null) {
@@ -156,6 +156,9 @@ public class FiltroAlquileres extends AppCompatActivity {
 
             }
         });
+
+        //Deshabilitamos la opción del menú para filtrar elementos
+        ApiUtils.menuFiltrarAlquileres = false;
 
     }
 
@@ -221,6 +224,7 @@ public class FiltroAlquileres extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         ApiUtils.filtroAlquileres = ApiUtils.TODO;
+        ApiUtils.menuFiltrarAlquileres = true;
         ApiUtils.usuario = null;
         ApiUtils.pelicula = null;
     }

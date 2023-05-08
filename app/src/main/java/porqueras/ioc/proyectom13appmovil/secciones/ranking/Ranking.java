@@ -235,8 +235,15 @@ public class Ranking extends AppCompatActivity implements RankingAdapter.PasarId
                 preguntarNumPeliculasPorPag();
                 break;
             case R.id.filtrosRanking:
+                if(ApiUtils.menuFiltrarRanking){
                 Intent i = new Intent(this, FiltroRanking.class);
-                startActivity(i);
+                startActivity(i);}else{
+                    //Muestra un Toast conforme no se pueden filtrar el ranking de películas en esta pantalla
+                    Toast toast = Toast.makeText(getBaseContext(), "Esta opción no está disponible" +
+                            " en esta pantalla," +
+                            " regrese atrás...", Toast.LENGTH_LONG);
+                    toast.show();
+                }
                 break;
         }
         return false;

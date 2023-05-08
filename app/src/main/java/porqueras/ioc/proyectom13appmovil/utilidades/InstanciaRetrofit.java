@@ -42,7 +42,7 @@ public class InstanciaRetrofit {
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .sslSocketFactory(ApiUtils.sslContext.getSocketFactory(), (X509TrustManager) ApiUtils.trustAllCerts[0])
                     .hostnameVerifier((hostname, session) -> true)
-                    .connectTimeout(5, TimeUnit.SECONDS)
+                    .connectTimeout(10, TimeUnit.SECONDS)
                     .build();
 
             //Creamos la instancia de Gson y Retrofit

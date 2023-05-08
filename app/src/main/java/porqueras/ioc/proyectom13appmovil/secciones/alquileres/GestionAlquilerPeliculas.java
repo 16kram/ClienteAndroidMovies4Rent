@@ -33,7 +33,7 @@ public class GestionAlquilerPeliculas extends AppCompatActivity {
 
         //Añadimos el título de la Activity en la barra superior
         setTitle("Movies4Rent");
-        ActionBar actionBar=getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setSubtitle("Gestión alquiler películas");
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.ic_baseline_ondemand_video_24);
@@ -42,7 +42,7 @@ public class GestionAlquilerPeliculas extends AppCompatActivity {
         crearAlquiler = (Button) findViewById(R.id.buttonCrearAlquiler);
         botónListarAlquiler = (Button) findViewById(R.id.buttonListarAlquiler);
         botonEliminarAlquiler = (Button) findViewById(R.id.buttonEliminarAlquiler);
-        botonActualizarEstadoAlquiler=(Button)findViewById(R.id.buttonActualizarEstadoAlquiler);
+        botonActualizarEstadoAlquiler = (Button) findViewById(R.id.buttonActualizarEstadoAlquiler);
 
         //Acción del botón Crear Alquiler
         crearAlquiler.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +60,7 @@ public class GestionAlquilerPeliculas extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(GestionAlquilerPeliculas.this, ListadoAlquileres.class);
-                i.putExtra("accion","listar");
+                i.putExtra("accion", "listar");
                 startActivity(i);
             }
         });
@@ -70,7 +70,7 @@ public class GestionAlquilerPeliculas extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(GestionAlquilerPeliculas.this, ListadoAlquileres.class);
-                i.putExtra("accion","eliminar");
+                i.putExtra("accion", "eliminar");
                 startActivity(i);
             }
         });
@@ -80,8 +80,8 @@ public class GestionAlquilerPeliculas extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(GestionAlquilerPeliculas.this, ListadoAlquileres.class);
-                i.putExtra("accion","modificar");
-                startActivityForResult(i,8888);
+                i.putExtra("accion", "modificar");
+                startActivityForResult(i, 8888);
             }
         });
     }
@@ -115,11 +115,11 @@ public class GestionAlquilerPeliculas extends AppCompatActivity {
         }
 
         //Recibimos el id del alquiler de la película
-        if(requestCode==8888 & resultCode==RESULT_OK){
-            idAlquiler=data.getExtras().getString("idAlquiler");
+        if (requestCode == 8888 & resultCode == RESULT_OK) {
+            idAlquiler = data.getExtras().getString("idAlquiler");
             Log.d("response", "idAlquiler=" + idAlquiler);
             Intent intent = new Intent(GestionAlquilerPeliculas.this, EstadoAlquiler.class);
-            intent.putExtra("idAlquiler",idAlquiler);
+            intent.putExtra("idAlquiler", idAlquiler);
             startActivity(intent);
         }
     }

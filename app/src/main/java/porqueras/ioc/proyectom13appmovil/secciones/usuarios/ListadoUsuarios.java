@@ -341,9 +341,17 @@ public class ListadoUsuarios extends AppCompatActivity implements WordListAdadpt
                 preguntarNumUsuariosPorPag();
                 break;
             case R.id.filtrosUsuarios:
-                Intent i = new Intent(ListadoUsuarios.this, FiltroUsuarios.class);
-                i.putExtra("accion", accion);
-                startActivity(i);
+                if (ApiUtils.menuFiltrarUsuarios) {
+                    Intent i = new Intent(ListadoUsuarios.this, FiltroUsuarios.class);
+                    i.putExtra("accion", accion);
+                    startActivity(i);
+                } else {
+                    //Muestra un Toast conforme no se pueden filtrar usuarios en esta pantalla
+                    Toast toast = Toast.makeText(getBaseContext(), "Esta opción no está disponible" +
+                            " en esta pantalla," +
+                            " regrese atrás...", Toast.LENGTH_LONG);
+                    toast.show();
+                }
                 break;
 
         }
