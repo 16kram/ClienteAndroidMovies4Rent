@@ -134,9 +134,19 @@ public class FiltroAlquileres extends AppCompatActivity {
                 Log.d("response", "fechaFin=" + ApiUtils.fechaFin);
                 Log.d("response", "ordenar por=" + ApiUtils.ordenarAlquileresPor);
 
+                //Lista los alquileres
                 Intent i = new Intent(FiltroAlquileres.this, ListadoAlquileres.class);
                 i.putExtra("accion", accion);
-                startActivity(i);
+                //Si la acción es modificar se espera el retorno del id del alquiler
+                if (accion.equals("modificar")) {
+                    i = new Intent(FiltroAlquileres.this, ListadoAlquileres.class);
+                    i.putExtra("accion", "modificar");
+                    startActivityForResult(i, 8888);
+                } else {
+                    //Si la acción es distinta a modificar no se espera ningún retorno
+                    startActivity(i);
+                }
+
             }
         });
 
@@ -213,6 +223,15 @@ public class FiltroAlquileres extends AppCompatActivity {
                     Log.d("response", "Error de red-->" + t.getMessage());
                 }
             });
+        }
+
+        //Recibimos el id del alquiler y llamamos a la pantalla de estado del alquiler
+        if (requestCode == 8888 & resultCode == RESULT_OK) {
+            Log.d("response", "(FiltroAlquileres)idAlquiler=" + data.getExtras().getString("idAlquiler"));
+            Intent intent = new Intent(this, EstadoAlquiler.class);
+            intent.putExtra("idAlquiler", data.getExtras().getString("idAlquiler"));
+            startActivity(intent);
+            finish();
         }
     }
 
