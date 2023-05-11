@@ -18,6 +18,7 @@ import porqueras.ioc.proyectom13appmovil.modelos.UsuarioInfoResponse;
 import porqueras.ioc.proyectom13appmovil.secciones.alquileres.AlquilerPelicula;
 import porqueras.ioc.proyectom13appmovil.secciones.alquileres.ListarAlquileresPorUsuario;
 import porqueras.ioc.proyectom13appmovil.secciones.peliculas.ListadoPeliculas;
+import porqueras.ioc.proyectom13appmovil.secciones.ranking.Ranking;
 import porqueras.ioc.proyectom13appmovil.secciones.usuarios.CambiarPassword;
 import porqueras.ioc.proyectom13appmovil.secciones.usuarios.ModificarUsuario;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
@@ -34,7 +35,7 @@ import retrofit2.Response;
  */
 public class PantallaUsuario extends AppCompatActivity {
     private APIService apiService;
-    private Button botonLogout, modificarDatos, modificarPassword, botonAlquilarPelicula, botonVerPeliculasAlquiladas;
+    private Button botonLogout, modificarDatos, modificarPassword, botonAlquilarPelicula, botonVerPeliculasAlquiladas, botonRankingPeliculas;
     private TextView titulo;
     private String id;//Identificador del usuario
 
@@ -48,7 +49,7 @@ public class PantallaUsuario extends AppCompatActivity {
 
         //Añadimos el título de la Activity en la barra superior
         setTitle("Movies4Rent");
-        ActionBar actionBar=getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setSubtitle("Menú del usuario");
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setIcon(R.drawable.ic_baseline_local_movies_24);
@@ -60,6 +61,7 @@ public class PantallaUsuario extends AppCompatActivity {
         modificarPassword = (Button) findViewById(R.id.buttonModificarPassword);
         botonAlquilarPelicula = (Button) findViewById(R.id.buttonUsuarioAlquilar);
         botonVerPeliculasAlquiladas = (Button) findViewById(R.id.buttonVerAlquileres);
+        botonRankingPeliculas = (Button) findViewById(R.id.buttonRankingPeliculasUsuario);
 
         //Instanciomos la incerfaz de APIService mediante Retrofit
         apiService = InstanciaRetrofit.getApiService();
@@ -141,11 +143,21 @@ public class PantallaUsuario extends AppCompatActivity {
         botonVerPeliculasAlquiladas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent i=new Intent(PantallaUsuario.this, ListarAlquileresPorUsuario.class);
-            i.putExtra("idUsuario",id);
-            startActivity(i);
+                Intent i = new Intent(PantallaUsuario.this, ListarAlquileresPorUsuario.class);
+                i.putExtra("idUsuario", id);
+                startActivity(i);
             }
         });
+
+        //Acción del botón Ranking de las películas
+        botonRankingPeliculas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PantallaUsuario.this, Ranking.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     /**
