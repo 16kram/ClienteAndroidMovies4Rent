@@ -14,7 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import porqueras.ioc.proyectom13appmovil.PantallaUsuario;
 import porqueras.ioc.proyectom13appmovil.R;
+import porqueras.ioc.proyectom13appmovil.secciones.alquileres.AlquilerPelicula;
 import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
 
 /**
@@ -24,7 +26,7 @@ import porqueras.ioc.proyectom13appmovil.utilidades.ApiUtils;
  */
 public class FiltroPeliculas extends AppCompatActivity {
     private Button botonFiltrarPelicula;
-    private EditText filtroPeliculasDirector, filtroPeliculasGenero, filtroPeliculasAño, filtroPeliculasVecesAlquilada;
+    private EditText filtroPeliculasTitulo,filtroPeliculasDirector, filtroPeliculasGenero, filtroPeliculasAño, filtroPeliculasVecesAlquilada;
     private String accion;
     private Spinner spinnerPelicula;
 
@@ -44,6 +46,7 @@ public class FiltroPeliculas extends AppCompatActivity {
         actionBar.setIcon(R.drawable.ic_baseline_local_movies_24);
 
         //Añadimos los campos de texto y los botones
+        filtroPeliculasTitulo=(EditText)findViewById(R.id.editTextFiltroPeliculaTitulo);
         filtroPeliculasDirector = (EditText) findViewById(R.id.editTextFiltroPeliculasDirector);
         filtroPeliculasGenero = (EditText) findViewById(R.id.editTextFiltroPeliculasGenero);
         filtroPeliculasAño = (EditText) findViewById(R.id.editTextFiltroPeliculaAño);
@@ -62,6 +65,7 @@ public class FiltroPeliculas extends AppCompatActivity {
             public void onClick(View v) {
                 //Si no hay ningún campo rellenado, no se activa ningún filtro, y se visualizan todas las películas
                 ApiUtils.filtroPeliculas = ApiUtils.TODAS;
+                ApiUtils.titulo=filtroPeliculasTitulo.getText().toString();
                 ApiUtils.director = filtroPeliculasDirector.getText().toString();
                 ApiUtils.genero = filtroPeliculasGenero.getText().toString();
                 //Si hay un número en el campo año se activa el filtro de años
@@ -82,18 +86,33 @@ public class FiltroPeliculas extends AppCompatActivity {
                 //Si hay texto en algún campo de texto se aplican los filtros
                 if ((!filtroPeliculasDirector.getText().toString().equals("") ||
                         !filtroPeliculasGenero.getText().toString().equals("") ||
+                        !filtroPeliculasTitulo.getText().toString().equals("") ||
                         ApiUtils.ordenarPeliculasPor != null)
                         && filtroPeliculasAño.getText().toString().equals("")
                         && filtroPeliculasVecesAlquilada.getText().toString().equals("")) {
                     ApiUtils.filtroPeliculas = ApiUtils.DIRECTORGENERO;
                 }
 
-
                 Log.d("response", "Número de filtro para las películas=" + ApiUtils.filtroPeliculas);
+                Log.d("response", "título=" + ApiUtils.titulo);
+                Log.d("response", "director=" + ApiUtils.director);
+                Log.d("response", "genero=" + ApiUtils.genero);
+                Log.d("response", "año=" + ApiUtils.año);
+                Log.d("response", "vecesAlquilada=" + ApiUtils.vecesAlquilada);
+                Log.d("response", "ordenar por...=" + ApiUtils.ordenarPeliculasPor);
 
+                //Lista las películas
                 Intent i = new Intent(FiltroPeliculas.this, ListadoPeliculas.class);
-                i.putExtra("accion", accion);
-                startActivity(i);
+                if (accion.equals("alquilar")) {
+                    Log.d("response", "FiltroPeliculas-->Alquilar");
+                    //Si la acción es modificar se espera el retorno del id del alquiler
+                    i.putExtra("accion", "alquilar");
+                    startActivityForResult(i, 9876);
+                } else {
+                    //Si la acción es distinta a modificar no se espera ningún retorno
+                    i.putExtra("accion", accion);
+                    startActivity(i);
+                }
             }
         });
 
@@ -115,9 +134,32 @@ public class FiltroPeliculas extends AppCompatActivity {
         });
 
         //Deshabilitamos la opción del menú para filtrar elementos
-        ApiUtils.menuFiltrarPeliculas =false;
+        ApiUtils.menuFiltrarPeliculas = false;
 
     }
+
+
+    /**
+     * Desde el RecyclerView se nos devuelve el id del usuario y el id de la película
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 9876 & resultCode == RESULT_OK) {
+            String idPelicula = data.getExtras().getString("idPelicula");
+            Log.d("response", "idPelícula=" + idPelicula);
+            //Enviamos los datos de idUsuario e idPelícula a la actividad de AlquilerPelicula
+            Intent i = new Intent(this, AlquilerPelicula.class);
+            i.putExtra("idUsuario", ApiUtils.idUsuario);
+            i.putExtra("idPelicula", idPelicula);
+            startActivity(i);
+            finish();
+        }
+    }
+
 
     /**
      * Si se sale de la actividad se pone el filtro para que en el RecyclerView

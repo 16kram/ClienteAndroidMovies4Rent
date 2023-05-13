@@ -35,6 +35,7 @@ public class ApiUtils {
     //Filtros películas
     public static final int TODAS = 0, AÑO = 1, VECESALQUILADA = 2, AÑO_VECESALQUILADA = 3, DIRECTORGENERO = 4;
     public static int filtroPeliculas = 0;
+    public static String titulo;
     public static String director;
     public static String genero;
     public static int año = 0;
@@ -65,5 +66,7 @@ public class ApiUtils {
     public static boolean menuFiltrarAlquileres = true;
     public static boolean menuFiltrarRanking = true;
 
+    //Identificador del usuario
+    public static String idUsuario;
 
 }

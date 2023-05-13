@@ -15,7 +15,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextFiltroPeliculaTitulo" />
 
     <EditText
         android:id="@+id/editTextFiltroPeliculasGenero"
@@ -51,7 +51,6 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextFiltroPeliculaAño" />
 
 
-
     <TextView
         android:id="@+id/textViewFiltroPeliculaDirector"
         android:layout_width="wrap_content"
@@ -61,7 +60,7 @@
         android:text="Director"
         android:textSize="19dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewFiltroPeliculaTitulo" />
 
     <TextView
         android:id="@+id/textViewFiltroPeliculaGenero"
@@ -128,6 +127,28 @@
         android:text="Ordenar por..."
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDuracionPeliculaModificar" />
+
+    <TextView
+        android:id="@+id/textViewFiltroPeliculaTitulo"
+        android:textSize="19dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:text="Título"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextFiltroPeliculaTitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -75,6 +75,7 @@ public class PantallaUsuario extends AppCompatActivity {
                     Log.d("response", "Nombre usuario=" + response.body().getValue().getNombre());
                     titulo.setText("Bienvenido a MOVIES4RENT \n" + response.body().getValue().getNombre() + " eres USUARIO");
                     id = response.body().getValue().getId();
+                    ApiUtils.idUsuario=id;
                 } else {
                     Log.d("response", "Ocurrió un error al buscar el nombre de usuario, código=" + response.code());
                 }
