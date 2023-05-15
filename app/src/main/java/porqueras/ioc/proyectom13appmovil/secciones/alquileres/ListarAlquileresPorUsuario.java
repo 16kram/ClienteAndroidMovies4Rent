@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -70,6 +71,11 @@ public class ListarAlquileresPorUsuario extends AppCompatActivity implements Pel
             @Override
             public void onResponse(Call<PeliculaListaResponseAlquilerPorId> call, Response<PeliculaListaResponseAlquilerPorId> response) {
                 if (response.isSuccessful()) {
+                    if (response.body().getValue().size() == 0) {
+                        //Muestra un Toast conforme no hay alquileres que mostrar
+                        Toast toast = Toast.makeText(getBaseContext(), "No hay ningún alquiler para mostrar", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
                     for (int n = 0; n < response.body().getValue().size(); n++) {
                         //Obtiene las películas y las añade a la lista
                         Pelicula pelicula = new Pelicula();
