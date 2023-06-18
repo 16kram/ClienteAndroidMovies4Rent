@@ -1,4 +1,4 @@
-# ProyectoM13AppMovil
+# ClienteAndroidMovies4Rent
 Proyecto del módulo M13 de Android
 Proyecto final del CFGS de DAM
 
