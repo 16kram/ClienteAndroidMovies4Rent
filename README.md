@@ -8,3 +8,5 @@ métodos HTTP estándar como GET,POST,PUT,DELETE, etc, con los que poder acceder
 Para hacer uso de estos recursos en Android he escogido la librería Retrofit, 
 la cual permite realizar las solicitudes HTTP al servidor y recibir los datos de 
 una forma bastante sencilla. El formato de intercambio de datos es JSON.
+
+[![Alt text](https://img.youtube.com/vi/t7jrG3A9fLI/0.jpg)](https://www.youtube.com/watch?v=t7jrG3A9fLI)
